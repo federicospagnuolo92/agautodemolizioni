@@ -250,6 +250,37 @@
         </div>
       </form>
 
+<script>
+function sendWhatsApp(e) {
+  e.preventDefault();
+
+  const nome = document.getElementById('nome')?.value || '';
+  const cognome = document.getElementById('cognome')?.value || '';
+  const telefono = document.getElementById('telefono')?.value || '';
+  const email = document.getElementById('email')?.value || '';
+  const citta = document.getElementById('citta')?.value || '';
+  const targa = document.getElementById('targa')?.value || '';
+  const condizioni = document.getElementById('condizioni')?.value || '';
+  const note = document.getElementById('note')?.value || '';
+
+  let messaggio = `🚗 *Richiesta demolizione auto*%0A%0A`;
+
+  if(nome) messaggio += `👤 Nome: ${nome} ${cognome}%0A`;
+  if(telefono) messaggio += `📞 Telefono: ${telefono}%0A`;
+  if(email) messaggio += `✉️ Email: ${email}%0A`;
+  if(citta) messaggio += `📍 Città: ${citta}%0A`;
+  if(targa) messaggio += `🚘 Targa: ${targa}%0A`;
+  if(condizioni) messaggio += `⚙️ Condizioni: ${condizioni}%0A`;
+  if(note) messaggio += `📝 Note: ${note}%0A`;
+
+  const numero = "393384672370"; // il tuo numero
+
+  const url = `https://wa.me/${numero}?text=${messaggio}`;
+
+  window.open(url, '_blank');
+}
+</script>
+      
       <p class="privacy-note">🔒 I tuoi dati sono al sicuro. Non li condividiamo con terze parti.</p>
     </div>
   </div>
