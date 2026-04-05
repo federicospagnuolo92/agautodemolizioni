@@ -209,7 +209,9 @@
         Servizio attivo nelle province di Milano e Monza-Brianza.
       </p>
 
-      <form class="form-grid" onsubmit="handleSubmit(event)">
+      <form class="form-grid" action="https://formspree.io/f/meepvqnn" method="POST">
+        <input type="hidden" name="_subject" value="🚗 Nuova richiesta demolizione auto">
+        <input type="hidden" name="_captcha" value="false">
         <div class="form-group">
           <label for="nome">Nome *</label>
           <input type="text" id="nome" name="nome" placeholder="Mario" required>
@@ -409,22 +411,6 @@
 <!-- ══════════════════════════════════════════
      JS
 ══════════════════════════════════════════ -->
-<script>
-  function handleSubmit(e) {
-    e.preventDefault();
-    const btn = e.target.querySelector('.form-submit');
-    btn.textContent = '✅ Richiesta inviata! Ti contatteremo entro 8 ore.';
-    btn.disabled = true;
-    btn.style.background = '#16a34a';
-    // Reset dopo 5 secondi
-    setTimeout(() => {
-      btn.textContent = '🚗 Invia richiesta demolizione gratuita';
-      btn.disabled = false;
-      btn.style.background = '';
-      e.target.reset();
-    }, 5000);
-  }
-</script>
 
 </body>
 </html>
