@@ -309,6 +309,58 @@
 <!-- ══════════════════════════════════════════
      REGIONS
 ══════════════════════════════════════════ -->
+
+.map-lombardia {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.map-lombardia img {
+  width: 100%;
+  display: block;
+}
+
+.pin {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #E8001D;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+.pin::after {
+  content: attr(title);
+  position: absolute;
+  top: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #111;
+  color: #fff;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  opacity: 0;
+  transition: 0.2s;
+  white-space: nowrap;
+}
+
+.pin:hover::after {
+  opacity: 1;
+}
+<div class="map-lombardia">
+  <img src="assets/lombardia-map.png" alt="Zone servite Lombardia">
+
+  <div class="pin" style="top:40%; left:55%;" title="Milano"></div>
+  <div class="pin" style="top:35%; left:60%;" title="Monza"></div>
+  <div class="pin" style="top:38%; left:58%;" title="Sesto San Giovanni"></div>
+  <div class="pin" style="top:42%; left:57%;" title="Desio"></div>
+  <div class="pin" style="top:45%; left:56%;" title="Seregno"></div>
+</div>
+
+  
 <section class="regions">
   <div class="regions-label">Comuni serviti — Provincia di Milano e Monza-Brianza</div>
   <div class="regions-tags">
