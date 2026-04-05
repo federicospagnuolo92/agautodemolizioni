@@ -298,14 +298,14 @@ nav ul a:hover { color: var(--text); }
 .stat-item:last-child { border-right: none; }
 
 .stat-num {
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 800;
   color: var(--red);
   letter-spacing: -1px;
 }
 
 .stat-label {
-  font-size: .72rem;
+  font-size: .75rem;
   font-weight: 500;
   color: var(--muted);
   margin-top: .2rem;
