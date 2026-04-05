@@ -310,46 +310,7 @@
      REGIONS
 ══════════════════════════════════════════ -->
 
-.map-lombardia {
-  position: relative;
-  max-width: 600px;
-  margin: 0 auto;
-}
 
-.map-lombardia img {
-  width: 100%;
-  display: block;
-}
-
-.pin {
-  position: absolute;
-  width: 12px;
-  height: 12px;
-  background: #E8001D;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  cursor: pointer;
-}
-
-.pin::after {
-  content: attr(title);
-  position: absolute;
-  top: -28px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #111;
-  color: #fff;
-  font-size: 12px;
-  padding: 4px 8px;
-  border-radius: 6px;
-  opacity: 0;
-  transition: 0.2s;
-  white-space: nowrap;
-}
-
-.pin:hover::after {
-  opacity: 1;
-}
 <div class="map-lombardia">
   <img src="assets/lombardia-map.png" alt="Zone servite Lombardia">
 
