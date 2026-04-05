@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contatti A.G.S. Autodemolizioni — Telefono, email e sede. Demolizione auto gratuita nelle province di Milano e Monza-Brianza.">
+  <title>Contatti — A.G.S. Autodemolizioni</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="assets/logoAGS.png">
+  <style>
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      padding: calc(68px + 4rem) 5vw 4rem;
+      background: var(--bg-alt);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .page-hero .tag { display: block; margin-bottom: .8rem; }
+
+    .page-hero h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .page-hero p {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ── CONTACT CARDS ── */
+    .contact-section {
+      padding: 5rem 5vw;
+      background: var(--bg-alt);
+    }
+
+    .contact-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 1000px;
+      margin: 0 auto 4rem;
+    }
+
+    .contact-card {
+      position: relative;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 3rem 2rem;
+      text-align: center;
+      background: #fff;
+      overflow: hidden;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      transition: border-color .3s, color .3s;
+    }
+
+    /* Sfondo rosso che sale dal basso */
+    .contact-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 0%;
+      background: var(--red);
+      transition: height .4s cubic-bezier(.4, 0, .2, 1);
+      z-index: 0;
+    }
+
+    .contact-card:hover::before { height: 100%; }
+
+    .contact-card:hover { border-color: var(--red); }
+
+    /* Tutti i contenuti sopra lo sfondo */
+    .contact-card-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Icona */
+    .contact-card-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .contact-card-icon svg {
+      width: 40px;
+      height: 40px;
+      fill: var(--red);
+      transition: fill .3s;
+    }
+
+    .contact-card:hover .contact-card-icon svg { fill: #fff; }
+
+    /* Label */
+    .contact-card-label {
+      font-size: .7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--red);
+      margin-bottom: .8rem;
+      transition: color .3s;
+    }
+
+    .contact-card:hover .contact-card-label { color: rgba(255,255,255,0.75); }
+
+    /* Value */
+    .contact-card-value {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.5;
+      transition: color .3s;
+    }
+
+    .contact-card:hover .contact-card-value { color: #fff; }
+
+    /* ── MAP SECTION ── */
+    .map-section {
+      padding: 0 5vw 5rem;
+      background: var(--bg-alt);
+    }
+
+    .map-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.07);
+    }
+
+    .map-wrapper iframe {
+      width: 100%;
+      height: 420px;
+      border: none;
+      display: block;
+    }
+
+    /* ── ORARI ── */
+    .orari-section {
+      padding: 5rem 5vw;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
+
+    .orari-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .orari-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+
+    .orari-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: .85rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: .9rem;
+    }
+
+    .orari-row:last-child { border-bottom: none; }
+
+    .orari-day { font-weight: 600; color: var(--text); }
+    .orari-time { color: var(--muted); }
+    .orari-closed { color: var(--red); font-weight: 600; }
+
+    /* CTA laterale */
+    .orari-cta {
+      background: var(--red);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      color: #fff;
+    }
+
+    .orari-cta h3 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: .8rem;
+      letter-spacing: -0.5px;
+    }
+
+    .orari-cta p {
+      font-size: .9rem;
+      opacity: .85;
+      margin-bottom: 1.8rem;
+      line-height: 1.6;
+    }
+
+    .orari-cta .btn-white {
+      display: inline-flex;
+      width: 100%;
+      justify-content: center;
+      margin-bottom: .8rem;
+    }
+
+    .btn-white-outline {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      width: 100%;
+      background: transparent;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: .9rem;
+      padding: .9rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      border: 2px solid rgba(255,255,255,0.5);
+      cursor: pointer;
+      transition: border-color .2s, background .2s;
+    }
+
+    .btn-white-outline:hover {
+      border-color: #fff;
+      background: rgba(255,255,255,0.1);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .contact-cards { grid-template-columns: 1fr; gap: 1rem; }
+      .orari-inner { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    @media (max-width: 500px) {
+      .contact-cards { grid-template-columns: 1fr; }
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo-link">
+    <img src="assets/logoAGS.png" alt="A.G.S. Autodemolizioni">
+  </a>
+  <ul>
+    <li><a href="index.html#servizi">Servizi</a></li>
+    <li><a href="index.html#come-funziona">Come Funziona</a></li>
+    <li><a href="contatti.html">Contatti</a></li>
+    <li><a href="index.html#richiesta" class="nav-cta">Demolisci Gratis</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <span class="tag">Dove Siamo</span>
+  <h1>Contattaci</h1>
+  <p>Siamo nelle province di Milano e Monza-Brianza. Chiamaci, scrivici o vieni a trovarci.</p>
+</section>
+
+<!-- CONTACT CARDS -->
+<section class="contact-section">
+  <div class="contact-cards">
+
+    <!-- Sede -->
+    <a href="https://maps.google.com/?q=A.G.S.+Autodemolizioni" target="_blank" class="contact-card">
+      <div class="contact-card-inner">
+        <div class="contact-card-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+          </svg>
+        </div>
+        <div class="contact-card-label">Sede</div>
+        <div class="contact-card-value">Provincia di Milano<br>e Monza-Brianza</div>
+      </div>
+    </a>
+
+    <!-- Telefono -->
+    <a href="tel:0362306524" class="contact-card">
+      <div class="contact-card-inner">
+        <div class="contact-card-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+          </svg>
+        </div>
+        <div class="contact-card-label">Telefono</div>
+        <div class="contact-card-value">0362 306524</div>
+      </div>
+    </a>
+
+    <!-- WhatsApp -->
+    <a href="https://wa.me/393384672370" target="_blank" class="contact-card">
+      <div class="contact-card-inner">
+        <div class="contact-card-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+        </div>
+        <div class="contact-card-label">WhatsApp</div>
+        <div class="contact-card-value">+39 338 467 2370</div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- MAP -->
+  <div class="map-section" style="padding: 0;">
+    <div class="map-wrapper" style="max-width:1000px; margin: 0 auto;">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2793.5!2d9.2!3d45.65!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sA.G.S.+Autodemolizioni!5e0!3m2!1sit!2sit!4v1"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Sede A.G.S. Autodemolizioni">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ORARI + CTA -->
+<section class="orari-section">
+  <div class="orari-inner">
+
+    <div>
+      <div class="orari-title">Orari di apertura</div>
+      <div class="orari-row">
+        <span class="orari-day">Lunedì</span>
+        <span class="orari-time">08:30 – 12:30 / 14:00 – 18:00</span>
+      </div>
+      <div class="orari-row">
+        <span class="orari-day">Martedì</span>
+        <span class="orari-time">08:30 – 12:30 / 14:00 – 18:00</span>
+      </div>
+      <div class="orari-row">
+        <span class="orari-day">Mercoledì</span>
+        <span class="orari-time">08:30 – 12:30 / 14:00 – 18:00</span>
+      </div>
+      <div class="orari-row">
+        <span class="orari-day">Giovedì</span>
+        <span class="orari-time">08:30 – 12:30 / 14:00 – 18:00</span>
+      </div>
+      <div class="orari-row">
+        <span class="orari-day">Venerdì</span>
+        <span class="orari-time">08:30 – 12:30 / 14:00 – 18:00</span>
+      </div>
+      <div class="orari-row">
+        <span class="orari-day">Sabato</span>
+        <span class="orari-time">08:30 – 12:30</span>
+      </div>
+      <div class="orari-row">
+        <span class="orari-day">Domenica</span>
+        <span class="orari-closed">Chiuso</span>
+      </div>
+    </div>
+
+    <div class="orari-cta">
+      <h3>Hai un'auto da demolire?</h3>
+      <p>Chiamaci subito o scrivici su WhatsApp. Il servizio è completamente gratuito.</p>
+      <a href="tel:0362306524" class="btn-white">📞 Chiama ora</a>
+      <a href="https://wa.me/393384672370" target="_blank" class="btn-white-outline">💬 Scrivici su WhatsApp</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contatti-footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="index.html" class="footer-logo-link">
+        <img src="assets/logoAGS.png" alt="A.G.S. Autodemolizioni">
+      </a>
+      <p>Specializzati nella demolizione gratuita di veicoli nelle province di Milano e Monza-Brianza.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Servizi</h5>
+      <ul>
+        <li><a href="index.html#servizi">Demolizione Gratuita</a></li>
+        <li><a href="index.html#servizi">Pratiche PRA</a></li>
+        <li><a href="index.html#servizi">Ricambi Auto</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Azienda</h5>
+      <ul>
+        <li><a href="index.html#come-funziona">Come Funziona</a></li>
+        <li><a href="index.html#recensioni">Recensioni</a></li>
+        <li><a href="contatti.html">Contatti</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contatti</h5>
+      <ul>
+        <li><a href="tel:0362306524">📞 0362 306524</a></li>
+        <li><a href="mailto:info@agsautodemolizioni.it">✉️ info@agsautodemolizioni.it</a></li>
+        <li><a href="https://wa.me/393384672370">💬 WhatsApp</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2000 A.G.S. Autodemolizioni — P.IVA 02864010968</span>
+    <div class="footer-bottom-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Cookie Policy</a>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP -->
+<a href="https://wa.me/393384672370"
+   class="whatsapp-btn"
+   target="_blank"
+   rel="noopener noreferrer"
+   title="Chatta su WhatsApp">💬</a>
+
+</body>
+</html>
