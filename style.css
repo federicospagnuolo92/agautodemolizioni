@@ -95,7 +95,6 @@ nav ul a:hover { color: var(--text); }
   align-items: center;
   padding: 1rem 2vw 1rem 10vw;
   max-width: none;
-  
   width: 100%;
   gap: 2rem;
 }
@@ -226,7 +225,7 @@ nav ul a:hover { color: var(--text); }
   margin-left: auto;
   margin-top: 0.1rem;
   margin-left: auto;
-  margin-right: 5vw;
+  margin-right: 10vw;
   align-self: flex-start;
 }
 
