@@ -97,7 +97,7 @@ nav ul a:hover { color: var(--text); }
   max-width: 1200px;
   margin: 0 0 0 5vw;
   width: 100%;
-  gap: 4rem;
+  gap: 2rem;
 }
 
 .hero-left { flex: 1; }
@@ -226,6 +226,7 @@ nav ul a:hover { color: var(--text); }
   margin-left: auto;
   margin-top: 0.1rem;
   margin-left: auto;
+  margin-right: 3vw;
   align-self: flex-start;
 }
 
@@ -281,6 +282,7 @@ nav ul a:hover { color: var(--text); }
 /* ── STATS STRIP ── */
 .stats-strip {
   border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   background: var(--bg-alt);
@@ -288,7 +290,7 @@ nav ul a:hover { color: var(--text); }
 }
 
 .stat-item {
-  padding: 1.8rem 2rem;
+  padding: 1rem 2rem;
   border-right: 1px solid var(--border);
   text-align: center;
 }
@@ -296,17 +298,17 @@ nav ul a:hover { color: var(--text); }
 .stat-item:last-child { border-right: none; }
 
 .stat-num {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 800;
   color: var(--red);
   letter-spacing: -1px;
 }
 
 .stat-label {
-  font-size: .75rem;
+  font-size: .72rem;
   font-weight: 500;
   color: var(--muted);
-  margin-top: .25rem;
+  margin-top: .2rem;
 }
 
 /* ── ANIMATION ── */
