@@ -225,7 +225,7 @@ nav ul a:hover { color: var(--text); }
   flex: 0 0 360px;
   animation: fadeUp .7s ease .35s both;
   margin-left: auto;
-  margin-top: 3rem;
+  margin-top: 2rem;
   margin-left: auto;
   align-self: flex-start;
 }
