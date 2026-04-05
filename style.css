@@ -220,12 +220,11 @@ nav ul a:hover { color: var(--text); }
   box-shadow: 0 6px 24px rgba(0,0,0,0.2);
 }
 
-/* ── TRUST CARD (hero right) ── */
 .hero-right {
   flex: 0 0 360px;
   animation: fadeUp .7s ease .35s both;
   margin-left: auto;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   margin-left: auto;
   align-self: flex-start;
 }
