@@ -1,11 +1,4 @@
-/* ============================================================
-   A.G.S. Autodemolizioni — style.css
-   Font: Inter (Google Fonts)
-   ============================================================ */
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-
-/* ── VARIABLES ── */
 :root {
   --red:        #E8001D;
   --red-light:  #fef1f2;
@@ -19,7 +12,6 @@
   --muted-light:#9ca3af;
 }
 
-/* ── RESET ── */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
