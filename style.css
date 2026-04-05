@@ -221,7 +221,7 @@ nav ul a:hover { color: var(--text); }
 }
 
 .hero-right {
-  flex: 0 0 420px;
+  flex: 0 0 400px;
   animation: fadeUp .7s ease .35s both;
   margin-left: auto;
   margin-top: 0.1rem;
