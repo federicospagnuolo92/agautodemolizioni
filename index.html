@@ -383,5 +383,17 @@ async function sendForm(e) {
   }
 }
 </script>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('hamburger').classList.toggle('open');
+    document.getElementById('nav-menu').classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('hamburger').classList.remove('open');
+    document.getElementById('nav-menu').classList.remove('open');
+  }
+</script>
+  
 </body>
 </html>
