@@ -47,6 +47,10 @@ nav {
 .logo-link img {
   height: 90px;
   width: auto;
+  margin-left: 2rem;
+  display: block;
+  object-fit: contain;
+  object-position: center;
 }
 
 nav ul {
