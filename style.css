@@ -822,7 +822,7 @@ footer {
   }
   
   .hero-inner {
-    padding: 2rem 5vw;  /* padding simmetrico su mobile */
+    padding: 2rem 2vw;  /* padding simmetrico su mobile */
   }
   .stats-strip { grid-template-columns: 1fr 1fr; }
   .form-grid { grid-template-columns: 1fr; }
