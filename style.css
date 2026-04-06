@@ -819,10 +819,11 @@ footer {
 @media (max-width: 700px) {
   .hero {
     padding-top: 10px; /* adatta al tuo nav height */
+    justify-content: center;
   }
   
   .hero-inner {
-    padding: 2rem 2vw;  /* padding simmetrico su mobile */
+    padding: 2rem 6vw;
   }
   .stats-strip { grid-template-columns: 1fr 1fr; }
   .form-grid { grid-template-columns: 1fr; }
@@ -889,8 +890,6 @@ footer {
     display: block;
   }
 }
-
-
 
 
 @media (max-width: 480px) {
