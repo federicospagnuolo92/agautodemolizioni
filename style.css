@@ -866,7 +866,14 @@ footer {
   nav ul {
     display: none;
     position: fixed;
-@@ -878,11 +823,7 @@ footer {
+    top: 80px;
+    left: 0;
+    right: 0;
+    background: #fff;
+    flex-direction: column;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     z-index: 99;
     padding: 0.5rem 0;
   }
@@ -878,7 +885,8 @@ footer {
   nav ul a {
     display: block;
     padding: 1rem 2rem;
-@@ -891,17 +832,30 @@ footer {
+    font-size: 1rem;
+    border-bottom: 1px solid var(--border);
     color: var(--text) !important;
     background: none !important;
   }
@@ -894,19 +902,3 @@ footer {
     display: block;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
