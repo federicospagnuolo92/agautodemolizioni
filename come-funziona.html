@@ -1,16 +1,7 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <!-- Start cookieyes banner --> <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/2ee346540f980852835571ffd6693821/script.js"></script> <!-- End cookieyes banner -->
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEM3N5VMN"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-FTEM3N5VMN');
-</script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/klaro@0.7.21/dist/klaro.min.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Come funziona la demolizione gratuita di A.G.S. Autodemolizioni — 4 semplici passi per demolire la tua auto gratis nelle province di Milano e Monza-Brianza.">
@@ -474,5 +465,40 @@
   }
 </script>
 
+<!-- KLARO -->
+<script src="https://cdn.jsdelivr.net/npm/klaro@0.7.21/dist/klaro.min.js"></script>
+
+<script>
+var klaroConfig = {
+  version: 1,
+  elementID: 'klaro',
+  storageMethod: 'localStorage',
+  cookieName: 'klaro',
+  mustConsent: true,
+
+  services: [
+    {
+      name: 'google-analytics',
+      title: 'Google Analytics',
+      purposes: ['analytics'],
+      default: false
+    }
+  ]
+};
+
+// 👇 QUESTA È LA RIGA CHE TI MANCAVA
+klaro.setup(klaroConfig);
+</script>
+
+<!-- GOOGLE ANALYTICS BLOCCATO -->
+<script type="text/plain" data-name="google-analytics" src="https://www.googletagmanager.com/gtag/js?id=G-FTEM3N5VMN"></script>
+
+<script type="text/plain" data-name="google-analytics">
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-FTEM3N5VMN');
+</script>
+  
 </body>
 </html>
