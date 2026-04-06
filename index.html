@@ -2,15 +2,7 @@
 <html lang="it">
 <head>
   <link rel="stylesheet" href="/assets/klaro.min.css">
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEM3N5VMN"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-FTEM3N5VMN');
-</script>
+  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="A.G.S. Autodemolizioni — Demolizione auto gratuita nelle province di Milano e Monza-Brianza. Ritiro a domicilio, pratiche PRA incluse, zero burocrazia.">
@@ -398,6 +390,7 @@ async function sendForm(e) {
   }
 </script>
 
+<!-- KLARO -->
 <script src="https://cdn.jsdelivr.net/npm/klaro@0.7.21/dist/klaro.min.js"></script>
 
 <script>
@@ -407,21 +400,28 @@ var klaroConfig = {
   storageMethod: 'localStorage',
   cookieName: 'klaro',
   mustConsent: true,
-  services: []
+
+  services: [
+    {
+      name: 'google-analytics',
+      title: 'Google Analytics',
+      purposes: ['analytics'],
+      default: false
+    }
+  ]
 };
+</script>
+
+<!-- GOOGLE ANALYTICS BLOCCATO -->
+<script type="text/plain" data-name="google-analytics" src="https://www.googletagmanager.com/gtag/js?id=G-FTEM3N5VMN"></script>
+
+<script type="text/plain" data-name="google-analytics">
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-FTEM3N5VMN');
 </script>
   
   
 </body>
-
-  <script src="https://cdn.jsdelivr.net/npm/klaro@0.7.21/dist/klaro.min.js"></script>
-
-<script>
-var klaroConfig = {
-  version: 1,
-  elementID: 'klaro',
-  mustConsent: true,
-  services: []
-};
-</script>
 </html>
