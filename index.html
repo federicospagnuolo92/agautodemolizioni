@@ -397,49 +397,20 @@ async function sendForm(e) {
     document.getElementById('nav-menu').classList.remove('open');
   }
 </script>
-  <script src="/assets/klaro.min.js"></script>
-  <script>
+
+<script src="https://cdn.jsdelivr.net/npm/klaro@0.7.21/dist/klaro.min.js"></script>
+
+<script>
 var klaroConfig = {
   version: 1,
   elementID: 'klaro',
   storageMethod: 'localStorage',
   cookieName: 'klaro',
   mustConsent: true,
-
-  services: [
-    {
-      name: 'google-analytics',
-      title: 'Google Analytics',
-      purposes: ['analytics'],
-      default: false
-    },
-    {
-      name: 'google-ads',
-      title: 'Google Ads',
-      purposes: ['marketing'],
-      default: false
-    }
-  ]
+  services: []
 };
 </script>
-
-<!-- 3. DOPO metti gli script Google BLOCCATI -->
-<script type="text/plain" data-name="google-analytics" src="https://www.googletagmanager.com/gtag/js?id=G-XXXX"></script>
-
-<script type="text/plain" data-name="google-analytics">
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-XXXX');
-</script>
-
-<script type="text/plain" data-name="google-ads" src="https://www.googletagmanager.com/gtag/js?id=AW-XXXX"></script>
-
-<script type="text/plain" data-name="google-ads">
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'AW-XXXX');
-</script>
+  
+  
 </body>
 </html>
