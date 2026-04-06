@@ -789,6 +789,14 @@ footer {
 }
 
 @media (max-width: 700px) {
+  .hero {
+    min-height: auto;  /* rimuove il 100vh su mobile */
+    padding-top: 80px; /* adatta al tuo nav height */
+  }
+  
+  .hero-inner {
+    padding: 2rem 5vw;  /* padding simmetrico su mobile */
+  }
   nav {
     justify-content: center; 
      }
