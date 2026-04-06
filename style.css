@@ -809,6 +809,54 @@ footer {
   50%       { box-shadow: 0 4px 30px rgba(37,211,102,0.65); }
 }
 
+
+
+
+
+/* KLARO → banner in basso a sinistra */
+#klaro .cm-modal {
+  position: fixed !important;
+  bottom: 20px !important;
+  left: 20px !important;
+  right: auto !important;
+  top: auto !important;
+
+  width: 350px !important;
+  max-width: calc(100% - 40px);
+
+  border-radius: 12px !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2) !important;
+
+  animation: slideUp 0.4s ease;
+}
+
+/* animazione carina */
+@keyframes slideUp {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+#klaro .cm-btn-success {
+  background-color: #16a34a !important;
+  border-radius: 8px !important;
+}
+
+
+
+
+
+
+
+
+
+
+
 @media (max-width: 900px) {
   .hero-right { display: none; }
   .footer-top { grid-template-columns: 1fr 1fr; }
