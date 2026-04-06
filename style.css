@@ -96,7 +96,7 @@ nav ul a:hover { color: var(--text); }
   padding: 2rem 2vw 1rem 10vw;
   max-width: none;
   width: 100%;
-  gap: 2rem;
+  gap: 3rem;
 }
 
 .hero-left { flex: 1; }
