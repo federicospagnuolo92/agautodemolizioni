@@ -87,6 +87,7 @@ nav ul a:hover { color: var(--text); }
 .hero {
   padding-top: 68px;
   display: flex;
+  min-height: 100vh;
   flex-direction: column;
   background: var(--bg);
 }
