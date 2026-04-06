@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Come funziona la demolizione gratuita di A.G.S. Autodemolizioni — 4 semplici passi per demolire la tua auto gratis nelle province di Milano e Monza-Brianza.">
+  <title>Come Funziona — A.G.S. Autodemolizioni</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="assets/logoAGS.png">
+  <style>
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      padding: calc(68px + 4rem) 5vw 4rem;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+    .page-hero .tag { display: block; margin-bottom: .8rem; }
+    .page-hero h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+    .page-hero p {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ── STEPS SECTION ── */
+    .steps-section {
+      padding: 6rem 5vw;
+      background: var(--bg);
+    }
+    .steps-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .step-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 3rem;
+      margin-bottom: 4rem;
+      position: relative;
+    }
+
+    /* Linea verticale connettore */
+    .step-row:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 27px;
+      top: 56px;
+      bottom: -4rem;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--red), var(--red-mid));
+      opacity: 0.3;
+    }
+
+    .step-left {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .step-circle {
+      width: 56px;
+      height: 56px;
+      background: var(--red);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 800;
+      flex-shrink: 0;
+      box-shadow: 0 4px 16px rgba(232,0,29,0.25);
+    }
+
+    .step-content {
+      flex: 1;
+      padding-top: 8px;
+    }
+
+    .step-content h2 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: .6rem;
+      letter-spacing: -0.5px;
+    }
+
+    .step-content p {
+      font-size: .95rem;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 1rem;
+    }
+
+    .step-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+    }
+
+    .step-detail-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      color: var(--text-mid);
+      font-size: .78rem;
+      font-weight: 600;
+      padding: .3rem .8rem;
+      border-radius: 100px;
+    }
+
+    /* ── FAQ ── */
+    .faq-section {
+      padding: 5rem 5vw;
+      background: var(--bg-alt);
+      border-top: 1px solid var(--border);
+    }
+
+    .faq-inner {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 1.2rem 0;
+    }
+
+    .faq-item:first-of-type { border-top: 1px solid var(--border); }
+
+    .faq-question {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      user-select: none;
+    }
+
+    .faq-icon {
+      width: 24px;
+      height: 24px;
+      background: var(--red-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .9rem;
+      color: var(--red);
+      flex-shrink: 0;
+      transition: transform .3s;
+      font-weight: 700;
+    }
+
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+    .faq-answer {
+      font-size: .9rem;
+      color: var(--muted);
+      line-height: 1.75;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .35s ease, padding .35s;
+      padding-top: 0;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 300px;
+      padding-top: .8rem;
+    }
+
+    /* ── CTA FINALE ── */
+    .final-cta {
+      padding: 5rem 5vw;
+      background: var(--bg);
+      text-align: center;
+    }
+
+    .final-cta h2 {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: var(--text);
+      margin-bottom: .8rem;
+    }
+
+    .final-cta p {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    .final-cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .step-row { gap: 1.5rem; }
+      .step-row:not(:last-child)::after { left: 27px; }
+      .step-content h2 { font-size: 1.2rem; }
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo-link">
+    <img src="assets/logoAGS.png" alt="A.G.S. Autodemolizioni">
+  </a>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+  <ul id="nav-menu">
+    <li><a href="index.html#servizi" onclick="closeMenu()">Servizi</a></li>
+    <li><a href="come-funziona.html" onclick="closeMenu()">Come Funziona</a></li>
+    <li><a href="contatti.html" onclick="closeMenu()">Contatti</a></li>
+    <li><a href="index.html#richiesta" class="nav-cta" onclick="closeMenu()">Demolisci Gratis</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <span class="tag">Il Processo</span>
+  <h1>Come Funziona</h1>
+  <p>Demolire la tua auto con A.G.S. è semplice, veloce e completamente gratuito. Segui questi 4 passi.</p>
+</section>
+
+<!-- STEPS -->
+<section class="steps-section">
+  <div class="steps-inner">
+
+    <!-- Step 1 -->
+    <div class="step-row">
+      <div class="step-left">
+        <div class="step-circle">01</div>
+      </div>
+      <div class="step-content">
+        <h2>Contattaci o compila il modulo</h2>
+        <p>
+          Il primo passo è semplicissimo: chiamaci al <strong>0362 306524</strong>, 
+          scrivici su WhatsApp oppure compila il modulo online. 
+          Ti basteranno 2 minuti — nessun impegno, nessun documento richiesto in questa fase.
+        </p>
+        <div class="step-details">
+          <span class="step-detail-pill">📞 Chiamata diretta</span>
+          <span class="step-detail-pill">💬 WhatsApp</span>
+          <span class="step-detail-pill">📋 Modulo online</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step-row">
+      <div class="step-left">
+        <div class="step-circle">02</div>
+      </div>
+      <div class="step-content">
+        <h2>Ti contattiamo entro 8 ore</h2>
+        <p>
+          Il nostro team ti richiama entro 8 ore lavorative per raccogliere 
+          le informazioni sul veicolo e concordare giorno e orario del ritiro. 
+          Operiamo dal lunedì al sabato nelle province di Milano e Monza-Brianza.
+        </p>
+        <div class="step-details">
+          <span class="step-detail-pill">⚡ Risposta in 8 ore</span>
+          <span class="step-detail-pill">📅 Appuntamento flessibile</span>
+          <span class="step-detail-pill">🗓️ Lun–Sab</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step-row">
+      <div class="step-left">
+        <div class="step-circle">03</div>
+      </div>
+      <div class="step-content">
+        <h2>Ritiriamo il veicolo a domicilio</h2>
+        <p>
+          Arriviamo direttamente da te con il carro attrezzi, gratuitamente. 
+          Non devi portare il veicolo da nessuna parte. Ritiriamo qualsiasi mezzo: 
+          auto, SUV, furgoni, veicoli incidentati, senza documenti o con fermo amministrativo.
+        </p>
+        <div class="step-details">
+          <span class="step-detail-pill">🚚 Carro attrezzi gratuito</span>
+          <span class="step-detail-pill">🔒 Fermo amministrativo OK</span>
+          <span class="step-detail-pill">📄 Senza documenti OK</span>
+          <span class="step-detail-pill">💥 Incidentata OK</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="step-row">
+      <div class="step-left">
+        <div class="step-circle">04</div>
+      </div>
+      <div class="step-content">
+        <h2>Pratiche completate, certificato consegnato</h2>
+        <p>
+          Gestiamo noi tutte le pratiche burocratiche: radiazione al PRA, 
+          cancellazione del bollo auto e gestione dei documenti. 
+          Ti consegniamo il certificato di avvenuta demolizione — 
+          da quel momento sei completamente a posto, senza future responsabilità.
+        </p>
+        <div class="step-details">
+          <span class="step-detail-pill">📜 Certificato demolizione</span>
+          <span class="step-detail-pill">🏛️ Pratiche PRA incluse</span>
+          <span class="step-detail-pill">✅ Zero responsabilità future</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="faq-inner">
+    <div class="tag" style="display:block; text-align:center; margin-bottom:.8rem;">Domande frequenti</div>
+    <div class="section-title" style="text-align:center; margin-bottom:2.5rem;">Hai dei dubbi?</div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        Il servizio è davvero gratuito?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        Sì, assolutamente. Il ritiro del veicolo, il trasporto con carro attrezzi, 
+        le pratiche PRA e il certificato di demolizione sono tutti completamente gratuiti. 
+        Non ci sono costi nascosti né sorprese.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        Demolite anche veicoli con fermo amministrativo?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        Sì. Gestiamo anche veicoli con fermo amministrativo, sequestrati o privi di documenti. 
+        Contattaci e ti spiegheremo come procedere nel tuo caso specifico.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        Quanto tempo ci vuole dall'inizio alla fine?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        Di solito 24-48 ore dalla prima chiamata al ritiro del veicolo. 
+        Le pratiche burocratiche possono richiedere qualche giorno in più 
+        a seconda degli uffici, ma ti teniamo sempre aggiornato.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        Devo essere presente al momento del ritiro?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        Sì, è necessaria la presenza del proprietario o di un suo delegato 
+        con apposita delega scritta. Ti informeremo su cosa portare 
+        quando concorderemo l'appuntamento.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        Operate fuori dalle province di Milano e Monza-Brianza?
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        Al momento il nostro servizio di ritiro gratuito è attivo 
+        nelle province di Milano e Monza-Brianza. 
+        Contattaci per verificare se la tua zona è coperta.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <h2>Pronto a demolire la tua auto?</h2>
+  <p>È gratuito, veloce e senza burocrazia. Chiamaci ora.</p>
+  <div class="final-cta-buttons">
+    <a href="tel:0362306524" class="btn-primary">📞 Chiama ora — 0362 306524</a>
+    <a href="https://wa.me/393384672370" target="_blank" class="btn-outline">💬 Scrivici su WhatsApp</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="index.html" class="footer-logo-link">
+        <img src="assets/logoAGS.png" alt="A.G.S. Autodemolizioni">
+      </a>
+      <p>Specializzati nella demolizione gratuita di veicoli nelle province di Milano e Monza-Brianza.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Servizi</h5>
+      <ul>
+        <li><a href="index.html#servizi">Demolizione Gratuita</a></li>
+        <li><a href="index.html#servizi">Pratiche PRA</a></li>
+        <li><a href="index.html#servizi">Ricambi Auto</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Azienda</h5>
+      <ul>
+        <li><a href="come-funziona.html">Come Funziona</a></li>
+        <li><a href="index.html#recensioni">Recensioni</a></li>
+        <li><a href="contatti.html">Contatti</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contatti</h5>
+      <ul>
+        <li><a href="tel:0362306524">📞 0362 306524</a></li>
+        <li><a href="mailto:info@agsautodemolizioni.it">✉️ info@agsautodemolizioni.it</a></li>
+        <li><a href="https://wa.me/393384672370">💬 WhatsApp</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2000 A.G.S. Autodemolizioni — P.IVA 02864010968</span>
+    <div class="footer-bottom-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Cookie Policy</a>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/393384672370" class="whatsapp-btn" target="_blank" rel="noopener noreferrer" title="Chatta su WhatsApp">💬</a>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('hamburger').classList.toggle('open');
+    document.getElementById('nav-menu').classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('hamburger').classList.remove('open');
+    document.getElementById('nav-menu').classList.remove('open');
+  }
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+</script>
+
+</body>
+</html>
