@@ -150,6 +150,38 @@ nav ul a:hover { color: var(--text); }
   animation: fadeUp .7s ease .3s both;
 }
 
+/* ── HERO CHECKLIST ── */
+.hero-checklist {
+  list-style: none;
+  margin: 1.4rem 0 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+ 
+.hero-checklist li {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  font-size: .95rem;
+  color: var(--text-mid);
+  font-weight: 500;
+}
+ 
+.check-icon {
+  width: 22px;
+  height: 22px;
+  background: var(--red);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .75rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
 /* ── BUTTONS ── */
 .btn-primary {
   display: inline-flex;
