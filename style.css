@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
 :root {
   --red:        #E8001D;
   --red-light:  #fef1f2;
@@ -45,7 +46,7 @@ nav {
 }
 
 .logo-link img {
-  height: 55px;
+  height: 100px;
   width: auto;
   margin-left: 3rem;
   margin-top: 12px;
@@ -83,7 +84,7 @@ nav ul a:hover { color: var(--text); }
   transform: translateY(-1px);
 }
 
-/* Hamburger button */
+/* ── HAMBURGER ── */
 .hamburger {
   display: none;
   flex-direction: column;
@@ -104,16 +105,15 @@ nav ul a:hover { color: var(--text); }
   transition: all .3s;
 }
 
-/* Hamburger animato quando aperto */
 .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .hamburger.open span:nth-child(2) { opacity: 0; }
 .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* ── HERO ── */
 .hero {
-  padding-top: 68px;
-  display: flex;
+  padding-top: 80px;
   min-height: 100vh;
+  display: flex;
   flex-direction: column;
   background: var(--bg);
 }
@@ -184,7 +184,7 @@ nav ul a:hover { color: var(--text); }
   flex-direction: column;
   gap: .75rem;
 }
- 
+
 .hero-checklist li {
   display: flex;
   align-items: center;
@@ -193,7 +193,7 @@ nav ul a:hover { color: var(--text); }
   color: var(--text-mid);
   font-weight: 500;
 }
- 
+
 .check-icon {
   width: 22px;
   height: 22px;
@@ -280,13 +280,13 @@ nav ul a:hover { color: var(--text); }
   box-shadow: 0 6px 24px rgba(0,0,0,0.2);
 }
 
+/* ── TRUST CARD ── */
 .hero-right {
   flex: 0 0 340px;
   animation: fadeUp .7s ease .35s both;
   margin-left: auto;
-  margin-top: 2rem;
-  margin-left: auto;
   margin-right: 10vw;
+  margin-top: 2rem;
   align-self: flex-start;
 }
 
@@ -337,38 +337,6 @@ nav ul a:hover { color: var(--text); }
   color: var(--muted);
   margin-top: .1rem;
   display: block;
-}
-
-/* ── STATS STRIP ── */
-.stats-strip {
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  background: var(--bg-alt);
-  animation: fadeUp .7s ease .45s both;
-}
-
-.stat-item {
-  padding: 1.8rem 2rem;
-  border-right: 1px solid var(--border);
-  text-align: center;
-}
-
-.stat-item:last-child { border-right: none; }
-
-.stat-num {
-  font-size: 2rem;
-  font-weight: 800;
-  color: var(--red);
-  letter-spacing: -1px;
-}
-
-.stat-label {
-  font-size: .75rem;
-  font-weight: 500;
-  color: var(--muted);
-  margin-top: .2rem;
 }
 
 /* ── ANIMATION ── */
@@ -662,49 +630,6 @@ nav ul a:hover { color: var(--text); }
 .review-name { font-size: .875rem; font-weight: 600; }
 .review-city { font-size: .75rem; color: var(--muted); }
 
-/* ── REGIONS ── */
-.regions {
-  padding: 3.5rem 5vw;
-  background: var(--bg);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-
-.regions-label {
-  text-align: center;
-  font-size: .75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: var(--muted);
-  margin-bottom: 1.4rem;
-}
-
-.regions-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .5rem;
-  justify-content: center;
-}
-
-.region-tag {
-  font-size: .78rem;
-  font-weight: 500;
-  color: var(--muted);
-  border: 1px solid var(--border);
-  padding: .35rem .85rem;
-  border-radius: 100px;
-  cursor: pointer;
-  transition: color .2s, border-color .2s, background .2s;
-  background: var(--bg);
-}
-
-.region-tag:hover {
-  color: var(--red);
-  border-color: var(--red-mid);
-  background: var(--red-light);
-}
-
 /* ── FOOTER ── */
 footer {
   padding: 4rem 5vw 2rem;
@@ -731,9 +656,7 @@ footer {
 .footer-logo-link img {
   height: 52px;
   width: auto;
-  /* logo è su sfondo bianco — filtro per invertire i colori scuri su footer scuro */
   filter: brightness(0) invert(1);
-  /* teniamo il rosso: usiamo drop-shadow invece */
 }
 
 .footer-brand p {
@@ -809,134 +732,30 @@ footer {
   50%       { box-shadow: 0 4px 30px rgba(37,211,102,0.65); }
 }
 
-
-
-
-
-/* ===== KLARO BANNER PRO ===== */
-#klaro .cm-modal {
-  position: fixed !important;
-  bottom: 20px !important;
-  left: 20px !important;
-  right: auto !important;
-  top: auto !important;
-
-  width: 380px !important;
-  max-width: calc(100% - 40px);
-
-  background: #ffffff !important;
-  border-radius: 14px !important;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.15) !important;
-  padding: 20px !important;
-
-  font-family: 'Inter', sans-serif;
-  animation: slideUp 0.4s ease;
-}
-
-/* titolo */
-#klaro .cm-header {
-  font-size: 16px !important;
-  font-weight: 700 !important;
-  margin-bottom: 8px;
-}
-
-/* testo */
-#klaro .cm-text {
-  font-size: 14px !important;
-  color: #555 !important;
-  line-height: 1.5;
-}
-
-/* bottoni container */
-#klaro .cm-btns {
-  display: flex;
-  gap: 10px;
-  margin-top: 15px;
-}
-
-/* bottone accetta */
-#klaro .cm-btn-success {
-  background: #16a34a !important;
-  border-radius: 8px !important;
-  flex: 1;
-  font-weight: 600;
-}
-
-/* bottone rifiuta */
-#klaro .cm-btn-danger {
-  background: #e5e7eb !important;
-  color: #111 !important;
-  border-radius: 8px !important;
-  flex: 1;
-}
-
-/* bottone preferenze */
-#klaro .cm-btn-info {
-  display: none !important; /* lo nascondiamo per semplicità */
-}
-
-/* animazione */
-@keyframes slideUp {
-  from {
-    transform: translateY(40px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-/* mobile */
-@media (max-width: 600px) {
-  #klaro .cm-modal {
-    left: 10px !important;
-    right: 10px !important;
-    bottom: 10px !important;
-    width: auto !important;
-  }
-}
-
-
-
-
-
-
-
-
-
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
 
 @media (max-width: 900px) {
   .hero-right { display: none; }
   .footer-top { grid-template-columns: 1fr 1fr; }
+}
 
-  .hero {
-    padding-top: 10px; /* adatta al tuo nav height */
-    min-height: 80vh;
-    justify-content: center;
-  }
-  
-  .hero-inner {
-    padding: 2rem 6vw;
-  }
-  .stats-strip { grid-template-columns: 1fr 1fr; }
-  .form-grid { grid-template-columns: 1fr; }
-  .form-group.full { grid-column: 1; }
-  .cta-banner { padding: 2.5rem 2rem; }
+@media (max-width: 700px) {
 
+  /* NAV */
   nav {
     justify-content: center;
     position: relative;
   }
-
   .logo-link {
     margin: 0 auto;
   }
-
   .logo-link img {
     margin-left: 0;
+    margin-top: 0;
+    height: 65px;
   }
-
   .hamburger {
     display: flex;
     position: absolute;
@@ -944,7 +763,6 @@ footer {
     top: 50%;
     transform: translateY(-50%);
   }
-
   nav ul {
     display: none;
     position: fixed;
@@ -959,11 +777,7 @@ footer {
     z-index: 99;
     padding: 0.5rem 0;
   }
-
-  nav ul.open {
-    display: flex;
-  }
-
+  nav ul.open { display: flex; }
   nav ul a {
     display: block;
     padding: 1rem 2rem;
@@ -972,20 +786,155 @@ footer {
     color: var(--text) !important;
     background: none !important;
   }
-
-  nav ul a:hover {
-    background: var(--bg-alt) !important;
-  }
-
+  nav ul a:hover { background: var(--bg-alt) !important; }
   .nav-cta {
     margin: 0.8rem 2rem !important;
     border-radius: 8px !important;
     text-align: center;
     display: block;
   }
-}
 
+  /* HERO */
+  .hero {
+    min-height: auto;
+    padding-top: 80px;
+  }
+  .hero-inner {
+    padding: 2rem 5vw;
+  }
+
+  /* VARIE */
+  .form-grid { grid-template-columns: 1fr; }
+  .form-group.full { grid-column: 1; }
+  .cta-banner { padding: 2.5rem 2rem; }
+}
 
 @media (max-width: 480px) {
   .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+}
+
+/* ══════════════════════════════════════════
+   KLARO COOKIE BANNER — Stile AGS
+══════════════════════════════════════════ */
+
+#klaro .cookie-modal-overlay {
+  background: rgba(0,0,0,0.45) !important;
+  backdrop-filter: blur(4px) !important;
+}
+
+#klaro .cm-modal,
+#klaro .cookie-modal .cm-modal {
+  position: fixed !important;
+  bottom: 24px !important;
+  left: 24px !important;
+  right: auto !important;
+  top: auto !important;
+  transform: none !important;
+  width: 400px !important;
+  max-width: calc(100vw - 48px) !important;
+  background: #ffffff !important;
+  border-radius: 16px !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.18) !important;
+  padding: 0 !important;
+  font-family: 'Inter', sans-serif !important;
+  border: 1px solid #e5e7eb !important;
+  animation: klaroSlideUp 0.35s cubic-bezier(.4,0,.2,1) both !important;
+  overflow: hidden !important;
+}
+
+#klaro .cm-modal::before {
+  content: '';
+  display: block;
+  height: 4px;
+  background: #E8001D;
+  width: 100%;
+}
+
+#klaro .cm-header {
+  padding: 20px 24px 0 !important;
+  border: none !important;
+}
+
+#klaro .cm-header h1,
+#klaro .cm-header .title {
+  font-size: 17px !important;
+  font-weight: 800 !important;
+  color: #111827 !important;
+  letter-spacing: -0.3px !important;
+  margin: 0 0 6px !important;
+}
+
+#klaro .cm-body,
+#klaro .cm-text {
+  padding: 8px 24px !important;
+  font-size: 13.5px !important;
+  color: #6b7280 !important;
+  line-height: 1.6 !important;
+}
+
+#klaro .cm-body a,
+#klaro .cm-text a {
+  color: #E8001D !important;
+  text-decoration: underline !important;
+}
+
+#klaro .cm-footer,
+#klaro .cm-btns {
+  padding: 16px 24px 20px !important;
+  display: flex !important;
+  gap: 10px !important;
+  border-top: 1px solid #f3f4f6 !important;
+  margin-top: 8px !important;
+}
+
+#klaro .cm-btn {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  padding: 10px 16px !important;
+  border: none !important;
+  cursor: pointer !important;
+  flex: 1 !important;
+  transition: transform .15s, box-shadow .15s !important;
+}
+
+#klaro .cm-btn:hover { transform: translateY(-1px) !important; }
+
+#klaro .cm-btn-success {
+  background: #E8001D !important;
+  color: #fff !important;
+  box-shadow: 0 4px 12px rgba(232,0,29,0.25) !important;
+  order: -1 !important;
+}
+
+#klaro .cm-btn-success:hover {
+  background: #c8001a !important;
+  box-shadow: 0 6px 16px rgba(232,0,29,0.35) !important;
+}
+
+#klaro .cm-btn-danger {
+  background: #f3f4f6 !important;
+  color: #374151 !important;
+}
+
+#klaro .cm-btn-danger:hover { background: #e5e7eb !important; }
+
+#klaro .cm-btn-info { display: none !important; }
+
+@keyframes klaroSlideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+  #klaro .cm-modal {
+    left: 12px !important;
+    right: 12px !important;
+    bottom: 12px !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+  #klaro .cm-footer,
+  #klaro .cm-btns { flex-direction: column !important; }
 }
