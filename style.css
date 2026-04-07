@@ -821,11 +821,15 @@ footer {
   background: rgba(0,0,0,0.45) !important;
   backdrop-filter: blur(4px) !important;
 }
+
+
 #klaro .cm-modal p,
 #klaro .cm-modal span,
 #klaro .cm-modal .cm-service-description,
 #klaro .cm-modal .cm-services p {
   color: #374151 !important;
+}
+  
 #klaro .cm-modal,
 #klaro .cookie-modal .cm-modal {
   position: fixed !important;
