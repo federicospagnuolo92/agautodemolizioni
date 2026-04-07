@@ -814,7 +814,7 @@ footer {
 
 
 /* ══════════════════════════════════════════
-   KLARO COOKIE BANNER — Stile AGS
+   KLARO COOKIE BANNER
 ══════════════════════════════════════════ */
 
 #klaro .cookie-modal-overlay {
@@ -871,6 +871,8 @@ footer {
   color: #6b7280 !important;
   line-height: 1.6 !important;
 }
+
+#klaro .cm-powered-by { display: none !important; }
 
 #klaro .cm-footer,
 #klaro .cm-btns {
