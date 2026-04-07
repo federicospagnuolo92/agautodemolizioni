@@ -399,16 +399,31 @@ var klaroConfig = {
   storageMethod: 'localStorage',
   cookieName: 'klaro',
   mustConsent: true,
-
+  acceptAll: true,          /* aggiunge bottone "Accetta tutto" */
+  hideDeclineAll: false,
+  lang: 'it',
+  translations: {
+    it: {
+      acceptAll: 'Accetta tutto',
+      decline: 'Rifiuta',
+      consentNotice: {
+        title: 'Utilizziamo i cookie',
+        description: 'Utilizziamo cookie analitici per migliorare la tua esperienza sul sito.'
+      },
+      purposes: { analytics: 'Analisi' }
+    }
+  },
   services: [
     {
       name: 'google-analytics',
       title: 'Google Analytics',
       purposes: ['analytics'],
-      default: false
+      default: true           /* toggle già attivo */
     }
   ]
 };
+
+  
 
 // 👇 QUESTA È LA RIGA CHE TI MANCAVA
 klaro.setup(klaroConfig);
