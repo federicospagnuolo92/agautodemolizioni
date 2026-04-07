@@ -281,11 +281,13 @@ nav ul a:hover { color: var(--text); }
 }
 
 .hero-right {
-  flex: 0 0 480px;
+  flex: 1;
+  max-width: 520px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-right: 3vw;
+  margin-left: auto;
   animation: fadeUp .7s ease .35s both;
 }
 
