@@ -393,58 +393,53 @@ async function sendForm(e) {
 <script src="https://cdn.jsdelivr.net/npm/klaro@0.7.21/dist/klaro.min.js"></script>
 
 <script>
+
 var klaroConfig = {
   version: 1,
   elementID: 'klaro',
   storageMethod: 'localStorage',
   cookieName: 'klaro',
   mustConsent: true,
-  acceptAll: true,          /* aggiunge bottone "Accetta tutto" */
+  acceptAll: true,
   hideDeclineAll: false,
   lang: 'it',
-
   translations: {
-  it: {
-    acceptAll: 'Accetta tutto',
-    decline: 'Rifiuta',
-    consentModal: {
-      title: '🍪 Utilizziamo i cookie',
-      description: 'Utilizziamo cookie analitici (Google Analytics, Vercel) per migliorare la tua esperienza. Puoi scegliere quali accettare.'
-    },
-    consentNotice: {
-      title: '🍪 Utilizziamo i cookie',
-      description: 'Utilizziamo cookie analitici per migliorare la tua esperienza.'
-    },
-    purposes: {
-      analytics: 'Analisi'
-    },
-    service: {
-      disableAll: {
-        title: 'Abilita/Disabilita tutti'
-      }
-    },
-    services: {
-      'google-analytics': {
-        title: 'Google Analytics',
-        description: 'Ci aiuta a capire come gli utenti utilizzano il sito.'
+    it: {
+      acceptAll: 'Accetta tutto',
+      decline: 'Rifiuta',
+      consentModal: {
+        title: '🍪 Utilizziamo i cookie',
+        description: 'Utilizziamo cookie analitici (Google Analytics, Vercel) per migliorare la tua esperienza. Puoi scegliere quali accettare.'
+      },
+      consentNotice: {
+        title: '🍪 Utilizziamo i cookie',
+        description: 'Utilizziamo cookie analitici per migliorare la tua esperienza.'
+      },
+      purposes: {
+        analytics: 'Analisi'
+      },
+      services: {
+        'google-analytics': {
+          title: 'Google Analytics',
+          description: 'Ci aiuta a capire come gli utenti utilizzano il sito.'
+        }
       }
     }
-  }
-},
-
-
-
-
-
-
-
-  
+  },
+  services: [
+    {
+      name: 'google-analytics',
+      title: 'Google Analytics',
+      purposes: ['analytics'],
+      default: true
+    }
+  ]
 };
 
-  
-
-// 👇 QUESTA È LA RIGA CHE TI MANCAVA
 klaro.setup(klaroConfig);
+
+
+
 </script>
 
 <!-- GOOGLE ANALYTICS BLOCCATO -->
