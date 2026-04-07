@@ -829,7 +829,11 @@ footer {
 #klaro .cm-modal .cm-services p {
   color: #374151 !important;
 }
-  
+
+#klaro .cm-services,
+#klaro .cm-service,
+#klaro .cm-list-title { display: none !important; }
+
 #klaro .cm-modal,
 #klaro .cookie-modal .cm-modal {
   position: fixed !important;
