@@ -881,6 +881,8 @@ footer {
   gap: 10px !important;
   border-top: 1px solid #f3f4f6 !important;
   margin-top: 8px !important;
+  flex-wrap: nowrap !important;  /* ← aggiunge questa riga */
+  align-items: center !important;
 }
 
 #klaro .cm-btn {
