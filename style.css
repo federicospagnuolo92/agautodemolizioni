@@ -894,6 +894,8 @@ footer {
   border: none !important;
   cursor: pointer !important;
   flex: 1 !important;
+  min-width: 0 !important;      
+  white-space: nowrap !important; 
 }
 
 #klaro .cm-btn-success {
