@@ -902,7 +902,7 @@ footer {
   background: #E8001D !important;
   color: #fff !important;
   box-shadow: 0 4px 12px rgba(232,0,29,0.25) !important;
-  flex: 1 !important;
+  flex: 2 !important;
 }
 
 #klaro .cm-btn-success:hover {
