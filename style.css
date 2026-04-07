@@ -813,91 +813,118 @@ footer {
 
 
 
-/* ===== KLARO BANNER PRO ===== */
-#klaro .cm-modal {
+/* ══════════════════════════════════════════
+   KLARO COOKIE BANNER — Stile AGS
+══════════════════════════════════════════ */
+
+#klaro .cookie-modal-overlay {
+  background: rgba(0,0,0,0.45) !important;
+  backdrop-filter: blur(4px) !important;
+}
+
+#klaro .cm-modal,
+#klaro .cookie-modal .cm-modal {
   position: fixed !important;
-  bottom: 20px !important;
-  left: 20px !important;
+  bottom: 24px !important;
+  left: 24px !important;
   right: auto !important;
   top: auto !important;
-
-  width: 380px !important;
-  max-width: calc(100% - 40px);
-
+  transform: none !important;
+  width: 400px !important;
+  max-width: calc(100vw - 48px) !important;
   background: #ffffff !important;
-  border-radius: 14px !important;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.15) !important;
-  padding: 20px !important;
-
-  font-family: 'Inter', sans-serif;
-  animation: slideUp 0.4s ease;
+  border-radius: 16px !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.18) !important;
+  padding: 0 !important;
+  font-family: 'Inter', sans-serif !important;
+  border: 1px solid #e5e7eb !important;
+  animation: klaroSlideUp 0.35s cubic-bezier(.4,0,.2,1) both !important;
+  overflow: hidden !important;
 }
 
-/* titolo */
+#klaro .cm-modal::before {
+  content: '';
+  display: block;
+  height: 4px;
+  background: #E8001D;
+  width: 100%;
+}
+
 #klaro .cm-header {
-  font-size: 16px !important;
-  font-weight: 700 !important;
-  margin-bottom: 8px;
+  padding: 20px 24px 0 !important;
+  border: none !important;
 }
 
-/* testo */
+#klaro .cm-header h1,
+#klaro .cm-header .title {
+  font-size: 17px !important;
+  font-weight: 800 !important;
+  color: #111827 !important;
+  letter-spacing: -0.3px !important;
+  margin: 0 0 6px !important;
+}
+
+#klaro .cm-body,
 #klaro .cm-text {
-  font-size: 14px !important;
-  color: #555 !important;
-  line-height: 1.5;
+  padding: 8px 24px !important;
+  font-size: 13.5px !important;
+  color: #6b7280 !important;
+  line-height: 1.6 !important;
 }
 
-/* bottoni container */
+#klaro .cm-footer,
 #klaro .cm-btns {
-  display: flex;
-  gap: 10px;
-  margin-top: 15px;
+  padding: 16px 24px 20px !important;
+  display: flex !important;
+  gap: 10px !important;
+  border-top: 1px solid #f3f4f6 !important;
+  margin-top: 8px !important;
 }
 
-/* bottone accetta */
+#klaro .cm-btn {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 13.5px !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  padding: 10px 16px !important;
+  border: none !important;
+  cursor: pointer !important;
+  flex: 1 !important;
+}
+
 #klaro .cm-btn-success {
-  background: #16a34a !important;
-  border-radius: 8px !important;
-  flex: 1;
-  font-weight: 600;
+  background: #E8001D !important;
+  color: #fff !important;
+  box-shadow: 0 4px 12px rgba(232,0,29,0.25) !important;
 }
 
-/* bottone rifiuta */
+#klaro .cm-btn-success:hover {
+  background: #c8001a !important;
+}
+
 #klaro .cm-btn-danger {
-  background: #e5e7eb !important;
-  color: #111 !important;
-  border-radius: 8px !important;
-  flex: 1;
+  background: #f3f4f6 !important;
+  color: #374151 !important;
 }
 
-/* bottone preferenze */
-#klaro .cm-btn-info {
-  display: none !important; /* lo nascondiamo per semplicità */
+#klaro .cm-btn-info { display: none !important; }
+
+@keyframes klaroSlideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* animazione */
-@keyframes slideUp {
-  from {
-    transform: translateY(40px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-/* mobile */
 @media (max-width: 600px) {
   #klaro .cm-modal {
-    left: 10px !important;
-    right: 10px !important;
-    bottom: 10px !important;
+    left: 12px !important;
+    right: 12px !important;
+    bottom: 12px !important;
     width: auto !important;
+    max-width: none !important;
   }
+  #klaro .cm-footer,
+  #klaro .cm-btns { flex-direction: column !important; }
 }
-
-
 
 
 
