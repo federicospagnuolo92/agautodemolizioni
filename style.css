@@ -861,6 +861,8 @@ footer {
 #klaro .cm-header {
   padding: 20px 24px 0 !important;
   border: none !important;
+  border-bottom: 1px solid #e5e7eb !important; 
+  margin-bottom: 8px !important;
 }
 
 #klaro .cm-header h1,
