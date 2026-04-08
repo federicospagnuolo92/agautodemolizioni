@@ -469,20 +469,12 @@ nav ul a:hover { color: var(--text); }
 
 .services {
   position: relative;
-  background-color: #f0f2f5;
+  background-color: #fff;
   background-image: url('assets/tire-track.jpg');
   background-size: cover;
   background-position: center;
   padding-top: 3rem;
   padding-bottom: 4rem;
-}
-
-.services::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(240, 242, 245, 0.85);
-  z-index: 0;
 }
 
 .services .section-inner {
