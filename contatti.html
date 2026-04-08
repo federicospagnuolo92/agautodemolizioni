@@ -4,23 +4,26 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/klaro@0.7.21/dist/klaro.min.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Contatti A.G.S. Autodemolizioni — Telefono, email e sede. Demolizione auto gratuita nelle province di Milano e Monza-Brianza.">
-  <title>Contatti — A.G.S. Autodemolizioni</title>
+  <meta name="description" content="A.G.S. Autodemolizioni — Demolizione auto gratuita nelle province di Milano e Monza-Brianza. Ritiro a domicilio, pratiche PRA incluse, zero burocrazia.">
+  <title>A.G.S. Autodemolizioni — Demolizione Gratuita Milano e Monza</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" href="assets/logoAGS.png">
 </head>
 <body>
-
-<!-- NAV -->
 <nav>
-  <a href="index.html" class="logo-link">
+  <a href="https://agsrottama.it" class="logo-link">
     <img src="assets/logoAGS.png" alt="A.G.S. Autodemolizioni">
   </a>
-  <ul>
-    <li><a href="index.html#servizi">Servizi</a></li>
-    <li><a href="index.html#come-funziona">Come Funziona</a></li>
-    <li><a href="contatti.html">Contatti</a></li>
-    <li><a href="index.html#richiesta" class="nav-cta">Demolisci Gratis</a></li>
+<button class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <ul id="nav-menu">
+    <li><a href="#servizi" onclick="closeMenu()">Servizi</a></li>
+    <li><a href="https://agsrottama.it/come-funziona" onclick="closeMenu()">Come Funziona</a></li>
+    <li><a href="https://agsrottama.it/contatti" onclick="closeMenu()">Contatti</a></li>
+    <li><a href="#richiesta" class="nav-cta" onclick="closeMenu()">Demolisci Gratis</a></li>
   </ul>
 </nav>
 
