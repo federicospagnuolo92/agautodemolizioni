@@ -466,7 +466,7 @@ nav ul a:hover { color: var(--text); }
 }
 
 /* ── SERVICES ── */
-.services { background: var(--bg-alt); }
+.services { background: var(--bg); }
 
 .services-grid {
   display: grid;
