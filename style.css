@@ -470,7 +470,7 @@ nav ul a:hover { color: var(--text); }
 .services {
   position: relative;
   background-color: #fff;
-  background-image: url('assets/tire-track.webp');
+  background-image: url('assets/tire.jpg');
   background-size: cover;
   background-position: center;
   padding-top: 3rem;
