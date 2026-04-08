@@ -466,75 +466,104 @@ nav ul a:hover { color: var(--text); }
 }
 
 /* ── SERVICES ── */
-
 .services {
   position: relative;
-  background-color: #fff;
+  padding: 4rem 5vw;
   background-image: url('assets/tire-track.jpg');
   background-size: cover;
   background-position: center;
-  padding-top: 3rem;
-  padding-bottom: 4rem;
 }
-
-.services .section-inner {
+ 
+.services::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.88);
+  z-index: 0;
+}
+ 
+.services-inner {
   position: relative;
   z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
 }
-
-.services-grid {
+ 
+.services-row1 {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.2rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
 }
-
+ 
+.services-row2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  max-width: 740px;
+  margin: 0 auto;
+}
+ 
 .service-card {
   background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 2rem 1.8rem;
-  transition: box-shadow .25s, transform .25s;
-  cursor: pointer;
+  border-radius: 14px;
+  padding: 2.5rem 2rem 2rem;
+  text-align: center;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-
-.service-card:hover {
-  box-shadow: 0 8px 28px rgba(0,0,0,0.09);
-  transform: translateY(-3px);
-}
-
+ 
 .service-icon {
-  width: 48px;
-  height: 48px;
-  background: var(--red-light);
-  border-radius: 10px;
+  font-size: 3rem;
+  margin-bottom: 1.2rem;
+  width: 80px;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.4rem;
-  margin-bottom: 1.2rem;
 }
-
+ 
 .service-card h3 {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 700;
-  margin-bottom: .5rem;
+  color: var(--text);
+  margin-bottom: 0.8rem;
 }
-
+ 
 .service-card p {
-  font-size: .875rem;
+  font-size: 0.875rem;
   color: var(--muted);
   line-height: 1.7;
+  flex: 1;
+  margin-bottom: 1.5rem;
 }
-
-.service-pill {
+ 
+.btn-dark {
   display: inline-block;
-  margin-top: 1.2rem;
-  background: var(--red-light);
-  color: #b8001a;
-  font-size: .7rem;
+  background: #1e2d4f;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
   font-weight: 600;
-  padding: .25rem .75rem;
-  border-radius: 100px;
+  padding: 0.65rem 1.8rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background .2s;
+  border: none;
+  cursor: pointer;
+}
+ 
+.btn-dark:hover { background: #111827; }
+ 
+@media (max-width: 900px) {
+  .services-row1 { grid-template-columns: 1fr; }
+  .services-row2 { grid-template-columns: 1fr; max-width: 100%; }
+}
+ 
+@media (max-width: 600px) {
+  .services-row1, .services-row2 { gap: 1rem; }
 }
 
 /* ── HOW IT WORKS ── */
