@@ -469,7 +469,8 @@ nav ul a:hover { color: var(--text); }
 
 .services {
   background-color: #f0f2f5;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Ccircle cx='40' cy='40' r='18' fill='none' stroke='%23c8cdd6' stroke-width='2'/%3E%3Ccircle cx='40' cy='40' r='10' fill='none' stroke='%23c8cdd6' stroke-width='1.5'/%3E%3Ccircle cx='40' cy='40' r='3' fill='%23c8cdd6'/%3E%3Crect x='22' y='38.5' width='5' height='3' rx='1' fill='%23c8cdd6'/%3E%3Crect x='53' y='38.5' width='5' height='3' rx='1' fill='%23c8cdd6'/%3E%3Crect x='38.5' y='22' width='3' height='5' rx='1' fill='%23c8cdd6'/%3E%3Crect x='38.5' y='53' width='3' height='5' rx='1' fill='%23c8cdd6'/%3E%3Crect x='27' y='27' width='3' height='5' rx='1' fill='%23c8cdd6' transform='rotate(45 28.5 29.5)'/%3E%3Crect x='50' y='27' width='3' height='5' rx='1' fill='%23c8cdd6' transform='rotate(-45 51.5 29.5)'/%3E%3Crect x='27' y='50' width='3' height='5' rx='1' fill='%23c8cdd6' transform='rotate(-45 28.5 52.5)'/%3E%3Crect x='50' y='50' width='3' height='5' rx='1' fill='%23c8cdd6' transform='rotate(45 51.5 52.5)'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='80' viewBox='0 0 60 80'%3E%3Crect x='10' y='5' width='8' height='14' rx='4' fill='%23c8cdd6'/%3E%3Crect x='24' y='5' width='8' height='14' rx='4' fill='%23c8cdd6'/%3E%3Crect x='38' y='5' width='8' height='14' rx='4' fill='%23c8cdd6'/%3E%3Crect x='10' y='61' width='8' height='14' rx='4' fill='%23c8cdd6'/%3E%3Crect x='24' y='61' width='8' height='14' rx='4' fill='%23c8cdd6'/%3E%3Crect x='38' y='61' width='8' height='14' rx='4' fill='%23c8cdd6'/%3E%3C/svg%3E");
+  background-size: 60px 80px;
   padding-top: 3rem;
   padding-bottom: 4rem;
 }
