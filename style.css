@@ -468,11 +468,26 @@ nav ul a:hover { color: var(--text); }
 /* ── SERVICES ── */
 
 .services {
+  position: relative;
   background-color: #f0f2f5;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='80' viewBox='0 0 60 80'%3E%3Crect x='10' y='5' width='8' height='14' rx='4' fill='%23c8cdd6'/%3E%3Crect x='24' y='5' width='8' height='14' rx='4' fill='%23c8cdd6'/%3E%3Crect x='38' y='5' width='8' height='14' rx='4' fill='%23c8cdd6'/%3E%3Crect x='10' y='61' width='8' height='14' rx='4' fill='%23c8cdd6'/%3E%3Crect x='24' y='61' width='8' height='14' rx='4' fill='%23c8cdd6'/%3E%3Crect x='38' y='61' width='8' height='14' rx='4' fill='%23c8cdd6'/%3E%3C/svg%3E");
-  background-size: 60px 80px;
+  background-image: url('assets/tire-track.jpg');
+  background-size: cover;
+  background-position: center;
   padding-top: 3rem;
   padding-bottom: 4rem;
+}
+
+.services::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(240, 242, 245, 0.85);
+  z-index: 0;
+}
+
+.services .section-inner {
+  position: relative;
+  z-index: 1;
 }
 
 .services-grid {
