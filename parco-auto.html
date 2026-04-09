@@ -10,6 +10,8 @@
 *{ margin:0; padding:0; box-sizing:border-box; }
 html{ scroll-behavior:smooth; }
 body{ font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased; }
+
+/* NAV */
 nav{ height:80px; display:flex; align-items:center; justify-content:space-between; padding:0 5vw; position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(255,255,255,0.97); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); }
 .logo-link{ display:flex; align-items:center; text-decoration:none; }
 .logo-link img{ height:55px; width:auto; margin-left:3rem; margin-top:12px; }
@@ -22,20 +24,30 @@ nav ul a:hover{ color:var(--text); }
 .hamburger.open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
 .hamburger.open span:nth-child(2){ opacity:0; }
 .hamburger.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
-.page-header{ margin-top:80px; padding:2.5rem 5vw 0; background:var(--white); border-bottom:1px solid var(--border); }
-.page-header-inner{ max-width:1100px; margin:0 auto; }
-.page-header h1{ font-size:1.6rem; font-weight:800; color:var(--text); letter-spacing:-.5px; margin-bottom:.3rem; }
+
+/* PAGE HEADER */
+.page-header{ margin-top:80px; padding:2.5rem 0 0; background:var(--white); border-bottom:1px solid var(--border); }
+.page-header-inner{ max-width:1100px; margin:0 auto; padding:0 5vw; }
+.page-tag{ display:inline-block; font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:var(--red); margin-bottom:.5rem; }
+.page-header h1{ font-size:2.2rem; font-weight:800; color:var(--text); letter-spacing:-1px; margin-bottom:.4rem; line-height:1.1; }
+.page-header h1 span{ color:var(--red); }
 .page-header p{ font-size:.9rem; color:var(--muted); margin-bottom:1.5rem; }
+
+/* FILTRI */
 .filters{ display:flex; gap:.8rem; padding-bottom:1.2rem; flex-wrap:wrap; }
 .filter-select{ font-family:'Inter',sans-serif; font-size:.85rem; font-weight:500; color:var(--text); background:var(--white); border:1.5px solid var(--border); border-radius:8px; padding:.5rem 1rem; cursor:pointer; outline:none; transition:border-color .2s; min-width:140px; }
 .filter-select:focus{ border-color:var(--red); }
 .search-box{ display:flex; align-items:center; gap:.5rem; background:var(--white); border:1.5px solid var(--border); border-radius:8px; padding:.5rem 1rem; flex:1; max-width:300px; transition:border-color .2s; }
 .search-box:focus-within{ border-color:var(--red); }
 .search-box input{ border:none; outline:none; font-family:'Inter',sans-serif; font-size:.85rem; color:var(--text); width:100%; background:transparent; }
+
+/* MAIN */
 .main{ max-width:1100px; margin:0 auto; padding:1.5rem 5vw 4rem; }
 .results-bar{ display:flex; align-items:center; justify-content:space-between; margin-bottom:1.2rem; }
 .results-count{ font-size:.85rem; color:var(--muted); font-weight:500; }
 .results-count span{ color:var(--text); font-weight:700; }
+
+/* CAR LIST */
 .car-list{ display:flex; flex-direction:column; gap:1rem; }
 .car-card{ background:var(--white); border:1px solid var(--border); border-radius:12px; display:flex; align-items:stretch; overflow:hidden; transition:box-shadow .25s,transform .2s; position:relative; }
 .car-card:hover{ box-shadow:0 6px 24px rgba(0,0,0,0.1); transform:translateY(-2px); }
@@ -61,6 +73,8 @@ nav ul a:hover{ color:var(--text); }
 .btn-call:hover{ border-color:#9ca3af; }
 .empty-state{ text-align:center; padding:4rem 2rem; color:var(--muted); }
 .empty-state h3{ font-size:1.1rem; font-weight:700; color:var(--text); margin-bottom:.5rem; }
+
+/* RESPONSIVE */
 @media (max-width:900px){
   nav{ justify-content:center; position:relative; }
   .logo-link{ margin:0 auto; }
@@ -80,6 +94,7 @@ nav ul a:hover{ color:var(--text); }
 </style>
 </head>
 <body>
+
 <nav>
   <a href="https://agsrottama.it" class="logo-link">
     <img src="assets/logoAGS.png" alt="A.G.S. Autodemolizioni">
@@ -98,8 +113,9 @@ nav ul a:hover{ color:var(--text); }
 
 <div class="page-header">
   <div class="page-header-inner">
-    <h1>Parco Auto Disponibile</h1>
-    <p>Veicoli in demolizione — disponibili per ricambi. Aggiornato quotidianamente.</p>
+    <div class="page-tag">🚗 Aggiornato quotidianamente</div>
+    <h1>Parco Auto <span>Disponibile</span></h1>
+    <p>Veicoli in demolizione — disponibili per ricambi nelle province di Milano e Monza-Brianza.</p>
     <div class="filters">
       <div class="search-box">
         🔍 <input type="text" id="searchInput" placeholder="Cerca marca o modello..." oninput="filterCars()">
@@ -124,7 +140,6 @@ nav ul a:hover{ color:var(--text); }
 
 <script src="auto-db.js"></script>
 <script>
-// Popola filtro marche dinamicamente
 var marche = [...new Set(AUTO_DB.map(function(a){ return a.marca; }).sort())];
 var sel = document.getElementById('filterMarca');
 marche.forEach(function(m){
@@ -194,7 +209,6 @@ function filterCars() {
   renderCars(filtered);
 }
 
-// Carica all'inizio
 renderCars(AUTO_DB.filter(function(a){ return a.disponibile; }));
 </script>
 
