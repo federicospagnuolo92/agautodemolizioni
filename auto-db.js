@@ -15,9 +15,9 @@ var AUTO_DB = [
     cambio: "Manuale",
     colore: "Blu scuro",
     foto: [
-      "assets/panda-1.jpg",
-      "assets/panda-2.jpg",
-      "assets/panda-3.jpg"
+      "assets/panda.jpg",
+      "assets/panda2.jpg",
+      "assets/panda3.jfif"
     ],
     disponibile: true
   },
