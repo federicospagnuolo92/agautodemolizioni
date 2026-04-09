@@ -139,13 +139,21 @@ nav ul a:hover{ color:var(--text); }
 
 <script src="auto-db.js"></script>
 <script>
-var marche = [...new Set(AUTO_DB.map(function(a){ return a.marca; }).sort())];
-var sel = document.getElementById('filterMarca');
-marche.forEach(function(m){
-  var opt = document.createElement('option');
-  opt.value = m; opt.textContent = m;
-  sel.appendChild(opt);
-});
+let AUTO_DB = [];
+
+async function init() {
+  AUTO_DB = await fetchAutoFromAirtable();
+
+  var marche = [...new Set(AUTO_DB.map(a => a.marca).sort())];
+  var sel = document.getElementById('filterMarca');
+  marche.forEach(function(m){
+    var opt = document.createElement('option');
+    opt.value = m; opt.textContent = m;
+    sel.appendChild(opt);
+  });
+
+  renderCars(AUTO_DB);
+}
 
 function renderCars(cars) {
   var list = document.getElementById('carList');
@@ -156,12 +164,10 @@ function renderCars(cars) {
     return;
   }
   cars.forEach(function(auto) {
-    var foto = auto.foto[0] || '';
+    var foto = auto.foto[0] || 'assets/logoAGS.png';
     var waMsg = encodeURIComponent('Ciao, ho visto sul sito che avete una ' + auto.marca + ' ' + auto.modello + ' ' + auto.versione + ' del ' + auto.anno + '. Cerco: ');
     var card = document.createElement('div');
     card.className = 'car-card';
-    card.dataset.marca = auto.marca;
-    card.dataset.carburante = auto.carburante;
     card.innerHTML = `
       <a href="auto-dettaglio.html?id=${auto.id}" class="car-card-link"></a>
       <div class="car-img-wrap">
@@ -173,15 +179,14 @@ function renderCars(cars) {
           <div class="car-title">${auto.marca} ${auto.modello}</div>
           <div class="car-subtitle">${auto.versione}</div>
           <div class="car-specs">
-            <div class="car-spec"><span class="car-spec-icon">📅</span> ${auto.anno}</div>
-            <div class="car-spec"><span class="car-spec-icon">🛣️</span> ${auto.km} km</div>
-            <div class="car-spec"><span class="car-spec-icon">⛽</span> ${auto.carburante}</div>
-            <div class="car-spec"><span class="car-spec-icon">🔧</span> ${auto.kw} kW (${auto.cv} CV)</div>
+            <div class="car-spec">📅 ${auto.anno}</div>
+            <div class="car-spec">🛣️ ${auto.km} km</div>
+            <div class="car-spec">⛽ ${auto.carburante}</div>
+            <div class="car-spec">🔧 ${auto.cv} CV</div>
           </div>
         </div>
         <div class="car-tags">
           <span class="car-tag available">✓ Ricambi disponibili</span>
-          ${auto.cambio ? '<span class="car-tag">' + auto.cambio + '</span>' : ''}
         </div>
         <div class="car-arrow">Vedi dettagli →</div>
       </div>
@@ -203,12 +208,12 @@ function filterCars() {
     var matchSearch = !search || (a.marca + ' ' + a.modello + ' ' + a.versione).toLowerCase().includes(search);
     var matchMarca = !marca || a.marca === marca;
     var matchCarburante = !carburante || a.carburante === carburante;
-    return matchSearch && matchMarca && matchCarburante && a.disponibile;
+    return matchSearch && matchMarca && matchCarburante;
   });
   renderCars(filtered);
 }
 
-renderCars(AUTO_DB.filter(function(a){ return a.disponibile; }));
+init();
 </script>
 
 <script>
