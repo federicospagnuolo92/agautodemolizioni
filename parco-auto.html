@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parco Auto — A.G.S. Autodemolizioni</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root { --red:#E8001D; --navy:#1e2d4f; --bg:#f5f6f8; --white:#ffffff; --border:#e5e7eb; --text:#111827; --muted:#6b7280; }
+*{ margin:0; padding:0; box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{ font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased; }
+nav{ height:80px; display:flex; align-items:center; justify-content:space-between; padding:0 5vw; position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(255,255,255,0.97); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); }
+.logo-link{ display:flex; align-items:center; text-decoration:none; }
+.logo-link img{ height:55px; width:auto; margin-left:3rem; margin-top:12px; }
+nav ul{ display:flex; align-items:center; gap:2rem; list-style:none; }
+nav ul a{ font-size:.875rem; font-weight:500; color:var(--muted); text-decoration:none; transition:color .2s; }
+nav ul a:hover{ color:var(--text); }
+.nav-cta{ background:var(--red)!important; color:#fff!important; padding:.55rem 1.3rem; border-radius:6px; font-weight:600!important; font-size:.825rem!important; }
+.hamburger{ display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px; z-index:200; }
+.hamburger span{ display:block; width:24px; height:2px; background:var(--text); border-radius:2px; transition:all .3s; }
+.hamburger.open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2){ opacity:0; }
+.hamburger.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+.page-header{ margin-top:80px; padding:2.5rem 5vw 0; background:var(--white); border-bottom:1px solid var(--border); }
+.page-header-inner{ max-width:1100px; margin:0 auto; }
+.page-header h1{ font-size:1.6rem; font-weight:800; color:var(--text); letter-spacing:-.5px; margin-bottom:.3rem; }
+.page-header p{ font-size:.9rem; color:var(--muted); margin-bottom:1.5rem; }
+.filters{ display:flex; gap:.8rem; padding-bottom:1.2rem; flex-wrap:wrap; }
+.filter-select{ font-family:'Inter',sans-serif; font-size:.85rem; font-weight:500; color:var(--text); background:var(--white); border:1.5px solid var(--border); border-radius:8px; padding:.5rem 1rem; cursor:pointer; outline:none; transition:border-color .2s; min-width:140px; }
+.filter-select:focus{ border-color:var(--red); }
+.search-box{ display:flex; align-items:center; gap:.5rem; background:var(--white); border:1.5px solid var(--border); border-radius:8px; padding:.5rem 1rem; flex:1; max-width:300px; transition:border-color .2s; }
+.search-box:focus-within{ border-color:var(--red); }
+.search-box input{ border:none; outline:none; font-family:'Inter',sans-serif; font-size:.85rem; color:var(--text); width:100%; background:transparent; }
+.main{ max-width:1100px; margin:0 auto; padding:1.5rem 5vw 4rem; }
+.results-bar{ display:flex; align-items:center; justify-content:space-between; margin-bottom:1.2rem; }
+.results-count{ font-size:.85rem; color:var(--muted); font-weight:500; }
+.results-count span{ color:var(--text); font-weight:700; }
+.car-list{ display:flex; flex-direction:column; gap:1rem; }
+.car-card{ background:var(--white); border:1px solid var(--border); border-radius:12px; display:flex; align-items:stretch; overflow:hidden; transition:box-shadow .25s,transform .2s; position:relative; }
+.car-card:hover{ box-shadow:0 6px 24px rgba(0,0,0,0.1); transform:translateY(-2px); }
+.car-card-link{ position:absolute; inset:0; z-index:1; cursor:pointer; }
+.car-img-wrap{ flex:0 0 240px; position:relative; overflow:hidden; background:#f8f9fa; }
+.car-img-wrap img{ width:100%; height:100%; object-fit:contain; padding:.5rem; transition:transform .3s; }
+.car-card:hover .car-img-wrap img{ transform:scale(1.04); }
+.car-badge{ position:absolute; top:10px; left:10px; background:var(--red); color:#fff; font-size:.65rem; font-weight:700; padding:.25rem .6rem; border-radius:5px; text-transform:uppercase; letter-spacing:.5px; z-index:2; }
+.car-body{ flex:1; padding:1.4rem 1.8rem; display:flex; flex-direction:column; justify-content:space-between; }
+.car-title{ font-size:1.15rem; font-weight:800; color:var(--text); margin-bottom:.2rem; letter-spacing:-.3px; }
+.car-subtitle{ font-size:.82rem; color:var(--muted); margin-bottom:1rem; }
+.car-specs{ display:flex; gap:1.2rem; flex-wrap:wrap; margin-bottom:1rem; }
+.car-spec{ display:flex; align-items:center; gap:.4rem; font-size:.8rem; color:var(--text); font-weight:500; }
+.car-tags{ display:flex; gap:.5rem; flex-wrap:wrap; }
+.car-tag{ font-size:.72rem; font-weight:600; padding:.22rem .7rem; border-radius:100px; border:1px solid var(--border); color:var(--muted); }
+.car-tag.available{ background:#f0fdf4; border-color:#86efac; color:#16a34a; }
+.car-arrow{ display:flex; align-items:center; gap:.3rem; font-size:.75rem; font-weight:600; color:var(--red); margin-top:.8rem; }
+.car-cta{ flex:0 0 200px; padding:1.4rem 1.5rem; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.8rem; border-left:1px solid var(--border); background:#fafafa; position:relative; z-index:2; }
+.car-cta-label{ font-size:.7rem; color:var(--muted); text-align:center; line-height:1.5; }
+.btn-wa{ display:flex; align-items:center; gap:.5rem; background:#25D366; color:#fff; font-family:'Inter',sans-serif; font-size:.82rem; font-weight:700; padding:.7rem 1.2rem; border-radius:8px; text-decoration:none; width:100%; justify-content:center; transition:background .2s; position:relative; z-index:3; }
+.btn-wa:hover{ background:#1aad52; }
+.btn-call{ display:flex; align-items:center; gap:.5rem; background:var(--white); color:var(--text); font-family:'Inter',sans-serif; font-size:.82rem; font-weight:600; padding:.65rem 1.2rem; border-radius:8px; text-decoration:none; width:100%; justify-content:center; border:1.5px solid var(--border); transition:border-color .2s; position:relative; z-index:3; }
+.btn-call:hover{ border-color:#9ca3af; }
+.empty-state{ text-align:center; padding:4rem 2rem; color:var(--muted); }
+.empty-state h3{ font-size:1.1rem; font-weight:700; color:var(--text); margin-bottom:.5rem; }
+@media (max-width:900px){
+  nav{ justify-content:center; position:relative; }
+  .logo-link{ margin:0 auto; }
+  .logo-link img{ margin-left:0; margin-top:0; height:65px; }
+  .hamburger{ display:flex; position:absolute; right:1.5rem; top:50%; transform:translateY(-50%); }
+  nav ul{ display:none; position:fixed; top:80px; left:0; right:0; background:#fff; flex-direction:column; gap:0; border-bottom:1px solid var(--border); box-shadow:0 4px 20px rgba(0,0,0,0.1); z-index:99; padding:.5rem 0; }
+  nav ul.open{ display:flex; }
+  nav ul a{ display:block; padding:1rem 2rem; font-size:1rem; border-bottom:1px solid var(--border); color:var(--text)!important; background:none!important; }
+  .nav-cta{ margin:.8rem 2rem!important; border-radius:8px!important; text-align:center; display:block; }
+}
+@media (max-width:768px){
+  .car-card{ flex-direction:column; }
+  .car-img-wrap{ flex:0 0 200px; height:200px; }
+  .car-cta{ flex:none; border-left:none; border-top:1px solid var(--border); flex-direction:row; padding:1rem; }
+  .btn-wa,.btn-call{ width:auto; flex:1; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="https://agsrottama.it" class="logo-link">
+    <img src="assets/logoAGS.png" alt="A.G.S. Autodemolizioni">
+  </a>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+  <ul id="nav-menu">
+    <li><a href="https://agsrottama.it" onclick="closeMenu()">Home</a></li>
+    <li><a href="https://agsrottama.it/servizi" onclick="closeMenu()">Servizi</a></li>
+    <li><a href="https://agsrottama.it/come-funziona" onclick="closeMenu()">Come Funziona</a></li>
+    <li><a href="https://agsrottama.it/contatti" onclick="closeMenu()">Contatti</a></li>
+    <li><a href="https://agsrottama.it/#richiesta" class="nav-cta" onclick="closeMenu()">Demolisci Gratis</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <h1>Parco Auto Disponibile</h1>
+    <p>Veicoli in demolizione — disponibili per ricambi. Aggiornato quotidianamente.</p>
+    <div class="filters">
+      <div class="search-box">
+        🔍 <input type="text" id="searchInput" placeholder="Cerca marca o modello..." oninput="filterCars()">
+      </div>
+      <select class="filter-select" id="filterMarca" onchange="filterCars()">
+        <option value="">Tutte le marche</option>
+      </select>
+      <select class="filter-select" id="filterCarburante" onchange="filterCars()">
+        <option value="">Tutti i carburanti</option>
+        <option>Benzina</option><option>Diesel</option><option>GPL</option><option>Ibrido</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="results-bar">
+    <div class="results-count" id="resultsCount"><span>0</span> veicoli disponibili</div>
+  </div>
+  <div class="car-list" id="carList"></div>
+</div>
+
+<script src="auto-db.js"></script>
+<script>
+// Popola filtro marche dinamicamente
+var marche = [...new Set(AUTO_DB.map(function(a){ return a.marca; }).sort())];
+var sel = document.getElementById('filterMarca');
+marche.forEach(function(m){
+  var opt = document.createElement('option');
+  opt.value = m; opt.textContent = m;
+  sel.appendChild(opt);
+});
+
+function renderCars(cars) {
+  var list = document.getElementById('carList');
+  list.innerHTML = '';
+  if (cars.length === 0) {
+    list.innerHTML = '<div class="empty-state"><h3>Nessun veicolo trovato</h3><p>Prova a modificare i filtri di ricerca</p></div>';
+    document.getElementById('resultsCount').innerHTML = '<span>0</span> veicoli trovati';
+    return;
+  }
+  cars.forEach(function(auto) {
+    var foto = auto.foto[0] || '';
+    var waMsg = encodeURIComponent('Ciao, ho visto sul sito che avete una ' + auto.marca + ' ' + auto.modello + ' ' + auto.versione + ' del ' + auto.anno + '. Cerco: ');
+    var card = document.createElement('div');
+    card.className = 'car-card';
+    card.dataset.marca = auto.marca;
+    card.dataset.carburante = auto.carburante;
+    card.innerHTML = `
+      <a href="auto-dettaglio.html?id=${auto.id}" class="car-card-link"></a>
+      <div class="car-img-wrap">
+        <img src="${foto}" alt="${auto.marca} ${auto.modello}" onerror="this.src='assets/logoAGS.png'">
+        <span class="car-badge">Disponibile</span>
+      </div>
+      <div class="car-body">
+        <div>
+          <div class="car-title">${auto.marca} ${auto.modello}</div>
+          <div class="car-subtitle">${auto.versione}</div>
+          <div class="car-specs">
+            <div class="car-spec"><span class="car-spec-icon">📅</span> ${auto.anno}</div>
+            <div class="car-spec"><span class="car-spec-icon">🛣️</span> ${auto.km} km</div>
+            <div class="car-spec"><span class="car-spec-icon">⛽</span> ${auto.carburante}</div>
+            <div class="car-spec"><span class="car-spec-icon">🔧</span> ${auto.kw} kW (${auto.cv} CV)</div>
+          </div>
+        </div>
+        <div class="car-tags">
+          <span class="car-tag available">✓ Ricambi disponibili</span>
+          ${auto.cambio ? '<span class="car-tag">' + auto.cambio + '</span>' : ''}
+        </div>
+        <div class="car-arrow">Vedi dettagli →</div>
+      </div>
+      <div class="car-cta">
+        <div class="car-cta-label">Cerchi un ricambio per questa auto?</div>
+        <a href="https://wa.me/393384672370?text=${waMsg}" target="_blank" class="btn-wa">💬 WhatsApp</a>
+        <a href="tel:0362306524" class="btn-call">📞 Chiama</a>
+      </div>`;
+    list.appendChild(card);
+  });
+  document.getElementById('resultsCount').innerHTML = '<span>' + cars.length + '</span> veicol' + (cars.length === 1 ? 'o disponibile' : 'i disponibili');
+}
+
+function filterCars() {
+  var search = document.getElementById('searchInput').value.toLowerCase();
+  var marca = document.getElementById('filterMarca').value;
+  var carburante = document.getElementById('filterCarburante').value;
+  var filtered = AUTO_DB.filter(function(a) {
+    var matchSearch = !search || (a.marca + ' ' + a.modello + ' ' + a.versione).toLowerCase().includes(search);
+    var matchMarca = !marca || a.marca === marca;
+    var matchCarburante = !carburante || a.carburante === carburante;
+    return matchSearch && matchMarca && matchCarburante && a.disponibile;
+  });
+  renderCars(filtered);
+}
+
+// Carica all'inizio
+renderCars(AUTO_DB.filter(function(a){ return a.disponibile; }));
+</script>
+
+<script>
+function toggleMenu() { document.getElementById('hamburger').classList.toggle('open'); document.getElementById('nav-menu').classList.toggle('open'); }
+function closeMenu() { document.getElementById('hamburger').classList.remove('open'); document.getElementById('nav-menu').classList.remove('open'); }
+</script>
+</body>
+</html>

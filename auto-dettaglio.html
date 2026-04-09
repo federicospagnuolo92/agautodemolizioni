@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dettaglio Auto — A.G.S. Autodemolizioni</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root { --red:#E8001D; --navy:#1e2d4f; --bg:#f5f6f8; --white:#ffffff; --border:#e5e7eb; --text:#111827; --muted:#6b7280; }
+*{ margin:0; padding:0; box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{ font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased; }
+nav{ height:80px; display:flex; align-items:center; justify-content:space-between; padding:0 5vw; position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(255,255,255,0.97); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); }
+.logo-link{ display:flex; align-items:center; text-decoration:none; }
+.logo-link img{ height:55px; width:auto; margin-left:3rem; margin-top:12px; }
+nav ul{ display:flex; align-items:center; gap:2rem; list-style:none; }
+nav ul a{ font-size:.875rem; font-weight:500; color:var(--muted); text-decoration:none; transition:color .2s; }
+nav ul a:hover{ color:var(--text); }
+.nav-cta{ background:var(--red)!important; color:#fff!important; padding:.55rem 1.3rem; border-radius:6px; font-weight:600!important; font-size:.825rem!important; }
+.hamburger{ display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px; z-index:200; }
+.hamburger span{ display:block; width:24px; height:2px; background:var(--text); border-radius:2px; transition:all .3s; }
+.hamburger.open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2){ opacity:0; }
+.hamburger.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+.breadcrumb{ margin-top:80px; padding:1rem 5vw; background:var(--white); border-bottom:1px solid var(--border); font-size:.82rem; color:var(--muted); }
+.breadcrumb a{ color:var(--muted); text-decoration:none; }
+.breadcrumb a:hover{ color:var(--red); }
+.breadcrumb span{ margin:0 .4rem; }
+.main{ max-width:1100px; margin:0 auto; padding:2rem 5vw 5rem; display:grid; grid-template-columns:1fr 380px; gap:2.5rem; align-items:start; }
+.back-link{ display:inline-flex; align-items:center; gap:.4rem; font-size:.82rem; font-weight:600; color:var(--muted); text-decoration:none; margin-bottom:1rem; transition:color .2s; }
+.back-link:hover{ color:var(--red); }
+.gallery{ background:var(--white); border-radius:14px; overflow:hidden; border:1px solid var(--border); }
+.gallery-main{ position:relative; background:#f8f9fa; height:400px; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+.gallery-main img{ width:100%; height:100%; object-fit:contain; padding:1.5rem; transition:opacity .3s; }
+.gallery-badge{ position:absolute; top:16px; left:16px; background:var(--red); color:#fff; font-size:.72rem; font-weight:700; padding:.3rem .8rem; border-radius:6px; text-transform:uppercase; letter-spacing:.5px; }
+.gallery-nav{ position:absolute; top:50%; transform:translateY(-50%); display:flex; justify-content:space-between; width:100%; padding:0 .8rem; pointer-events:none; }
+.gallery-btn{ width:36px; height:36px; background:rgba(255,255,255,0.9); border:1px solid var(--border); border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:.9rem; pointer-events:all; transition:background .2s; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
+.gallery-btn:hover{ background:#fff; box-shadow:0 4px 12px rgba(0,0,0,0.15); }
+.gallery-counter{ position:absolute; bottom:12px; right:12px; background:rgba(0,0,0,0.5); color:#fff; font-size:.72rem; font-weight:600; padding:.2rem .6rem; border-radius:100px; }
+.gallery-thumbs{ display:flex; gap:8px; padding:12px; background:#f0f2f5; border-top:1px solid var(--border); min-height:72px; }
+.gallery-thumb{ flex:1; max-width:100px; height:72px; border-radius:8px; overflow:hidden; cursor:pointer; border:2.5px solid transparent; transition:border-color .2s,opacity .2s; opacity:.65; }
+.gallery-thumb.active{ border-color:var(--red); opacity:1; }
+.gallery-thumb:hover{ opacity:1; }
+.gallery-thumb img{ width:100%; height:100%; object-fit:cover; }
+.car-details{ margin-top:1.5rem; background:var(--white); border-radius:14px; border:1px solid var(--border); overflow:hidden; }
+.details-header{ padding:1.2rem 1.5rem; border-bottom:1px solid var(--border); font-size:.82rem; font-weight:700; color:var(--text); text-transform:uppercase; letter-spacing:.5px; }
+.details-grid{ display:grid; grid-template-columns:1fr 1fr; }
+.detail-item{ padding:1rem 1.5rem; border-bottom:1px solid var(--border); border-right:1px solid var(--border); }
+.detail-item:nth-child(even){ border-right:none; }
+.detail-item:nth-last-child(-n+2){ border-bottom:none; }
+.detail-label{ font-size:.72rem; font-weight:600; text-transform:uppercase; letter-spacing:.5px; color:var(--muted); margin-bottom:.3rem; }
+.detail-value{ font-size:.92rem; font-weight:700; color:var(--text); }
+.sidebar{ display:flex; flex-direction:column; gap:1.2rem; }
+.car-title-box{ background:var(--white); border:1px solid var(--border); border-radius:14px; padding:1.8rem; }
+.car-badge-row{ display:flex; align-items:center; gap:.6rem; margin-bottom:.8rem; }
+.badge-disponibile{ background:#f0fdf4; color:#16a34a; border:1px solid #86efac; font-size:.72rem; font-weight:700; padding:.25rem .8rem; border-radius:100px; text-transform:uppercase; letter-spacing:.5px; }
+.badge-id{ background:var(--bg); color:var(--muted); border:1px solid var(--border); font-size:.72rem; font-weight:600; padding:.25rem .8rem; border-radius:100px; }
+.car-name{ font-size:1.8rem; font-weight:800; letter-spacing:-1px; color:var(--text); line-height:1.1; margin-bottom:.3rem; }
+.car-version{ font-size:.9rem; color:var(--muted); margin-bottom:1.2rem; }
+.specs-row{ display:grid; grid-template-columns:1fr 1fr; gap:.6rem; }
+.spec-box{ background:var(--bg); border-radius:8px; padding:.7rem .8rem; display:flex; align-items:center; gap:.5rem; }
+.spec-box-icon{ font-size:1.1rem; }
+.spec-box-label{ font-size:.68rem; color:var(--muted); display:block; }
+.spec-box-value{ font-size:.82rem; font-weight:700; color:var(--text); }
+.cta-box{ background:var(--white); border:1px solid var(--border); border-radius:14px; padding:1.8rem; }
+.cta-box h3{ font-size:1rem; font-weight:800; color:var(--text); margin-bottom:.4rem; }
+.cta-box p{ font-size:.82rem; color:var(--muted); line-height:1.6; margin-bottom:1.4rem; }
+.btn-wa-big{ display:flex; align-items:center; justify-content:center; gap:.6rem; background:#25D366; color:#fff; font-family:'Inter',sans-serif; font-size:.95rem; font-weight:700; padding:.9rem 1.5rem; border-radius:10px; text-decoration:none; width:100%; margin-bottom:.8rem; transition:background .2s,transform .15s; box-shadow:0 4px 14px rgba(37,211,102,0.3); }
+.btn-wa-big:hover{ background:#1aad52; transform:translateY(-1px); }
+.btn-call-big{ display:flex; align-items:center; justify-content:center; gap:.6rem; background:var(--white); color:var(--text); font-family:'Inter',sans-serif; font-size:.95rem; font-weight:600; padding:.85rem 1.5rem; border-radius:10px; text-decoration:none; width:100%; border:1.5px solid var(--border); transition:border-color .2s; }
+.btn-call-big:hover{ border-color:#9ca3af; }
+.divider{ border:none; border-top:1px solid var(--border); margin:1rem 0; }
+.mini-form{ display:flex; flex-direction:column; gap:.6rem; }
+.mini-form-label{ font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.5px; color:var(--muted); }
+.mini-form input,.mini-form textarea{ font-family:'Inter',sans-serif; font-size:.85rem; border:1.5px solid var(--border); border-radius:8px; padding:.65rem .9rem; outline:none; color:var(--text); transition:border-color .2s; }
+.mini-form input:focus,.mini-form textarea:focus{ border-color:var(--red); }
+.mini-form textarea{ resize:vertical; min-height:70px; }
+.btn-send{ display:flex; align-items:center; justify-content:center; gap:.5rem; background:var(--red); color:#fff; font-family:'Inter',sans-serif; font-size:.9rem; font-weight:700; padding:.85rem; border-radius:10px; border:none; cursor:pointer; width:100%; transition:background .2s; margin-top:.2rem; box-shadow:0 4px 14px rgba(232,0,29,0.25); }
+.btn-send:hover{ background:#c8001a; }
+.not-found{ text-align:center; padding:6rem 2rem; color:var(--muted); }
+.not-found h2{ font-size:1.5rem; font-weight:800; color:var(--text); margin-bottom:.5rem; }
+@media (max-width:900px){
+  nav{ justify-content:center; position:relative; }
+  .logo-link{ margin:0 auto; }
+  .logo-link img{ margin-left:0; margin-top:0; height:65px; }
+  .hamburger{ display:flex; position:absolute; right:1.5rem; top:50%; transform:translateY(-50%); }
+  nav ul{ display:none; position:fixed; top:80px; left:0; right:0; background:#fff; flex-direction:column; gap:0; border-bottom:1px solid var(--border); box-shadow:0 4px 20px rgba(0,0,0,0.1); z-index:99; padding:.5rem 0; }
+  nav ul.open{ display:flex; }
+  nav ul a{ display:block; padding:1rem 2rem; font-size:1rem; border-bottom:1px solid var(--border); color:var(--text)!important; background:none!important; }
+  .nav-cta{ margin:.8rem 2rem!important; border-radius:8px!important; text-align:center; display:block; }
+  .main{ grid-template-columns:1fr; }
+  .sidebar{ order:-1; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="https://agsrottama.it" class="logo-link">
+    <img src="assets/logoAGS.png" alt="A.G.S. Autodemolizioni">
+  </a>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+  <ul id="nav-menu">
+    <li><a href="https://agsrottama.it" onclick="closeMenu()">Home</a></li>
+    <li><a href="parco-auto.html" onclick="closeMenu()">Parco Auto</a></li>
+    <li><a href="https://agsrottama.it/contatti" onclick="closeMenu()">Contatti</a></li>
+    <li><a href="https://agsrottama.it/#richiesta" class="nav-cta" onclick="closeMenu()">Demolisci Gratis</a></li>
+  </ul>
+</nav>
+
+<div class="breadcrumb" id="breadcrumb">
+  <a href="https://agsrottama.it">Home</a>
+  <span>›</span>
+  <a href="parco-auto.html">Parco Auto</a>
+  <span>›</span>
+  <span id="breadcrumbTitle">Dettaglio auto</span>
+</div>
+
+<div id="pageContent"></div>
+
+<script src="auto-db.js"></script>
+<script>
+var params = new URLSearchParams(window.location.search);
+var id = parseInt(params.get('id'));
+var auto = AUTO_DB.find(function(a){ return a.id === id; });
+
+if (!auto) {
+  document.getElementById('pageContent').innerHTML = '<div class="not-found"><h2>Auto non trovata</h2><p>Torna al <a href="parco-auto.html" style="color:var(--red)">parco auto</a></p></div>';
+} else {
+  document.title = auto.marca + ' ' + auto.modello + ' ' + auto.anno + ' — A.G.S. Autodemolizioni';
+  document.getElementById('breadcrumbTitle').textContent = auto.marca + ' ' + auto.modello + ' ' + auto.anno;
+
+  var thumbsHTML = auto.foto.map(function(f, i){
+    return '<div class="gallery-thumb' + (i===0?' active':'') + '" onclick="goTo(' + i + ',this)"><img src="' + f + '" alt=""></div>';
+  }).join('');
+
+  var detailsHTML = [
+    ['Marca', auto.marca], ['Modello', auto.modello],
+    ['Versione', auto.versione], ['Anno', auto.anno],
+    ['Chilometri', auto.km + ' km'], ['Carburante', auto.carburante],
+    ['Potenza', auto.kw + ' kW (' + auto.cv + ' CV)'], ['Cambio', auto.cambio]
+  ].filter(function(d){ return d[1]; }).map(function(d){
+    return '<div class="detail-item"><div class="detail-label">' + d[0] + '</div><div class="detail-value">' + d[1] + '</div></div>';
+  }).join('');
+
+  var waMsg = encodeURIComponent('Ciao, ho visto sul sito la ' + auto.marca + ' ' + auto.modello + ' ' + auto.versione + ' del ' + auto.anno + ' (ID: AGS-' + String(auto.id).padStart(3,'0') + '). Cerco: ');
+
+  document.getElementById('pageContent').innerHTML = `
+    <div class="main">
+      <div>
+        <a href="parco-auto.html" class="back-link">← Torna al parco auto</a>
+        <div class="gallery">
+          <div class="gallery-main">
+            <span class="gallery-badge">Disponibile</span>
+            <img id="mainPhoto" src="${auto.foto[0]}" alt="${auto.marca} ${auto.modello}">
+            <div class="gallery-nav">
+              <button class="gallery-btn" onclick="prevPhoto()">‹</button>
+              <button class="gallery-btn" onclick="nextPhoto()">›</button>
+            </div>
+            <div class="gallery-counter" id="photoCounter">1 / ${auto.foto.length}</div>
+          </div>
+          <div class="gallery-thumbs">${thumbsHTML}</div>
+        </div>
+        <div class="car-details">
+          <div class="details-header">📋 Scheda tecnica</div>
+          <div class="details-grid">${detailsHTML}</div>
+        </div>
+      </div>
+      <div class="sidebar">
+        <div class="car-title-box">
+          <div class="car-badge-row">
+            <span class="badge-disponibile">✓ Disponibile</span>
+            <span class="badge-id">#AGS-${String(auto.id).padStart(3,'0')}</span>
+          </div>
+          <div class="car-name">${auto.marca} ${auto.modello}</div>
+          <div class="car-version">${auto.versione}</div>
+          <div class="specs-row">
+            <div class="spec-box"><span class="spec-box-icon">📅</span><div><span class="spec-box-label">Anno</span><span class="spec-box-value">${auto.anno}</span></div></div>
+            <div class="spec-box"><span class="spec-box-icon">🛣️</span><div><span class="spec-box-label">Km</span><span class="spec-box-value">${auto.km}</span></div></div>
+            <div class="spec-box"><span class="spec-box-icon">⛽</span><div><span class="spec-box-label">Carburante</span><span class="spec-box-value">${auto.carburante}</span></div></div>
+            <div class="spec-box"><span class="spec-box-icon">🔧</span><div><span class="spec-box-label">Potenza</span><span class="spec-box-value">${auto.cv} CV</span></div></div>
+          </div>
+        </div>
+        <div class="cta-box">
+          <h3>Cerchi un ricambio?</h3>
+          <p>Contattaci subito — rispondiamo in pochi minuti.</p>
+          <a href="https://wa.me/393384672370?text=${waMsg}" target="_blank" class="btn-wa-big">💬 Scrivi su WhatsApp</a>
+          <a href="tel:0362306524" class="btn-call-big">📞 Chiama — 0362 306524</a>
+          <hr class="divider">
+          <div class="mini-form">
+            <div class="mini-form-label">Oppure lascia la tua richiesta</div>
+            <input type="text" id="fNome" placeholder="Il tuo nome">
+            <input type="tel" id="fTel" placeholder="Telefono">
+            <textarea id="fRicambio" placeholder="Che ricambio cerchi? (es. portiera sx, faro ant. dx...)"></textarea>
+            <button class="btn-send" onclick="sendWA()">🚗 Invia richiesta</button>
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+  // Galleria
+  var current = 0;
+  window.goTo = function(idx, el) {
+    current = idx;
+    document.getElementById('mainPhoto').src = auto.foto[idx];
+    document.getElementById('photoCounter').textContent = (idx+1) + ' / ' + auto.foto.length;
+    document.querySelectorAll('.gallery-thumb').forEach(function(t){ t.classList.remove('active'); });
+    el.classList.add('active');
+  };
+  window.nextPhoto = function() {
+    var next = (current+1) % auto.foto.length;
+    window.goTo(next, document.querySelectorAll('.gallery-thumb')[next]);
+  };
+  window.prevPhoto = function() {
+    var prev = (current-1+auto.foto.length) % auto.foto.length;
+    window.goTo(prev, document.querySelectorAll('.gallery-thumb')[prev]);
+  };
+  window.sendWA = function() {
+    var nome = document.getElementById('fNome').value;
+    var tel = document.getElementById('fTel').value;
+    var ricambio = document.getElementById('fRicambio').value;
+    if (!nome || !ricambio) { alert('Inserisci nome e ricambio cercato'); return; }
+    var msg = 'Ciao, sono ' + nome + ' (' + tel + '). Ho visto la ' + auto.marca + ' ' + auto.modello + ' ' + auto.anno + ' (AGS-' + String(auto.id).padStart(3,'0') + '). Cerco: ' + ricambio;
+    window.open('https://wa.me/393384672370?text=' + encodeURIComponent(msg), '_blank');
+  };
+}
+
+function toggleMenu() { document.getElementById('hamburger').classList.toggle('open'); document.getElementById('nav-menu').classList.toggle('open'); }
+function closeMenu() { document.getElementById('hamburger').classList.remove('open'); document.getElementById('nav-menu').classList.remove('open'); }
+</script>
+</body>
+</html>
