@@ -121,30 +121,34 @@ nav ul a:hover{ color:var(--text); }
 
 <script src="auto-db.js"></script>
 <script>
-var params = new URLSearchParams(window.location.search);
-var id = parseInt(params.get('id'));
-var auto = AUTO_DB.find(function(a){ return a.id === id; });
+async function init() {
+  const AUTO_DB = await fetchAutoFromAirtable();
+  var params = new URLSearchParams(window.location.search);
+  var id = params.get('id');
+  var auto = AUTO_DB.find(a => a.id === id);
 
-if (!auto) {
-  document.getElementById('pageContent').innerHTML = '<div class="not-found"><h2>Auto non trovata</h2><p>Torna al <a href="parco-auto.html" style="color:var(--red)">parco auto</a></p></div>';
-} else {
+  if (!auto) {
+    document.getElementById('pageContent').innerHTML = '<div class="not-found"><h2>Auto non trovata</h2><p>Torna al <a href="parco-auto.html" style="color:var(--red)">parco auto</a></p></div>';
+    return;
+  }
+
   document.title = auto.marca + ' ' + auto.modello + ' ' + auto.anno + ' — A.G.S. Autodemolizioni';
   document.getElementById('breadcrumbTitle').textContent = auto.marca + ' ' + auto.modello + ' ' + auto.anno;
 
-  var thumbsHTML = auto.foto.map(function(f, i){
-    return '<div class="gallery-thumb' + (i===0?' active':'') + '" onclick="goTo(' + i + ',this)"><img src="' + f + '" alt=""></div>';
-  }).join('');
+  var thumbsHTML = auto.foto.map((f, i) =>
+    `<div class="gallery-thumb${i===0?' active':''}" onclick="goTo(${i},this)"><img src="${f}" alt=""></div>`
+  ).join('');
 
   var detailsHTML = [
     ['Marca', auto.marca], ['Modello', auto.modello],
     ['Versione', auto.versione], ['Anno', auto.anno],
     ['Chilometri', auto.km + ' km'], ['Carburante', auto.carburante],
-    ['Potenza', auto.kw + ' kW (' + auto.cv + ' CV)'], ['Cambio', auto.cambio]
-  ].filter(function(d){ return d[1]; }).map(function(d){
-    return '<div class="detail-item"><div class="detail-label">' + d[0] + '</div><div class="detail-value">' + d[1] + '</div></div>';
-  }).join('');
+    ['Potenza', auto.cv + ' CV']
+  ].filter(d => d[1]).map(d =>
+    `<div class="detail-item"><div class="detail-label">${d[0]}</div><div class="detail-value">${d[1]}</div></div>`
+  ).join('');
 
-  var waMsg = encodeURIComponent('Ciao, ho visto sul sito la ' + auto.marca + ' ' + auto.modello + ' ' + auto.versione + ' del ' + auto.anno + ' (ID: AGS-' + String(auto.id).padStart(3,'0') + '). Cerco: ');
+  var waMsg = encodeURIComponent('Ciao, ho visto sul sito la ' + auto.marca + ' ' + auto.modello + ' ' + auto.versione + ' del ' + auto.anno + '. Cerco: ');
 
   document.getElementById('pageContent').innerHTML = `
     <div class="main">
@@ -171,7 +175,6 @@ if (!auto) {
         <div class="car-title-box">
           <div class="car-badge-row">
             <span class="badge-disponibile">✓ Disponibile</span>
-            <span class="badge-id">#AGS-${String(auto.id).padStart(3,'0')}</span>
           </div>
           <div class="car-name">${auto.marca} ${auto.modello}</div>
           <div class="car-version">${auto.versione}</div>
@@ -192,39 +195,40 @@ if (!auto) {
             <div class="mini-form-label">Oppure lascia la tua richiesta</div>
             <input type="text" id="fNome" placeholder="Il tuo nome">
             <input type="tel" id="fTel" placeholder="Telefono">
-            <textarea id="fRicambio" placeholder="Che ricambio cerchi? (es. portiera sx, faro ant. dx...)"></textarea>
+            <textarea id="fRicambio" placeholder="Che ricambio cerchi?"></textarea>
             <button class="btn-send" onclick="sendWA()">🚗 Invia richiesta</button>
           </div>
         </div>
       </div>
     </div>`;
 
-  // Galleria
   var current = 0;
   window.goTo = function(idx, el) {
     current = idx;
     document.getElementById('mainPhoto').src = auto.foto[idx];
     document.getElementById('photoCounter').textContent = (idx+1) + ' / ' + auto.foto.length;
-    document.querySelectorAll('.gallery-thumb').forEach(function(t){ t.classList.remove('active'); });
+    document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
     el.classList.add('active');
   };
   window.nextPhoto = function() {
     var next = (current+1) % auto.foto.length;
-    window.goTo(next, document.querySelectorAll('.gallery-thumb')[next]);
+    goTo(next, document.querySelectorAll('.gallery-thumb')[next]);
   };
   window.prevPhoto = function() {
     var prev = (current-1+auto.foto.length) % auto.foto.length;
-    window.goTo(prev, document.querySelectorAll('.gallery-thumb')[prev]);
+    goTo(prev, document.querySelectorAll('.gallery-thumb')[prev]);
   };
   window.sendWA = function() {
     var nome = document.getElementById('fNome').value;
     var tel = document.getElementById('fTel').value;
     var ricambio = document.getElementById('fRicambio').value;
     if (!nome || !ricambio) { alert('Inserisci nome e ricambio cercato'); return; }
-    var msg = 'Ciao, sono ' + nome + ' (' + tel + '). Ho visto la ' + auto.marca + ' ' + auto.modello + ' ' + auto.anno + ' (AGS-' + String(auto.id).padStart(3,'0') + '). Cerco: ' + ricambio;
+    var msg = 'Ciao, sono ' + nome + ' (' + tel + '). Ho visto la ' + auto.marca + ' ' + auto.modello + ' ' + auto.anno + '. Cerco: ' + ricambio;
     window.open('https://wa.me/393384672370?text=' + encodeURIComponent(msg), '_blank');
   };
 }
+
+init();
 
 function toggleMenu() { document.getElementById('hamburger').classList.toggle('open'); document.getElementById('nav-menu').classList.toggle('open'); }
 function closeMenu() { document.getElementById('hamburger').classList.remove('open'); document.getElementById('nav-menu').classList.remove('open'); }
