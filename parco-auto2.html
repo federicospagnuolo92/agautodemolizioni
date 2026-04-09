@@ -49,7 +49,30 @@ nav ul a:hover { color: var(--text); }
   background: var(--white);
   border-bottom: 1px solid var(--border);
 }
-.page-header-inner { max-width: 1100px; margin: 0 auto; }
+.page-header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.page-tag {
+  display: inline-block;
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--red);
+  margin-bottom: .5rem;
+}
+
+.page-header h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: .4rem;
+}
+
+.page-header h1 span {
+  color: var(--red);
+} 
 .page-header h1 { font-size: 1.6rem; font-weight: 800; color: var(--text); letter-spacing: -.5px; margin-bottom: .3rem; }
 .page-header p { font-size: .9rem; color: var(--muted); margin-bottom: 1.5rem; }
 
@@ -229,8 +252,13 @@ nav ul a:hover { color: var(--text); }
 
 <div class="page-header">
   <div class="page-header-inner">
-    <h1>Parco Auto Disponibile</h1>
-    <p>Veicoli in demolizione — disponibili per ricambi. Aggiornato quotidianamente.</p>
+    <div class="page-header-top">
+      <div>
+        <div class="page-tag">🚗 Aggiornato quotidianamente</div>
+        <h1>Parco Auto <span>Disponibile</span></h1>
+        <p>Veicoli in demolizione — disponibili per ricambi nelle province di Milano e Monza-Brianza.</p>
+      </div>
+    </div>
     <div class="filters">
       <div class="search-box">
         🔍 <input type="text" id="searchInput" placeholder="Cerca marca o modello..." oninput="filterCars()">
