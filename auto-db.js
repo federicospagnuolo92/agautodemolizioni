@@ -1,14 +1,7 @@
-const AIRTABLE_TOKEN = 'IL_TUO_TOKEN_QUI';
-const AIRTABLE_BASE  = 'appAKf0KEM8R99iT5';
-const AIRTABLE_TABLE = 'tbl73JrAmDgIzwiLp';
-
 async function fetchAutoFromAirtable() {
-  const url = `https://api.airtable.com/v0/${AIRTABLE_BASE}/${AIRTABLE_TABLE}`;
-  const res = await fetch(url, {
-    headers: { Authorization: `Bearer ${AIRTABLE_TOKEN}` }
-  });
+  const res = await fetch('/api/auto');
   const data = await res.json();
-  return data.records.map((r, i) => {
+  return data.records.map((r) => {
     const f = r.fields;
     return {
       id: r.id,
