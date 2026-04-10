@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — AGS</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root { --red:#E8001D; --bg:#f5f6f8; --white:#ffffff; --border:#e5e7eb; --text:#111827; --muted:#6b7280; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); }
+
+/* LOGIN */
+#loginPage { display:flex; align-items:center; justify-content:center; min-height:100vh; }
+.login-box { background:var(--white); border:1px solid var(--border); border-radius:16px; padding:2.5rem; width:100%; max-width:380px; }
+.login-box h1 { font-size:1.4rem; font-weight:800; margin-bottom:.3rem; }
+.login-box p { font-size:.85rem; color:var(--muted); margin-bottom:1.8rem; }
+.field { display:flex; flex-direction:column; gap:.4rem; margin-bottom:1rem; }
+.field label { font-size:.75rem; font-weight:600; text-transform:uppercase; letter-spacing:.5px; color:var(--muted); }
+.field input { font-family:'Inter',sans-serif; font-size:.9rem; border:1.5px solid var(--border); border-radius:8px; padding:.7rem 1rem; outline:none; }
+.field input:focus { border-color:var(--red); }
+.btn-red { background:var(--red); color:#fff; font-family:'Inter',sans-serif; font-size:.95rem; font-weight:700; padding:.85rem; border-radius:10px; border:none; cursor:pointer; width:100%; margin-top:.5rem; }
+.btn-red:hover { background:#c8001a; }
+
+/* ADMIN */
+#adminPage { display:none; max-width:800px; margin:0 auto; padding:2rem 1.5rem 5rem; }
+.admin-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:2rem; }
+.admin-header h1 { font-size:1.5rem; font-weight:800; }
+.btn-logout { font-family:'Inter',sans-serif; font-size:.8rem; font-weight:600; color:var(--muted); background:none; border:1.5px solid var(--border); border-radius:8px; padding:.4rem .9rem; cursor:pointer; }
+
+/* FORM */
+.form-box { background:var(--white); border:1px solid var(--border); border-radius:14px; padding:1.8rem; margin-bottom:2rem; }
+.form-box h2 { font-size:1rem; font-weight:700; margin-bottom:1.2rem; }
+.form-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+.form-grid .full { grid-column:1/-1; }
+.foto-preview { width:100%; height:200px; object-fit:contain; border-radius:8px; border:1px solid var(--border); margin-top:.5rem; display:none; background:#f8f9fa; }
+.btn-green { background:#16a34a; color:#fff; font-family:'Inter',sans-serif; font-size:.95rem; font-weight:700; padding:.85rem; border-radius:10px; border:none; cursor:pointer; width:100%; margin-top:1rem; }
+.btn-green:hover { background:#15803d; }
+
+/* LISTA AUTO */
+.auto-item { background:var(--white); border:1px solid var(--border); border-radius:12px; padding:1.2rem 1.5rem; display:flex; align-items:center; gap:1rem; margin-bottom:.8rem; }
+.auto-item img { width:80px; height:60px; object-fit:contain; border-radius:8px; background:#f8f9fa; flex-shrink:0; }
+.auto-info { flex:1; }
+.auto-info strong { font-size:.95rem; font-weight:700; }
+.auto-info span { font-size:.8rem; color:var(--muted); display:block; }
+.btn-delete { background:#fee2e2; color:#dc2626; font-family:'Inter',sans-serif; font-size:.8rem; font-weight:700; border:none; border-radius:8px; padding:.5rem .9rem; cursor:pointer; flex-shrink:0; }
+.btn-delete:hover { background:#fecaca; }
+.msg { font-size:.85rem; padding:.6rem 1rem; border-radius:8px; margin-top:.8rem; display:none; }
+.msg.ok { background:#f0fdf4; color:#16a34a; }
+.msg.err { background:#fee2e2; color:#dc2626; }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginPage">
+  <div class="login-box">
+    <h1>🔐 Admin AGS</h1>
+    <p>Accesso riservato</p>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="pwdInput" placeholder="Inserisci la password" onkeydown="if(event.key==='Enter')login()">
+    </div>
+    <button class="btn-red" onclick="login()">Accedi</button>
+    <div class="msg err" id="loginErr">Password errata</div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div id="adminPage">
+  <div class="admin-header">
+    <h1>🚗 Gestione Parco Auto</h1>
+    <button class="btn-logout" onclick="logout()">Esci</button>
+  </div>
+
+  <!-- FORM AGGIUNGI -->
+  <div class="form-box">
+    <h2>➕ Aggiungi nuova auto</h2>
+    <div class="form-grid">
+      <div class="field"><label>Marca</label><input type="text" id="fMarca" placeholder="Es. Fiat"></div>
+      <div class="field"><label>Modello</label><input type="text" id="fModello" placeholder="Es. Panda"></div>
+      <div class="field full"><label>Versione</label><input type="text" id="fVersione" placeholder="Es. 1.2 8v Easy 5p"></div>
+      <div class="field"><label>Anno</label><input type="number" id="fAnno" placeholder="Es. 2009"></div>
+      <div class="field"><label>Chilometri</label><input type="number" id="fKm" placeholder="Es. 140000"></div>
+      <div class="field"><label>Carburante</label>
+        <select id="fCarburante" style="font-family:'Inter',sans-serif;font-size:.9rem;border:1.5px solid var(--border);border-radius:8px;padding:.7rem 1rem;outline:none;">
+          <option>Benzina</option><option>Diesel</option><option>GPL</option><option>Ibrido</option>
+        </select>
+      </div>
+      <div class="field"><label>CV</label><input type="number" id="fCv" placeholder="Es. 69"></div>
+      <div class="field full"><label>Foto</label>
+        <input type="file" id="fFoto" accept="image/*" onchange="previewFoto(this)">
+        <img id="fotoPreview" class="foto-preview" alt="Anteprima">
+      </div>
+    </div>
+    <button class="btn-green" onclick="aggiungiAuto()">✅ Salva auto</button>
+    <div class="msg ok" id="msgOk">Auto aggiunta con successo!</div>
+    <div class="msg err" id="msgErr">Errore — riprova</div>
+  </div>
+
+  <!-- LISTA -->
+  <h2 style="font-size:1rem;font-weight:700;margin-bottom:1rem;">Auto nel parco (</h2>
+  <div id="listaAuto"></div>
+</div>
+
+<script src="auto-db.js"></script>
+<script>
+const SUPABASE_URL = 'https://wqxeyluxvepscqcvatik.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_YfGqts0tVEF4TQQZEvfoOA_QnVOHNMa';
+const ADMIN_PWD = 'ags2024!';
+
+function login() {
+  if (document.getElementById('pwdInput').value === ADMIN_PWD) {
+    sessionStorage.setItem('ags_admin', '1');
+    document.getElementById('loginPage').style.display = 'none';
+    document.getElementById('adminPage').style.display = 'block';
+    caricaAuto();
+  } else {
+    document.getElementById('loginErr').style.display = 'block';
+  }
+}
+
+function logout() {
+  sessionStorage.removeItem('ags_admin');
+  location.reload();
+}
+
+if (sessionStorage.getItem('ags_admin')) {
+  document.getElementById('loginPage').style.display = 'none';
+  document.getElementById('adminPage').style.display = 'block';
+  caricaAuto();
+}
+
+function previewFoto(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = e => {
+      var img = document.getElementById('fotoPreview');
+      img.src = e.target.result;
+      img.style.display = 'block';
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+async function uploadFoto(file) {
+  const ext = file.name.split('.').pop();
+  const nome = `auto_${Date.now()}.${ext}`;
+  const res = await fetch(`${SUPABASE_URL}/storage/v1/object/foto-auto/${nome}`, {
+    method: 'POST',
+    headers: {
+      'apikey': SUPABASE_KEY,
+      'Authorization': `Bearer ${SUPABASE_KEY}`,
+      'Content-Type': file.type
+    },
+    body: file
+  });
+  if (!res.ok) return null;
+  return `${SUPABASE_URL}/storage/v1/object/public/foto-auto/${nome}`;
+}
+
+async function aggiungiAuto() {
+  const marca = document.getElementById('fMarca').value.trim();
+  const modello = document.getElementById('fModello').value.trim();
+  if (!marca || !modello) { alert('Inserisci almeno marca e modello'); return; }
+
+  let foto_url = null;
+  const file = document.getElementById('fFoto').files[0];
+  if (file) foto_url = await uploadFoto(file);
+
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/auto`, {
+    method: 'POST',
+    headers: {
+      'apikey': SUPABASE_KEY,
+      'Authorization': `Bearer ${SUPABASE_KEY}`,
+      'Content-Type': 'application/json',
+      'Prefer': 'return=minimal'
+    },
+    body: JSON.stringify({
+      marca,
+      modello,
+      versione: document.getElementById('fVersione').value.trim(),
+      anno: parseInt(document.getElementById('fAnno').value) || null,
+      chilometri: parseInt(document.getElementById('fKm').value) || null,
+      carburante: document.getElementById('fCarburante').value,
+      cv: parseInt(document.getElementById('fCv').value) || null,
+      foto_url
+    })
+  });
+
+  if (res.ok) {
+    document.getElementById('msgOk').style.display = 'block';
+    setTimeout(() => document.getElementById('msgOk').style.display = 'none', 3000);
+    document.querySelectorAll('.field input').forEach(i => i.value = '');
+    document.getElementById('fotoPreview').style.display = 'none';
+    caricaAuto();
+  } else {
+    document.getElementById('msgErr').style.display = 'block';
+    setTimeout(() => document.getElementById('msgErr').style.display = 'none', 3000);
+  }
+}
+
+async function caricaAuto() {
+  const auto = await fetchAutoFromSupabase();
+  const lista = document.getElementById('listaAuto');
+  document.querySelector('#adminPage h2').textContent = `Auto nel parco (${auto.length})`;
+  if (auto.length === 0) { lista.innerHTML = '<p style="color:var(--muted);font-size:.85rem;">Nessuna auto inserita</p>'; return; }
+  lista.innerHTML = auto.map(a => `
+    <div class="auto-item">
+      <img src="${a.foto[0]}" alt="" onerror="this.src='assets/logoAGS.png'">
+      <div class="auto-info">
+        <strong>${a.marca} ${a.modello}</strong>
+        <span>${a.versione} — ${a.anno} — ${a.km} km</span>
+      </div>
+      <button class="btn-delete" onclick="eliminaAuto('${a.id}')">🗑 Elimina</button>
+    </div>`).join('');
+}
+
+async function eliminaAuto(id) {
+  if (!confirm('Eliminare questa auto?')) return;
+  await fetch(`${SUPABASE_URL}/rest/v1/auto?id=eq.${id}`, {
+    method: 'DELETE',
+    headers: {
+      'apikey': SUPABASE_KEY,
+      'Authorization': `Bearer ${SUPABASE_KEY}`
+    }
+  });
+  caricaAuto();
+}
+</script>
+</body>
+</html>
