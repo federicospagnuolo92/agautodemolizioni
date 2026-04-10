@@ -173,7 +173,6 @@ async function aggiungiAuto() {
       'Authorization': `Bearer ${SUPABASE_KEY}`,
       'Content-Type': 'application/json',
       'Prefer': 'return=minimal'
-      'Resolution': 'ignore-duplicates'
     },
     body: JSON.stringify({
       marca,
