@@ -10,7 +10,7 @@ async function fetchAutoFromSupabase() {
   });
   const data = await res.json();
   return data.map(a => ({
-    id: a.id,
+    id: String(a.id),
     marca: a.marca || '',
     modello: a.modello || '',
     versione: a.versione || '',
