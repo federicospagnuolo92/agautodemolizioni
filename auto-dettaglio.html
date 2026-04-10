@@ -26,33 +26,37 @@ nav ul a:hover{ color:var(--text); }
 .breadcrumb a{ color:var(--muted); text-decoration:none; }
 .breadcrumb a:hover{ color:var(--red); }
 .breadcrumb span{ margin:0 .4rem; }
-.main{ max-width:1100px; margin:0 auto; padding:2rem 5vw 5rem; display:grid; grid-template-columns:1fr 380px; gap:2.5rem; align-items:start; }
+.main{ max-width:1200px; margin:0 auto; padding:2rem 5vw 5rem; display:grid; grid-template-columns:1fr 400px; gap:2.5rem; align-items:start; }
 .back-link{ display:inline-flex; align-items:center; gap:.4rem; font-size:.82rem; font-weight:600; color:var(--muted); text-decoration:none; margin-bottom:1rem; transition:color .2s; }
 .back-link:hover{ color:var(--red); }
 .gallery{ background:var(--white); border-radius:14px; overflow:hidden; border:1px solid var(--border); }
-.gallery-main{ position:relative; background:#f8f9fa; height:400px; overflow:hidden; display:flex; align-items:center; justify-content:center; cursor:zoom-in; }
-.gallery-main img{ width:100%; height:100%; object-fit:contain; padding:1.5rem; transition:opacity .3s; }
-.gallery-badge{ position:absolute; top:16px; left:16px; background:var(--red); color:#fff; font-size:.72rem; font-weight:700; padding:.3rem .8rem; border-radius:6px; text-transform:uppercase; letter-spacing:.5px; z-index:2; }
-.gallery-nav{ position:absolute; top:50%; transform:translateY(-50%); display:flex; justify-content:space-between; width:100%; padding:0 .8rem; pointer-events:none; z-index:2; }
-.gallery-btn{ width:36px; height:36px; background:rgba(255,255,255,0.9); border:1px solid var(--border); border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:.9rem; pointer-events:all; transition:background .2s; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
-.gallery-btn:hover{ background:#fff; box-shadow:0 4px 12px rgba(0,0,0,0.15); }
-.gallery-counter{ position:absolute; bottom:12px; right:50px; background:rgba(0,0,0,0.5); color:#fff; font-size:.72rem; font-weight:600; padding:.2rem .6rem; border-radius:100px; z-index:2; }
-
-/* ── Tasto espandi ── */
-.btn-expand{
-  position:absolute; bottom:10px; right:10px;
-  width:32px; height:32px;
-  background:rgba(0,0,0,0.55);
-  border:none; border-radius:7px;
-  cursor:pointer; z-index:3;
+.gallery-main{
+  position:relative; background:#111;
+  height:520px; overflow:hidden;
   display:flex; align-items:center; justify-content:center;
-  transition:background .2s;
+  cursor:pointer;
 }
-.btn-expand:hover{ background:rgba(0,0,0,0.8); }
-.btn-expand svg{ width:16px; height:16px; fill:none; stroke:#fff; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
-
-.gallery-thumbs{ display:flex; gap:8px; padding:12px; background:#f0f2f5; border-top:1px solid var(--border); min-height:72px; }
-.gallery-thumb{ flex:1; max-width:100px; height:72px; border-radius:8px; overflow:hidden; cursor:pointer; border:2.5px solid transparent; transition:border-color .2s,opacity .2s; opacity:.65; }
+.gallery-main img{ width:100%; height:100%; object-fit:cover; transition:opacity .25s; user-select:none; pointer-events:none; }
+.gallery-badge{ position:absolute; top:16px; left:16px; background:var(--red); color:#fff; font-size:.72rem; font-weight:700; padding:.3rem .8rem; border-radius:6px; text-transform:uppercase; letter-spacing:.5px; z-index:2; }
+.gallery-btn{
+  position:absolute; top:50%; transform:translateY(-50%);
+  width:44px; height:44px;
+  background:rgba(255,255,255,0.18); border:1.5px solid rgba(255,255,255,0.35);
+  border-radius:50%; color:#fff; font-size:1.3rem; cursor:pointer; z-index:3;
+  display:flex; align-items:center; justify-content:center;
+  transition:background .2s; backdrop-filter:blur(4px);
+}
+.gallery-btn:hover{ background:rgba(255,255,255,0.35); }
+.gallery-btn.prev{ left:14px; }
+.gallery-btn.next{ right:14px; }
+.gallery-counter{ position:absolute; bottom:14px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,0.55); color:#fff; font-size:.72rem; font-weight:600; padding:.25rem .75rem; border-radius:100px; z-index:2; }
+.btn-expand{ position:absolute; bottom:12px; right:12px; width:34px; height:34px; background:rgba(0,0,0,0.55); border:none; border-radius:8px; cursor:pointer; z-index:3; display:flex; align-items:center; justify-content:center; transition:background .2s; }
+.btn-expand:hover{ background:rgba(0,0,0,0.85); }
+.btn-expand svg{ width:16px; height:16px; fill:none; stroke:#fff; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
+.gallery-thumbs{ display:flex; gap:6px; padding:10px; background:#f0f2f5; border-top:1px solid var(--border); overflow-x:auto; }
+.gallery-thumbs::-webkit-scrollbar{ height:4px; }
+.gallery-thumbs::-webkit-scrollbar-thumb{ background:#ccc; border-radius:2px; }
+.gallery-thumb{ flex-shrink:0; width:90px; height:62px; border-radius:7px; overflow:hidden; cursor:pointer; border:2.5px solid transparent; transition:border-color .18s,opacity .18s; opacity:.6; }
 .gallery-thumb.active{ border-color:var(--red); opacity:1; }
 .gallery-thumb:hover{ opacity:1; }
 .gallery-thumb img{ width:100%; height:100%; object-fit:cover; }
@@ -93,75 +97,23 @@ nav ul a:hover{ color:var(--text); }
 .not-found{ text-align:center; padding:6rem 2rem; color:var(--muted); }
 .not-found h2{ font-size:1.5rem; font-weight:800; color:var(--text); margin-bottom:.5rem; }
 
-/* ══════════════════════════════
-   LIGHTBOX
-══════════════════════════════ */
-#lightbox{
-  display:none;
-  position:fixed; inset:0; z-index:9999;
-  background:rgba(0,0,0,0.93);
-  align-items:center; justify-content:center;
-  flex-direction:column;
-  animation:lbFadeIn .18s ease;
-}
+/* LIGHTBOX */
+#lightbox{ display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.95); align-items:center; justify-content:center; flex-direction:column; animation:lbFadeIn .18s ease; }
 #lightbox.open{ display:flex; }
-@keyframes lbFadeIn{ from{opacity:0} to{opacity:1} }
-
-#lbImg{
-  max-width:90vw; max-height:82vh;
-  object-fit:contain;
-  border-radius:8px;
-  user-select:none;
-  transition:opacity .2s;
-}
-
-#lbClose{
-  position:fixed; top:18px; right:22px;
-  width:40px; height:40px;
-  background:rgba(255,255,255,0.12);
-  border:none; border-radius:50%;
-  color:#fff; font-size:1.3rem; cursor:pointer;
-  display:flex; align-items:center; justify-content:center;
-  transition:background .2s;
-}
-#lbClose:hover{ background:rgba(255,255,255,0.25); }
-
-#lbPrev, #lbNext{
-  position:fixed; top:50%; transform:translateY(-50%);
-  width:48px; height:48px;
-  background:rgba(255,255,255,0.1);
-  border:1px solid rgba(255,255,255,0.2);
-  border-radius:50%; color:#fff;
-  font-size:1.4rem; cursor:pointer;
-  display:flex; align-items:center; justify-content:center;
-  transition:background .2s;
-}
+@keyframes lbFadeIn{ from{opacity:0}to{opacity:1} }
+#lbImg{ max-width:90vw; max-height:80vh; object-fit:contain; border-radius:6px; user-select:none; transition:opacity .2s; }
+#lbClose{ position:fixed; top:18px; right:22px; width:42px; height:42px; background:rgba(255,255,255,0.12); border:none; border-radius:50%; color:#fff; font-size:1.3rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .2s; }
+#lbClose:hover{ background:rgba(255,255,255,0.28); }
+#lbPrev,#lbNext{ position:fixed; top:50%; transform:translateY(-50%); width:50px; height:50px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:50%; color:#fff; font-size:1.5rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .2s; }
 #lbPrev:hover,#lbNext:hover{ background:rgba(255,255,255,0.25); }
 #lbPrev{ left:16px; }
 #lbNext{ right:16px; }
-
-#lbCounter{
-  margin-top:14px;
-  font-size:.78rem; color:rgba(255,255,255,0.55);
-  font-family:'Inter',sans-serif;
-}
-
-#lbThumbs{
-  display:flex; gap:8px; margin-top:14px;
-  overflow-x:auto; max-width:90vw;
-  padding-bottom:4px;
-}
-#lbThumbs img{
-  height:52px; width:72px;
-  object-fit:cover; border-radius:6px;
-  cursor:pointer; opacity:.5;
-  border:2px solid transparent;
-  transition:opacity .2s, border-color .2s;
-  flex-shrink:0;
-}
+#lbCounter{ margin-top:12px; font-size:.78rem; color:rgba(255,255,255,0.5); font-family:'Inter',sans-serif; }
+#lbThumbs{ display:flex; gap:8px; margin-top:12px; overflow-x:auto; max-width:90vw; padding-bottom:4px; }
+#lbThumbs img{ height:54px; width:76px; object-fit:cover; border-radius:6px; cursor:pointer; opacity:.45; border:2px solid transparent; transition:opacity .2s,border-color .2s; flex-shrink:0; }
 #lbThumbs img.active{ opacity:1; border-color:#fff; }
 
-@media (max-width:900px){
+@media(max-width:900px){
   nav{ justify-content:center; position:relative; }
   .logo-link{ margin:0 auto; }
   .logo-link img{ margin-left:0; margin-top:0; height:65px; }
@@ -172,6 +124,7 @@ nav ul a:hover{ color:var(--text); }
   .nav-cta{ margin:.8rem 2rem!important; border-radius:8px!important; text-align:center; display:block; }
   .main{ grid-template-columns:1fr; }
   .sidebar{ order:-1; }
+  .gallery-main{ height:260px; }
   #lbPrev{ left:6px; }
   #lbNext{ right:6px; }
 }
@@ -179,9 +132,8 @@ nav ul a:hover{ color:var(--text); }
 </head>
 <body>
 
-<!-- ══ LIGHTBOX ══ -->
 <div id="lightbox">
-  <button id="lbClose" onclick="closeLightbox()" title="Chiudi (Esc)">✕</button>
+  <button id="lbClose" onclick="closeLightbox()">✕</button>
   <button id="lbPrev" onclick="lbPrev()">‹</button>
   <img id="lbImg" src="" alt="">
   <button id="lbNext" onclick="lbNext()">›</button>
@@ -204,11 +156,9 @@ nav ul a:hover{ color:var(--text); }
   </ul>
 </nav>
 
-<div class="breadcrumb" id="breadcrumb">
-  <a href="https://agsrottama.it">Home</a>
-  <span>›</span>
-  <a href="parco-auto.html">Parco Auto</a>
-  <span>›</span>
+<div class="breadcrumb">
+  <a href="https://agsrottama.it">Home</a><span>›</span>
+  <a href="parco-auto.html">Parco Auto</a><span>›</span>
   <span id="breadcrumbTitle">Dettaglio auto</span>
 </div>
 
@@ -216,103 +166,41 @@ nav ul a:hover{ color:var(--text); }
 
 <script src="auto-db.js"></script>
 <script>
-/* ══ LIGHTBOX LOGIC ══ */
-var lbPhotos = [];
-var lbCurrent = 0;
+var lbPhotos=[],lbCurrent=0;
+function openLightbox(p,i){lbPhotos=p;lbCurrent=i;document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';renderLb();buildLbThumbs();}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
+function renderLb(){var img=document.getElementById('lbImg');img.style.opacity='0';setTimeout(function(){img.src=lbPhotos[lbCurrent];img.style.opacity='1';},70);document.getElementById('lbCounter').textContent=(lbCurrent+1)+' / '+lbPhotos.length;document.querySelectorAll('#lbThumbs img').forEach(function(t,i){t.classList.toggle('active',i===lbCurrent);});}
+function lbNext(){lbCurrent=(lbCurrent+1)%lbPhotos.length;renderLb();}
+function lbPrev(){lbCurrent=(lbCurrent-1+lbPhotos.length)%lbPhotos.length;renderLb();}
+function buildLbThumbs(){document.getElementById('lbThumbs').innerHTML=lbPhotos.map(function(f,i){return'<img src="'+f+'" class="'+(i===lbCurrent?'active':'')+'" onclick="lbCurrent='+i+';renderLb()" alt="">';}).join('');}
+document.getElementById('lightbox').addEventListener('click',function(e){if(e.target===this)closeLightbox();});
+document.addEventListener('keydown',function(e){if(!document.getElementById('lightbox').classList.contains('open'))return;if(e.key==='Escape')closeLightbox();if(e.key==='ArrowRight')lbNext();if(e.key==='ArrowLeft')lbPrev();});
+var lbTX=null;
+document.getElementById('lbImg').addEventListener('touchstart',function(e){lbTX=e.touches[0].clientX;},{passive:true});
+document.getElementById('lbImg').addEventListener('touchend',function(e){if(lbTX===null)return;var dx=e.changedTouches[0].clientX-lbTX;if(Math.abs(dx)>40){dx<0?lbNext():lbPrev();}lbTX=null;});
 
-function openLightbox(photos, idx) {
-  lbPhotos = photos;
-  lbCurrent = idx;
-  document.getElementById('lightbox').classList.add('open');
-  document.body.style.overflow = 'hidden';
-  renderLb();
-  buildLbThumbs();
-}
-function closeLightbox() {
-  document.getElementById('lightbox').classList.remove('open');
-  document.body.style.overflow = '';
-}
-function renderLb() {
-  var img = document.getElementById('lbImg');
-  img.style.opacity = '0';
-  setTimeout(function(){ img.src = lbPhotos[lbCurrent]; img.style.opacity = '1'; }, 80);
-  document.getElementById('lbCounter').textContent = (lbCurrent+1) + ' / ' + lbPhotos.length;
-  document.querySelectorAll('#lbThumbs img').forEach(function(t,i){ t.classList.toggle('active', i===lbCurrent); });
-}
-function lbNext() { lbCurrent = (lbCurrent+1) % lbPhotos.length; renderLb(); }
-function lbPrev() { lbCurrent = (lbCurrent-1+lbPhotos.length) % lbPhotos.length; renderLb(); }
-function buildLbThumbs() {
-  var c = document.getElementById('lbThumbs');
-  c.innerHTML = lbPhotos.map(function(f,i){
-    return '<img src="'+f+'" class="'+(i===lbCurrent?'active':'')+'" onclick="lbCurrent='+i+';renderLb()" alt="">';
-  }).join('');
-}
-
-document.getElementById('lightbox').addEventListener('click', function(e){
-  if(e.target === this) closeLightbox();
-});
-document.addEventListener('keydown', function(e){
-  var lb = document.getElementById('lightbox');
-  if(!lb.classList.contains('open')) return;
-  if(e.key==='Escape') closeLightbox();
-  if(e.key==='ArrowRight') lbNext();
-  if(e.key==='ArrowLeft') lbPrev();
-});
-
-/* ══ SWIPE su mobile ══ */
-var lbTouchX = null;
-document.getElementById('lbImg').addEventListener('touchstart', function(e){ lbTouchX = e.touches[0].clientX; }, {passive:true});
-document.getElementById('lbImg').addEventListener('touchend', function(e){
-  if(lbTouchX === null) return;
-  var dx = e.changedTouches[0].clientX - lbTouchX;
-  if(Math.abs(dx) > 40){ dx < 0 ? lbNext() : lbPrev(); }
-  lbTouchX = null;
-});
-
-/* ══ PAGINA ══ */
-async function init() {
-  const AUTO_DB = await fetchAutoFromSupabase();
-  var params = new URLSearchParams(window.location.search);
-  var id = params.get('id');
-  var auto = AUTO_DB.find(a => String(a.id) === String(id));
-
-  if (!auto) {
-    document.getElementById('pageContent').innerHTML = '<div class="not-found"><h2>Auto non trovata</h2><p>Torna al <a href="parco-auto.html" style="color:var(--red)">parco auto</a></p></div>';
-    return;
-  }
-
-  document.title = auto.marca + ' ' + auto.modello + ' ' + auto.anno + ' — A.G.S. Autodemolizioni';
-  document.getElementById('breadcrumbTitle').textContent = auto.marca + ' ' + auto.modello + ' ' + auto.anno;
-
-  var thumbsHTML = auto.foto.map(function(f, i){
-    return '<div class="gallery-thumb'+(i===0?' active':'')+'" onclick="goTo('+i+',this)"><img src="'+f+'" alt=""></div>';
-  }).join('');
-
-  var detailsHTML = [
-    ['Marca', auto.marca], ['Modello', auto.modello],
-    ['Versione', auto.versione], ['Anno', auto.anno],
-    ['Chilometri', auto.km + ' km'], ['Carburante', auto.carburante],
-    ['Potenza', auto.cv + ' CV']
-  ].filter(function(d){ return d[1]; }).map(function(d){
-    return '<div class="detail-item"><div class="detail-label">'+d[0]+'</div><div class="detail-value">'+d[1]+'</div></div>';
-  }).join('');
-
-  var waMsg = encodeURIComponent('Ciao, ho visto sul sito la ' + auto.marca + ' ' + auto.modello + ' ' + auto.versione + ' del ' + auto.anno + '. Cerco: ');
-
-  document.getElementById('pageContent').innerHTML = `
+async function init(){
+  const AUTO_DB=await fetchAutoFromSupabase();
+  var id=new URLSearchParams(window.location.search).get('id');
+  var auto=AUTO_DB.find(function(a){return String(a.id)===String(id);});
+  if(!auto){document.getElementById('pageContent').innerHTML='<div class="not-found"><h2>Auto non trovata</h2><p>Torna al <a href="parco-auto.html" style="color:var(--red)">parco auto</a></p></div>';return;}
+  document.title=auto.marca+' '+auto.modello+' '+auto.anno+' — A.G.S. Autodemolizioni';
+  document.getElementById('breadcrumbTitle').textContent=auto.marca+' '+auto.modello+' '+auto.anno;
+  var thumbsHTML=auto.foto.map(function(f,i){return'<div class="gallery-thumb'+(i===0?' active':'')+'" onclick="goTo('+i+',this)"><img src="'+f+'" alt=""></div>';}).join('');
+  var detailsHTML=[['Marca',auto.marca],['Modello',auto.modello],['Versione',auto.versione],['Anno',auto.anno],['Chilometri',auto.km+' km'],['Carburante',auto.carburante],['Potenza',auto.cv+' CV']].filter(function(d){return d[1];}).map(function(d){return'<div class="detail-item"><div class="detail-label">'+d[0]+'</div><div class="detail-value">'+d[1]+'</div></div>';}).join('');
+  var waMsg=encodeURIComponent('Ciao, ho visto sul sito la '+auto.marca+' '+auto.modello+' '+auto.versione+' del '+auto.anno+'. Cerco: ');
+  document.getElementById('pageContent').innerHTML=`
     <div class="main">
       <div>
         <a href="parco-auto.html" class="back-link">← Torna al parco auto</a>
         <div class="gallery">
-          <div class="gallery-main" id="galleryMain" onclick="openLightbox(currentPhotos, currentIndex)" title="Clicca per ingrandire">
+          <div class="gallery-main" onclick="openLightbox(currentPhotos,currentIndex)" title="Clicca per ingrandire">
             <span class="gallery-badge">Disponibile</span>
             <img id="mainPhoto" src="${auto.foto[0]}" alt="${auto.marca} ${auto.modello}">
-            <div class="gallery-nav">
-              <button class="gallery-btn" onclick="event.stopPropagation();prevPhoto()">‹</button>
-              <button class="gallery-btn" onclick="event.stopPropagation();nextPhoto()">›</button>
-            </div>
+            <button class="gallery-btn prev" onclick="event.stopPropagation();prevPhoto()">‹</button>
+            <button class="gallery-btn next" onclick="event.stopPropagation();nextPhoto()">›</button>
             <div class="gallery-counter" id="photoCounter">1 / ${auto.foto.length}</div>
-            <button class="btn-expand" onclick="event.stopPropagation();openLightbox(currentPhotos,currentIndex)" title="Apri a schermo intero">
+            <button class="btn-expand" onclick="event.stopPropagation();openLightbox(currentPhotos,currentIndex)" title="Schermo intero">
               <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
             </button>
           </div>
@@ -325,9 +213,7 @@ async function init() {
       </div>
       <div class="sidebar">
         <div class="car-title-box">
-          <div class="car-badge-row">
-            <span class="badge-disponibile">✓ Disponibile</span>
-          </div>
+          <div class="car-badge-row"><span class="badge-disponibile">✓ Disponibile</span></div>
           <div class="car-name">${auto.marca} ${auto.modello}</div>
           <div class="car-version">${auto.versione}</div>
           <div class="specs-row">
@@ -354,40 +240,32 @@ async function init() {
       </div>
     </div>`;
 
-  var current = 0;
-  window.currentPhotos = auto.foto;
-  window.currentIndex = 0;
-
-  window.goTo = function(idx, el) {
-    current = idx;
-    window.currentIndex = idx;
-    document.getElementById('mainPhoto').src = auto.foto[idx];
-    document.getElementById('photoCounter').textContent = (idx+1) + ' / ' + auto.foto.length;
-    document.querySelectorAll('.gallery-thumb').forEach(function(t){ t.classList.remove('active'); });
+  var current=0;
+  window.currentPhotos=auto.foto;
+  window.currentIndex=0;
+  window.goTo=function(idx,el){
+    current=idx;window.currentIndex=idx;
+    var img=document.getElementById('mainPhoto');
+    img.style.opacity='0';
+    setTimeout(function(){img.src=auto.foto[idx];img.style.opacity='1';},80);
+    document.getElementById('photoCounter').textContent=(idx+1)+' / '+auto.foto.length;
+    document.querySelectorAll('.gallery-thumb').forEach(function(t){t.classList.remove('active');});
     el.classList.add('active');
   };
-  window.nextPhoto = function() {
-    var next = (current+1) % auto.foto.length;
-    goTo(next, document.querySelectorAll('.gallery-thumb')[next]);
+  window.nextPhoto=function(){var n=(current+1)%auto.foto.length;goTo(n,document.querySelectorAll('.gallery-thumb')[n]);};
+  window.prevPhoto=function(){var p=(current-1+auto.foto.length)%auto.foto.length;goTo(p,document.querySelectorAll('.gallery-thumb')[p]);};
+  window.sendWA=function(){
+    var nome=document.getElementById('fNome').value,tel=document.getElementById('fTel').value,ricambio=document.getElementById('fRicambio').value;
+    if(!nome||!ricambio){alert('Inserisci nome e ricambio cercato');return;}
+    window.open('https://wa.me/393384672370?text='+encodeURIComponent('Ciao, sono '+nome+' ('+tel+'). Ho visto la '+auto.marca+' '+auto.modello+' '+auto.anno+'. Cerco: '+ricambio),'_blank');
   };
-  window.prevPhoto = function() {
-    var prev = (current-1+auto.foto.length) % auto.foto.length;
-    goTo(prev, document.querySelectorAll('.gallery-thumb')[prev]);
-  };
-  window.sendWA = function() {
-    var nome = document.getElementById('fNome').value;
-    var tel = document.getElementById('fTel').value;
-    var ricambio = document.getElementById('fRicambio').value;
-    if (!nome || !ricambio) { alert('Inserisci nome e ricambio cercato'); return; }
-    var msg = 'Ciao, sono ' + nome + ' (' + tel + '). Ho visto la ' + auto.marca + ' ' + auto.modello + ' ' + auto.anno + '. Cerco: ' + ricambio;
-    window.open('https://wa.me/393384672370?text=' + encodeURIComponent(msg), '_blank');
-  };
+  var tx=null,gm=document.querySelector('.gallery-main');
+  gm.addEventListener('touchstart',function(e){tx=e.touches[0].clientX;},{passive:true});
+  gm.addEventListener('touchend',function(e){if(tx===null)return;var dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>40){dx<0?nextPhoto():prevPhoto();}tx=null;});
 }
-
 init();
-
-function toggleMenu() { document.getElementById('hamburger').classList.toggle('open'); document.getElementById('nav-menu').classList.toggle('open'); }
-function closeMenu() { document.getElementById('hamburger').classList.remove('open'); document.getElementById('nav-menu').classList.remove('open'); }
+function toggleMenu(){document.getElementById('hamburger').classList.toggle('open');document.getElementById('nav-menu').classList.toggle('open');}
+function closeMenu(){document.getElementById('hamburger').classList.remove('open');document.getElementById('nav-menu').classList.remove('open');}
 </script>
 </body>
 </html>
