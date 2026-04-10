@@ -142,7 +142,7 @@ nav ul a:hover{ color:var(--text); }
 let AUTO_DB = [];
 
 async function init() {
-  AUTO_DB = await fetchAutoFromAirtable();
+  AUTO_DB = await fetchAutoFromSupabase();
 
   var marche = [...new Set(AUTO_DB.map(a => a.marca).sort())];
   var sel = document.getElementById('filterMarca');
