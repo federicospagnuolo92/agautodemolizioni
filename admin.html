@@ -24,7 +24,7 @@ body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); 
 .field input:focus, .field select:focus { border-color:var(--red); }
 .btn-red { background:var(--red); color:#fff; font-family:'Inter',sans-serif; font-size:.95rem; font-weight:700; padding:.85rem; border-radius:10px; border:none; cursor:pointer; width:100%; margin-top:.5rem; }
 .btn-red:hover { background:#c8001a; }
-#adminPage { display:none; max-width:800px; margin:0 auto; padding:2rem 1.5rem 5rem; margin-top:80px; }
+#adminPage { display:none; max-width:800px; margin:80px auto 0; padding:2rem 1.5rem 5rem; }
 .admin-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:2rem; }
 .admin-header h1 { font-size:1.5rem; font-weight:800; }
 .btn-logout { font-family:'Inter',sans-serif; font-size:.8rem; font-weight:600; color:var(--muted); background:none; border:1.5px solid var(--border); border-radius:8px; padding:.4rem .9rem; cursor:pointer; }
@@ -34,19 +34,26 @@ body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); 
 .form-grid .full { grid-column:1/-1; }
 .btn-green { background:#16a34a; color:#fff; font-family:'Inter',sans-serif; font-size:.95rem; font-weight:700; padding:.85rem; border-radius:10px; border:none; cursor:pointer; width:100%; margin-top:1rem; }
 .btn-green:hover { background:#15803d; }
+.btn-orange { background:#ea580c; color:#fff; font-family:'Inter',sans-serif; font-size:.95rem; font-weight:700; padding:.85rem; border-radius:10px; border:none; cursor:pointer; width:100%; margin-top:.5rem; }
+.btn-orange:hover { background:#c2410c; }
+.btn-cancel { background:var(--bg); color:var(--muted); font-family:'Inter',sans-serif; font-size:.95rem; font-weight:700; padding:.85rem; border-radius:10px; border:1.5px solid var(--border); cursor:pointer; width:100%; margin-top:.5rem; }
 .auto-item { background:var(--white); border:1px solid var(--border); border-radius:12px; padding:1.2rem 1.5rem; display:flex; align-items:center; gap:1rem; margin-bottom:.8rem; }
 .auto-item img { width:80px; height:60px; object-fit:contain; border-radius:8px; background:#f8f9fa; flex-shrink:0; }
 .auto-info { flex:1; }
 .auto-info strong { font-size:.95rem; font-weight:700; }
 .auto-info span { font-size:.8rem; color:var(--muted); display:block; }
-.btn-delete { background:#fee2e2; color:#dc2626; font-family:'Inter',sans-serif; font-size:.8rem; font-weight:700; border:none; border-radius:8px; padding:.5rem .9rem; cursor:pointer; flex-shrink:0; }
+.auto-actions { display:flex; gap:.5rem; flex-shrink:0; }
+.btn-delete { background:#fee2e2; color:#dc2626; font-family:'Inter',sans-serif; font-size:.8rem; font-weight:700; border:none; border-radius:8px; padding:.5rem .9rem; cursor:pointer; }
 .btn-delete:hover { background:#fecaca; }
+.btn-edit { background:#eff6ff; color:#1d4ed8; font-family:'Inter',sans-serif; font-size:.8rem; font-weight:700; border:none; border-radius:8px; padding:.5rem .9rem; cursor:pointer; }
+.btn-edit:hover { background:#dbeafe; }
 .msg { font-size:.85rem; padding:.6rem 1rem; border-radius:8px; margin-top:.8rem; display:none; }
 .msg.ok { background:#f0fdf4; color:#16a34a; }
 .msg.err { background:#fee2e2; color:#dc2626; }
 .search-bar { display:flex; gap:.8rem; margin-bottom:1rem; }
 .search-bar input { font-family:'Inter',sans-serif; font-size:.85rem; border:1.5px solid var(--border); border-radius:8px; padding:.6rem 1rem; outline:none; flex:1; }
 .search-bar input:focus { border-color:var(--red); }
+.edit-mode-banner { background:#eff6ff; border:1.5px solid #93c5fd; border-radius:10px; padding:.8rem 1.2rem; margin-bottom:1rem; font-size:.85rem; color:#1d4ed8; font-weight:600; display:none; }
 </style>
 </head>
 <body>
@@ -86,7 +93,8 @@ body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); 
   </div>
 
   <div class="form-box">
-    <h2>➕ Aggiungi nuova auto</h2>
+    <h2 id="formTitolo">➕ Aggiungi nuova auto</h2>
+    <div class="edit-mode-banner" id="editBanner">✏️ Stai modificando un'auto esistente</div>
     <div class="form-grid">
       <div class="field"><label>Marca</label><input type="text" id="fMarca" placeholder="Es. Fiat"></div>
       <div class="field"><label>Modello</label><input type="text" id="fModello" placeholder="Es. Panda"></div>
@@ -106,8 +114,9 @@ body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); 
         <div id="fotoPreviewContainer" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:.5rem;"></div>
       </div>
     </div>
-    <button class="btn-green" onclick="aggiungiAuto()">✅ Salva auto</button>
-    <div class="msg ok" id="msgOk">Auto aggiunta con successo!</div>
+    <button class="btn-green" id="btnSalva" onclick="salva()">✅ Salva auto</button>
+    <button class="btn-cancel" id="btnAnnulla" style="display:none" onclick="annullaModifica()">✖ Annulla modifica</button>
+    <div class="msg ok" id="msgOk">Operazione completata!</div>
     <div class="msg err" id="msgErr">Errore — riprova</div>
   </div>
 
@@ -122,6 +131,7 @@ body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); 
 <script>
 const ADMIN_PWD = 'ags2024!';
 let tutteLeAuto = [];
+let editingId = null;
 
 function login() {
   if (document.getElementById('pwdInput').value === ADMIN_PWD) {
@@ -139,149 +149,4 @@ function logout() {
   location.reload();
 }
 
-if (sessionStorage.getItem('ags_admin')) {
-  document.getElementById('loginPage').style.display = 'none';
-  document.getElementById('adminPage').style.display = 'block';
-  caricaAuto();
-}
-
-function previewFoto(input) {
-  const container = document.getElementById('fotoPreviewContainer');
-  container.innerHTML = '';
-  if (input.files) {
-    Array.from(input.files).forEach(file => {
-      const reader = new FileReader();
-      reader.onload = e => {
-        const img = document.createElement('img');
-        img.src = e.target.result;
-        img.style = 'width:100px;height:75px;object-fit:cover;border-radius:8px;border:1px solid var(--border)';
-        container.appendChild(img);
-      };
-      reader.readAsDataURL(file);
-    });
-  }
-}
-
-async function uploadFoto(file) {
-  const ext = file.name.split('.').pop();
-  const nome = `auto_${Date.now()}_${Math.random().toString(36).substr(2,5)}.${ext}`;
-  const res = await fetch(`${SUPABASE_URL}/storage/v1/object/foto-auto/${nome}`, {
-    method: 'POST',
-    headers: {
-      'apikey': SUPABASE_KEY,
-      'Authorization': `Bearer ${SUPABASE_KEY}`,
-      'Content-Type': file.type
-    },
-    body: file
-  });
-  if (!res.ok) return null;
-  return `${SUPABASE_URL}/storage/v1/object/public/foto-auto/${nome}`;
-}
-
-async function aggiungiAuto() {
-  const marca = document.getElementById('fMarca').value.trim();
-  const modello = document.getElementById('fModello').value.trim();
-  if (!marca || !modello) { alert('Inserisci almeno marca e modello'); return; }
-
-  const resAuto = await fetch(`${SUPABASE_URL}/rest/v1/auto`, {
-    method: 'POST',
-    headers: {
-      'apikey': SUPABASE_KEY,
-      'Authorization': `Bearer ${SUPABASE_KEY}`,
-      'Content-Type': 'application/json',
-      'Prefer': 'return=representation'
-    },
-    body: JSON.stringify({
-      marca,
-      modello,
-      versione: document.getElementById('fVersione').value.trim(),
-      anno: parseInt(document.getElementById('fAnno').value) || null,
-      chilometri: parseInt(document.getElementById('fKm').value) || null,
-      carburante: document.getElementById('fCarburante').value,
-      cv: parseInt(document.getElementById('fCv').value) || null
-    })
-  });
-
-  if (!resAuto.ok) {
-    document.getElementById('msgErr').style.display = 'block';
-    setTimeout(() => document.getElementById('msgErr').style.display = 'none', 3000);
-    return;
-  }
-
-  const autoSalvata = await resAuto.json();
-  const autoId = autoSalvata[0].id;
-
-  const files = document.getElementById('fFoto').files;
-  for (const file of Array.from(files)) {
-    const url = await uploadFoto(file);
-    if (url) {
-      await fetch(`${SUPABASE_URL}/rest/v1/foto`, {
-        method: 'POST',
-        headers: {
-          'apikey': SUPABASE_KEY,
-          'Authorization': `Bearer ${SUPABASE_KEY}`,
-          'Content-Type': 'application/json',
-          'Prefer': 'return=minimal'
-        },
-        body: JSON.stringify({ auto_id: autoId, url })
-      });
-    }
-  }
-
-  document.getElementById('msgOk').style.display = 'block';
-  setTimeout(() => document.getElementById('msgOk').style.display = 'none', 3000);
-  document.querySelectorAll('.field input[type=text], .field input[type=number]').forEach(i => i.value = '');
-  document.getElementById('fFoto').value = '';
-  document.getElementById('fotoPreviewContainer').innerHTML = '';
-  caricaAuto();
-}
-
-async function caricaAuto() {
-  tutteLeAuto = await fetchAutoFromSupabase();
-  document.getElementById('titoloLista').textContent = `Auto nel parco (${tutteLeAuto.length})`;
-  renderLista(tutteLeAuto);
-}
-
-function filtraLista() {
-  const q = document.getElementById('searchAdmin').value.toLowerCase();
-  const filtrate = tutteLeAuto.filter(a =>
-    (a.marca + ' ' + a.modello + ' ' + a.versione).toLowerCase().includes(q)
-  );
-  renderLista(filtrate);
-}
-
-function renderLista(auto) {
-  const lista = document.getElementById('listaAuto');
-  if (auto.length === 0) {
-    lista.innerHTML = '<p style="color:var(--muted);font-size:.85rem;">Nessuna auto trovata</p>';
-    return;
-  }
-  lista.innerHTML = auto.map(a => `
-    <div class="auto-item">
-      <img src="${a.foto[0]}" alt="" onerror="this.src='assets/logoAGS.png'">
-      <div class="auto-info">
-        <strong>${a.marca} ${a.modello}</strong>
-        <span>${a.versione} — ${a.anno} — ${a.km} km</span>
-      </div>
-      <button class="btn-delete" onclick="eliminaAuto('${a.id}')">🗑 Elimina</button>
-    </div>`).join('');
-}
-
-async function eliminaAuto(id) {
-  if (!confirm('Eliminare questa auto?')) return;
-  await fetch(`${SUPABASE_URL}/rest/v1/foto?auto_id=eq.${id}`, {
-    method: 'DELETE',
-    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
-  });
-  await fetch(`${SUPABASE_URL}/rest/v1/auto?id=eq.${id}`, {
-    method: 'DELETE',
-    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
-  });
-  caricaAuto();
-}
-
-function toggleMenu() { document.getElementById('hamburger').classList.toggle('open'); document.getElementById('nav-menu').classList.toggle('open'); }
-function closeMenu() { document.getElementById('hamburger').classList.remove('open'); document.getElementById('nav-menu').classList.remove('open'); }
-</script>
-</body>
-</html>
+i
