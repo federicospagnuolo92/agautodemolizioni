@@ -125,7 +125,7 @@ async function init() {
   const AUTO_DB = await fetchAutoFromSupabase();
   var params = new URLSearchParams(window.location.search);
   var id = params.get('id');
-  var auto = AUTO_DB.find(a => a.id === id);
+  var auto = AUTO_DB.find(a => String(a.id) === String(id));
 
   if (!auto) {
     document.getElementById('pageContent').innerHTML = '<div class="not-found"><h2>Auto non trovata</h2><p>Torna al <a href="parco-auto.html" style="color:var(--red)">parco auto</a></p></div>';
