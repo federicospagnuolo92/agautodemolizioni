@@ -26,6 +26,7 @@ async function fetchAutoFromSupabase() {
       km: a.chilometri ? a.chilometri.toLocaleString('it-IT') : '',
       carburante: a.carburante || '',
       cv: a.cv || '',
+      targa: a.targa || '',
       foto: fotoFinali,
       disponibile: true
     };
