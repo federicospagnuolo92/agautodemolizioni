@@ -29,7 +29,6 @@ nav ul a:hover{ color:var(--text); }
 .search-hero-section h1{ font-size:2rem; font-weight:800; color:var(--text); letter-spacing:-1px; margin-bottom:.4rem; }
 .search-hero-section h1 span{ color:var(--red); }
 .search-hero-section p{ font-size:.9rem; color:var(--muted); margin-bottom:2rem; }
-
 .search-hero-bar{ display:flex; align-items:flex-end; gap:.8rem; }
 .search-hero-group{ display:flex; flex-direction:column; gap:.4rem; flex:1; }
 .search-hero-group label{ font-size:.78rem; font-weight:700; color:var(--text); padding-left:.2rem; }
@@ -42,32 +41,32 @@ nav ul a:hover{ color:var(--text); }
 .search-hero-btn:hover{ background:#c8001a; }
 
 .main{ max-width:1100px; margin:0 auto; padding:1.5rem 5vw 4rem; }
-.results-bar{ display:flex; align-items:center; justify-content:space-between; margin-bottom:1.2rem; }
+.results-bar{ display:flex; align-items:center; margin-bottom:1.2rem; }
 .results-count{ font-size:.85rem; color:var(--muted); font-weight:500; }
 .results-count span{ color:var(--text); font-weight:700; }
 
 .car-list{ display:flex; flex-direction:column; gap:1rem; }
-.car-card{ background:var(--white); border:1px solid var(--border); border-radius:12px; display:flex; align-items:stretch; overflow:hidden; transition:box-shadow .25s,transform .2s; position:relative; }
-.car-card:hover{ box-shadow:0 6px 24px rgba(0,0,0,0.1); transform:translateY(-2px); }
-.car-card-link{ position:absolute; inset:0; z-index:1; cursor:pointer; }
-.car-img-wrap{ flex:0 0 240px; position:relative; overflow:hidden; background:#f8f9fa; }
-.car-img-wrap img{ width:100%; height:100%; object-fit:contain; padding:.5rem; transition:transform .3s; }
-.car-card:hover .car-img-wrap img{ transform:scale(1.04); }
+.car-card{ background:var(--white); border:1px solid var(--border); border-radius:12px; display:flex; align-items:stretch; overflow:hidden; transition:box-shadow .25s,transform .2s; position:relative; cursor:pointer; }
+.car-card:hover{ box-shadow:0 4px 20px rgba(0,0,0,0.09); transform:translateY(-1px); }
+.car-card-link{ position:absolute; inset:0; z-index:1; }
+.car-img-wrap{ flex:0 0 220px; position:relative; overflow:hidden; background:#f8f9fa; }
+.car-img-wrap img{ width:100%; height:100%; object-fit:cover; transition:transform .3s; }
+.car-card:hover .car-img-wrap img{ transform:scale(1.03); }
 .car-badge{ position:absolute; top:10px; left:10px; background:var(--red); color:#fff; font-size:.65rem; font-weight:700; padding:.25rem .6rem; border-radius:5px; text-transform:uppercase; letter-spacing:.5px; z-index:2; }
-.car-body{ flex:1; padding:1.4rem 1.8rem; display:flex; flex-direction:column; justify-content:space-between; }
-.car-title{ font-size:1.15rem; font-weight:800; color:var(--text); margin-bottom:.2rem; letter-spacing:-.3px; }
-.car-subtitle{ font-size:.82rem; color:var(--muted); margin-bottom:1rem; }
-.car-specs{ display:flex; gap:1.2rem; flex-wrap:wrap; margin-bottom:1rem; }
-.car-spec{ display:flex; align-items:center; gap:.4rem; font-size:.8rem; color:var(--text); font-weight:500; }
-.car-tags{ display:flex; gap:.5rem; flex-wrap:wrap; }
-.car-tag{ font-size:.72rem; font-weight:600; padding:.22rem .7rem; border-radius:100px; border:1px solid var(--border); color:var(--muted); }
-.car-tag.available{ background:#f0fdf4; border-color:#86efac; color:#16a34a; }
-.car-arrow{ display:flex; align-items:center; gap:.3rem; font-size:.75rem; font-weight:600; color:var(--red); margin-top:.8rem; }
-.car-cta{ flex:0 0 200px; padding:1.4rem 1.5rem; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:.8rem; border-left:1px solid var(--border); background:#fafafa; position:relative; z-index:2; }
-.car-cta-label{ font-size:.7rem; color:var(--muted); text-align:center; line-height:1.5; }
-.btn-wa{ display:flex; align-items:center; gap:.5rem; background:#25D366; color:#fff; font-family:'Inter',sans-serif; font-size:.82rem; font-weight:700; padding:.7rem 1.2rem; border-radius:8px; text-decoration:none; width:100%; justify-content:center; transition:background .2s; position:relative; z-index:3; }
+.car-body{ flex:1; padding:1.2rem 1.5rem; display:flex; flex-direction:column; justify-content:space-between; }
+.car-top{ display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:.8rem; }
+.car-title-wrap{}
+.car-title{ font-size:1.1rem; font-weight:800; color:var(--text); letter-spacing:-.3px; margin-bottom:.15rem; }
+.car-version{ font-size:.8rem; color:var(--muted); }
+.car-badge-green{ background:#f0fdf4; color:#16a34a; border:1px solid #86efac; font-size:.72rem; font-weight:700; padding:.3rem .8rem; border-radius:6px; white-space:nowrap; }
+.car-specs{ display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:1rem; }
+.car-spec{ background:#f5f6f8; border-radius:6px; padding:.35rem .7rem; font-size:.78rem; font-weight:600; color:var(--text); }
+.car-bottom{ display:flex; align-items:center; justify-content:space-between; }
+.car-arrow{ font-size:.78rem; font-weight:600; color:var(--red); }
+.car-cta{ flex:0 0 160px; padding:1.2rem 1.2rem; display:flex; flex-direction:column; align-items:stretch; justify-content:center; gap:.6rem; border-left:1px solid var(--border); background:#fafafa; position:relative; z-index:2; }
+.btn-wa{ display:flex; align-items:center; justify-content:center; gap:.4rem; background:#25D366; color:#fff; font-family:'Inter',sans-serif; font-size:.8rem; font-weight:700; padding:.65rem 1rem; border-radius:8px; text-decoration:none; transition:background .2s; position:relative; z-index:3; }
 .btn-wa:hover{ background:#1aad52; }
-.btn-call{ display:flex; align-items:center; gap:.5rem; background:var(--white); color:var(--text); font-family:'Inter',sans-serif; font-size:.82rem; font-weight:600; padding:.65rem 1.2rem; border-radius:8px; text-decoration:none; width:100%; justify-content:center; border:1.5px solid var(--border); transition:border-color .2s; position:relative; z-index:3; }
+.btn-call{ display:flex; align-items:center; justify-content:center; gap:.4rem; background:var(--white); color:var(--text); font-family:'Inter',sans-serif; font-size:.8rem; font-weight:600; padding:.6rem 1rem; border-radius:8px; text-decoration:none; border:1.5px solid var(--border); transition:border-color .2s; position:relative; z-index:3; }
 .btn-call:hover{ border-color:#9ca3af; }
 .empty-state{ text-align:center; padding:4rem 2rem; color:var(--muted); }
 .empty-state h3{ font-size:1.1rem; font-weight:700; color:var(--text); margin-bottom:.5rem; }
@@ -89,7 +88,7 @@ nav ul a:hover{ color:var(--text); }
   .car-card{ flex-direction:column; }
   .car-img-wrap{ flex:0 0 200px; height:200px; }
   .car-cta{ flex:none; border-left:none; border-top:1px solid var(--border); flex-direction:row; padding:1rem; }
-  .btn-wa,.btn-call{ width:auto; flex:1; }
+  .btn-wa,.btn-call{ flex:1; }
 }
 </style>
 </head>
@@ -114,7 +113,7 @@ nav ul a:hover{ color:var(--text); }
 <div class="search-hero-section">
   <div class="search-hero-inner">
     <h1>Parco Auto <span>Disponibile</span></h1>
-    <p>Veicoli in demolizione — disponibili per ricambi. 🚗 Aggiornato quotidianamente</p>
+    <p>Veicoli in demolizione — disponibili per ricambi. Aggiornato quotidianamente</p>
     <div class="search-hero-bar">
       <div class="search-hero-group">
         <label>Cosa cerchi?</label>
@@ -193,24 +192,27 @@ function renderCars(cars) {
       </div>
       <div class="car-body">
         <div>
-          <div class="car-title">${auto.marca} ${auto.modello}</div>
-          <div class="car-subtitle">${auto.versione}</div>
+          <div class="car-top">
+            <div class="car-title-wrap">
+              <div class="car-title">${auto.marca} ${auto.modello}</div>
+              <div class="car-version">${auto.versione}</div>
+            </div>
+            <span class="car-badge-green">Ricambi disponibili</span>
+          </div>
           <div class="car-specs">
-            <div class="car-spec">📅 ${auto.anno}</div>
-            <div class="car-spec">🛣️ ${auto.km} km</div>
-            <div class="car-spec">⛽ ${auto.carburante}</div>
-            <div class="car-spec">🔧 ${auto.cv} CV</div>
+            <span class="car-spec">${auto.anno}</span>
+            <span class="car-spec">${auto.km} km</span>
+            <span class="car-spec">${auto.carburante}</span>
+            ${auto.cv ? `<span class="car-spec">${auto.cv} CV</span>` : ''}
           </div>
         </div>
-        <div class="car-tags">
-          <span class="car-tag available">✓ Ricambi disponibili</span>
+        <div class="car-bottom">
+          <span class="car-arrow">Vedi dettagli →</span>
         </div>
-        <div class="car-arrow">Vedi dettagli →</div>
       </div>
       <div class="car-cta">
-        <div class="car-cta-label">Cerchi un ricambio per questa auto?</div>
-        <a href="https://wa.me/393384672370?text=${waMsg}" target="_blank" class="btn-wa">💬 WhatsApp</a>
-        <a href="tel:0362306524" class="btn-call">📞 Chiama</a>
+        <a href="https://wa.me/393384672370?text=${waMsg}" target="_blank" class="btn-wa">WhatsApp</a>
+        <a href="tel:0362306524" class="btn-call">Chiama</a>
       </div>`;
     list.appendChild(card);
   });
