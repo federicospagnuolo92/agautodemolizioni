@@ -122,7 +122,7 @@ nav ul a:hover{ color:var(--text); }
 <script src="auto-db.js"></script>
 <script>
 async function init() {
-  const AUTO_DB = await fetchAutoFromAirtable();
+  const AUTO_DB = await fetchAutoFromSupabase();
   var params = new URLSearchParams(window.location.search);
   var id = params.get('id');
   var auto = AUTO_DB.find(a => a.id === id);
