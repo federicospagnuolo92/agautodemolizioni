@@ -47,32 +47,28 @@ nav ul a:hover{ color:var(--text); }
 
 .car-list{ display:flex; flex-direction:column; gap:1.5rem; }
 
-.car-card-wrap{ position:relative; }
+.car-card-wrap{ display:flex; flex-direction:column; gap:.4rem; }
 .car-card{ background:var(--white); border:1px solid var(--border); border-radius:14px; overflow:hidden; transition:box-shadow .2s,transform .2s; position:relative; cursor:pointer; display:flex; padding:1rem; gap:1.2rem; }
 .car-card:hover{ box-shadow:0 4px 20px rgba(0,0,0,0.09); transform:translateY(-1px); }
 .car-card-link{ position:absolute; inset:0; z-index:1; }
 
-.car-img-wrap{ flex:0 0 300px; position:relative; overflow:hidden; background:#f0f0f0; border-radius:10px; height:200px; }
+.car-img-wrap{ flex:0 0 220px; height:220px; position:relative; overflow:hidden; background:#f0f0f0; border-radius:10px; }
 .car-img-wrap img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .3s; }
 .car-card:hover .car-img-wrap img{ transform:scale(1.03); }
 .car-badge{ position:absolute; top:10px; left:10px; background:var(--red); color:#fff; font-size:.65rem; font-weight:700; padding:.25rem .6rem; border-radius:5px; text-transform:uppercase; letter-spacing:.5px; z-index:2; }
 
-.car-content{ flex:1; display:flex; flex-direction:column; justify-content:space-between; min-width:0; }
-.car-badge-green{ display:inline-block; background:#f0fdf4; color:#15803d; border:1.5px solid #86efac; font-size:.78rem; font-weight:700; padding:.3rem 1rem; border-radius:8px; margin-bottom:.7rem; }
-.car-title{ font-size:1.2rem; font-weight:800; color:var(--text); letter-spacing:-.3px; margin-bottom:.2rem; }
-.car-version{ font-size:.85rem; color:var(--muted); margin-bottom:1rem; }
-
-.car-cta-btns{ display:flex; gap:.6rem; margin-bottom:1rem; position:relative; z-index:3; }
-.btn-wa{ display:flex; align-items:center; justify-content:center; background:#25D366; color:#fff; font-family:'Inter',sans-serif; font-size:.85rem; font-weight:700; padding:.6rem 1.4rem; border-radius:8px; text-decoration:none; transition:background .2s; }
-.btn-wa:hover{ background:#1aad52; }
-.btn-call{ display:flex; align-items:center; justify-content:center; background:var(--white); color:var(--text); font-family:'Inter',sans-serif; font-size:.85rem; font-weight:600; padding:.6rem 1.4rem; border-radius:8px; text-decoration:none; border:1.5px solid var(--border); transition:border-color .2s; }
-.btn-call:hover{ border-color:#9ca3af; }
+.car-content{ flex:1; display:flex; flex-direction:column; justify-content:space-between; min-width:0; padding:.2rem 0; }
+.car-header{ display:flex; align-items:flex-start; justify-content:space-between; gap:.8rem; }
+.car-title{ font-size:1.15rem; font-weight:800; color:var(--text); letter-spacing:-.3px; margin-bottom:.2rem; }
+.car-version{ font-size:.85rem; color:var(--muted); }
+.car-badge-green{ background:#f0fdf4; color:#15803d; border:1.5px solid #86efac; font-size:.78rem; font-weight:700; padding:.3rem 1rem; border-radius:8px; white-space:nowrap; flex-shrink:0; }
 
 .car-specs-bar{ display:flex; align-items:center; gap:.5rem; flex-wrap:wrap; }
 .car-spec-item{ display:flex; align-items:center; gap:.35rem; font-size:.78rem; font-weight:500; color:#374151; background:#f3f4f6; padding:.3rem .7rem; border-radius:100px; white-space:nowrap; }
 .car-spec-item svg{ width:13px; height:13px; flex-shrink:0; color:#6b7280; }
 
-.car-arrow{ font-size:.78rem; font-weight:600; color:var(--red); margin-top:.6rem; display:inline-block; position:relative; z-index:3; }
+.car-arrow{ font-size:.78rem; font-weight:600; color:var(--red); text-decoration:underline; align-self:flex-start; position:relative; z-index:3; }
+.car-arrow:hover{ color:#c8001a; }
 
 .empty-state{ text-align:center; padding:4rem 2rem; color:var(--muted); }
 .empty-state h3{ font-size:1.1rem; font-weight:700; color:var(--text); margin-bottom:.5rem; }
@@ -89,8 +85,8 @@ nav ul a:hover{ color:var(--text); }
   .search-hero-bar{ flex-direction:column; }
   .search-hero-group{ width:100%; }
   .search-hero-btn{ width:100%; border-radius:10px; }
-  .car-card{ flex-direction:column; padding:.8rem; }
-  .car-img-wrap{ flex:none; height:200px; width:100%; }
+  .car-card{ flex-direction:column; }
+  .car-img-wrap{ flex:none; width:100%; height:200px; }
 }
 </style>
 </head>
@@ -188,7 +184,6 @@ function renderCars(cars) {
   }
   cars.forEach(function(auto) {
     var foto = auto.foto[0] || 'assets/logoAGS.png';
-    var waMsg = encodeURIComponent('Ciao, ho visto sul sito che avete una ' + auto.marca + ' ' + auto.modello + ' ' + auto.versione + ' del ' + auto.anno + '. Cerco: ');
     var card = document.createElement('div');
     card.className = 'car-card-wrap';
     card.innerHTML = `
@@ -199,14 +194,12 @@ function renderCars(cars) {
           <span class="car-badge">Disponibile</span>
         </div>
         <div class="car-content">
-          <div>
+          <div class="car-header">
+            <div>
+              <div class="car-title">${auto.marca} ${auto.modello}</div>
+              <div class="car-version">${auto.versione}</div>
+            </div>
             <span class="car-badge-green">Ricambi disponibili</span>
-            <div class="car-title">${auto.marca} ${auto.modello}</div>
-            <div class="car-version">${auto.versione}</div>
-          </div>
-          <div class="car-cta-btns">
-            <a href="https://wa.me/393384672370?text=${waMsg}" target="_blank" class="btn-wa">WhatsApp</a>
-            <a href="tel:0362306524" class="btn-call">Chiama</a>
           </div>
           <div class="car-specs-bar">
             ${auto.anno ? `<div class="car-spec-item">${icoAnno} ${auto.anno}</div>` : ''}
