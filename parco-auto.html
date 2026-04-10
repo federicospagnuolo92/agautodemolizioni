@@ -29,14 +29,16 @@ nav ul a:hover{ color:var(--text); }
 .search-hero-section h1{ font-size:2rem; font-weight:800; color:var(--text); letter-spacing:-1px; margin-bottom:.4rem; }
 .search-hero-section h1 span{ color:var(--red); }
 .search-hero-section p{ font-size:.9rem; color:var(--muted); margin-bottom:2rem; }
-.search-hero-bar{ display:flex; align-items:center; gap:0; background:var(--white); border:1.5px solid var(--border); border-radius:12px; overflow:hidden; box-shadow:0 2px 16px rgba(0,0,0,0.07); }
-.search-hero-group{ display:flex; flex-direction:column; gap:.3rem; flex:1; padding:.9rem 1.2rem; border-right:1px solid var(--border); }
-.search-hero-group label{ font-size:.75rem; font-weight:700; color:var(--text); }
-.search-hero-field{ display:flex; align-items:center; gap:.5rem; }
-.search-hero-icon{ width:16px; height:16px; min-width:16px; min-height:16px; flex-shrink:0; color:#9ca3af; }
+
+.search-hero-bar{ display:flex; align-items:flex-end; gap:.8rem; }
+.search-hero-group{ display:flex; flex-direction:column; gap:.4rem; flex:1; }
+.search-hero-group label{ font-size:.78rem; font-weight:700; color:var(--text); padding-left:.2rem; }
+.search-hero-field{ display:flex; align-items:center; gap:.6rem; background:var(--white); border:1.5px solid var(--border); border-radius:10px; padding:.7rem 1rem; height:44px; transition:border-color .2s; }
+.search-hero-field:focus-within{ border-color:var(--navy); }
+.search-hero-icon{ width:16px; height:16px; min-width:16px; flex-shrink:0; color:#9ca3af; }
 .search-hero-field input, .search-hero-field select{ border:none; outline:none; font-family:'Inter',sans-serif; font-size:.88rem; color:var(--text); width:100%; background:transparent; }
 .search-hero-field input::placeholder{ color:#9ca3af; }
-.search-hero-btn{ background:var(--red); color:#fff; border:none; cursor:pointer; width:48px; height:48px; min-width:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 .8rem; flex-shrink:0; transition:background .2s; }
+.search-hero-btn{ background:var(--red); color:#fff; border:none; cursor:pointer; width:44px; height:44px; min-width:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:background .2s; align-self:flex-end; }
 .search-hero-btn:hover{ background:#c8001a; }
 
 .main{ max-width:1100px; margin:0 auto; padding:1.5rem 5vw 4rem; }
@@ -79,9 +81,9 @@ nav ul a:hover{ color:var(--text); }
   nav ul.open{ display:flex; }
   nav ul a{ display:block; padding:1rem 2rem; font-size:1rem; border-bottom:1px solid var(--border); color:var(--text)!important; background:none!important; }
   .nav-cta{ margin:.8rem 2rem!important; border-radius:8px!important; text-align:center; display:block; }
-  .search-hero-bar{ flex-direction:column; border-radius:12px; }
-  .search-hero-group{ border-right:none; border-bottom:1px solid var(--border); width:100%; }
-  .search-hero-btn{ width:calc(100% - 1.6rem); border-radius:8px; margin:.8rem; height:44px; }
+  .search-hero-bar{ flex-direction:column; }
+  .search-hero-group{ width:100%; }
+  .search-hero-btn{ width:100%; border-radius:10px; height:44px; }
 }
 @media (max-width:768px){
   .car-card{ flex-direction:column; }
@@ -130,7 +132,7 @@ nav ul a:hover{ color:var(--text); }
           </select>
         </div>
       </div>
-      <div class="search-hero-group" style="border-right:none">
+      <div class="search-hero-group">
         <label>Carburante</label>
         <div class="search-hero-field">
           <svg class="search-hero-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 22h12M3 22V8l6-5 6 5v14M9 22v-6h6v6M18 5h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-1"/></svg>
