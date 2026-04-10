@@ -149,4 +149,249 @@ function logout() {
   location.reload();
 }
 
-i
+if (sessionStorage.getItem('ags_admin')) {
+  document.getElementById('loginPage').style.display = 'none';
+  document.getElementById('adminPage').style.display = 'block';
+  caricaAuto();
+}
+
+function previewFoto(input) {
+  const container = document.getElementById('fotoPreviewContainer');
+  container.innerHTML = '';
+  if (input.files) {
+    Array.from(input.files).forEach(file => {
+      const reader = new FileReader();
+      reader.onload = e => {
+        const img = document.createElement('img');
+        img.src = e.target.result;
+        img.style = 'width:100px;height:75px;object-fit:cover;border-radius:8px;border:1px solid var(--border)';
+        container.appendChild(img);
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+}
+
+async function uploadFoto(file) {
+  const ext = file.name.split('.').pop();
+  const nome = `auto_${Date.now()}_${Math.random().toString(36).substr(2,5)}.${ext}`;
+  const res = await fetch(`${SUPABASE_URL}/storage/v1/object/foto-auto/${nome}`, {
+    method: 'POST',
+    headers: {
+      'apikey': SUPABASE_KEY,
+      'Authorization': `Bearer ${SUPABASE_KEY}`,
+      'Content-Type': file.type
+    },
+    body: file
+  });
+  if (!res.ok) return null;
+  return `${SUPABASE_URL}/storage/v1/object/public/foto-auto/${nome}`;
+}
+
+async function salva() {
+  if (editingId) {
+    await modificaAuto();
+  } else {
+    await aggiungiAuto();
+  }
+}
+
+async function aggiungiAuto() {
+  const marca = document.getElementById('fMarca').value.trim();
+  const modello = document.getElementById('fModello').value.trim();
+  if (!marca || !modello) { alert('Inserisci almeno marca e modello'); return; }
+
+  const resAuto = await fetch(`${SUPABASE_URL}/rest/v1/auto`, {
+    method: 'POST',
+    headers: {
+      'apikey': SUPABASE_KEY,
+      'Authorization': `Bearer ${SUPABASE_KEY}`,
+      'Content-Type': 'application/json',
+      'Prefer': 'return=representation'
+    },
+    body: JSON.stringify({
+      marca,
+      modello,
+      versione: document.getElementById('fVersione').value.trim(),
+      anno: parseInt(document.getElementById('fAnno').value) || null,
+      chilometri: parseInt(document.getElementById('fKm').value) || null,
+      carburante: document.getElementById('fCarburante').value,
+      cv: parseInt(document.getElementById('fCv').value) || null
+    })
+  });
+
+  if (!resAuto.ok) {
+    document.getElementById('msgErr').style.display = 'block';
+    setTimeout(() => document.getElementById('msgErr').style.display = 'none', 3000);
+    return;
+  }
+
+  const autoSalvata = await resAuto.json();
+  const autoId = autoSalvata[0].id;
+
+  const files = document.getElementById('fFoto').files;
+  for (const file of Array.from(files)) {
+    const url = await uploadFoto(file);
+    if (url) {
+      await fetch(`${SUPABASE_URL}/rest/v1/foto`, {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_KEY,
+          'Authorization': `Bearer ${SUPABASE_KEY}`,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({ auto_id: autoId, url })
+      });
+    }
+  }
+
+  document.getElementById('msgOk').style.display = 'block';
+  setTimeout(() => document.getElementById('msgOk').style.display = 'none', 3000);
+  resetForm();
+  caricaAuto();
+}
+
+async function modificaAuto() {
+  const marca = document.getElementById('fMarca').value.trim();
+  const modello = document.getElementById('fModello').value.trim();
+  if (!marca || !modello) { alert('Inserisci almeno marca e modello'); return; }
+
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/auto?id=eq.${editingId}`, {
+    method: 'PATCH',
+    headers: {
+      'apikey': SUPABASE_KEY,
+      'Authorization': `Bearer ${SUPABASE_KEY}`,
+      'Content-Type': 'application/json',
+      'Prefer': 'return=minimal'
+    },
+    body: JSON.stringify({
+      marca,
+      modello,
+      versione: document.getElementById('fVersione').value.trim(),
+      anno: parseInt(document.getElementById('fAnno').value) || null,
+      chilometri: parseInt(document.getElementById('fKm').value) || null,
+      carburante: document.getElementById('fCarburante').value,
+      cv: parseInt(document.getElementById('fCv').value) || null
+    })
+  });
+
+  // Carica nuove foto se selezionate
+  const files = document.getElementById('fFoto').files;
+  for (const file of Array.from(files)) {
+    const url = await uploadFoto(file);
+    if (url) {
+      await fetch(`${SUPABASE_URL}/rest/v1/foto`, {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_KEY,
+          'Authorization': `Bearer ${SUPABASE_KEY}`,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({ auto_id: editingId, url })
+      });
+    }
+  }
+
+  document.getElementById('msgOk').style.display = 'block';
+  setTimeout(() => document.getElementById('msgOk').style.display = 'none', 3000);
+  resetForm();
+  caricaAuto();
+}
+
+function apriModifica(id) {
+  const auto = tutteLeAuto.find(a => String(a.id) === String(id));
+  if (!auto) return;
+
+  editingId = id;
+  document.getElementById('fMarca').value = auto.marca;
+  document.getElementById('fModello').value = auto.modello;
+  document.getElementById('fVersione').value = auto.versione;
+  document.getElementById('fAnno').value = auto.anno;
+  document.getElementById('fKm').value = auto.km.replace(/\./g, '');
+  document.getElementById('fCarburante').value = auto.carburante;
+  document.getElementById('fCv').value = auto.cv;
+
+  // Mostra foto esistenti
+  const container = document.getElementById('fotoPreviewContainer');
+  container.innerHTML = auto.foto.map(url =>
+    `<img src="${url}" style="width:100px;height:75px;object-fit:cover;border-radius:8px;border:1px solid var(--border)" onerror="this.style.display='none'">`
+  ).join('');
+
+  document.getElementById('formTitolo').textContent = '✏️ Modifica auto';
+  document.getElementById('editBanner').style.display = 'block';
+  document.getElementById('btnSalva').textContent = '✅ Salva modifiche';
+  document.getElementById('btnAnnulla').style.display = 'block';
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function annullaModifica() {
+  editingId = null;
+  resetForm();
+}
+
+function resetForm() {
+  editingId = null;
+  document.querySelectorAll('.field input[type=text], .field input[type=number]').forEach(i => i.value = '');
+  document.getElementById('fFoto').value = '';
+  document.getElementById('fotoPreviewContainer').innerHTML = '';
+  document.getElementById('formTitolo').textContent = '➕ Aggiungi nuova auto';
+  document.getElementById('editBanner').style.display = 'none';
+  document.getElementById('btnSalva').textContent = '✅ Salva auto';
+  document.getElementById('btnAnnulla').style.display = 'none';
+}
+
+async function caricaAuto() {
+  tutteLeAuto = await fetchAutoFromSupabase();
+  document.getElementById('titoloLista').textContent = `Auto nel parco (${tutteLeAuto.length})`;
+  renderLista(tutteLeAuto);
+}
+
+function filtraLista() {
+  const q = document.getElementById('searchAdmin').value.toLowerCase();
+  const filtrate = tutteLeAuto.filter(a =>
+    (a.marca + ' ' + a.modello + ' ' + a.versione).toLowerCase().includes(q)
+  );
+  renderLista(filtrate);
+}
+
+function renderLista(auto) {
+  const lista = document.getElementById('listaAuto');
+  if (auto.length === 0) {
+    lista.innerHTML = '<p style="color:var(--muted);font-size:.85rem;">Nessuna auto trovata</p>';
+    return;
+  }
+  lista.innerHTML = auto.map(a => `
+    <div class="auto-item">
+      <img src="${a.foto[0]}" alt="" onerror="this.src='assets/logoAGS.png'">
+      <div class="auto-info">
+        <strong>${a.marca} ${a.modello}</strong>
+        <span>${a.versione} — ${a.anno} — ${a.km} km</span>
+      </div>
+      <div class="auto-actions">
+        <button class="btn-edit" onclick="apriModifica('${a.id}')">✏️ Modifica</button>
+        <button class="btn-delete" onclick="eliminaAuto('${a.id}')">🗑 Elimina</button>
+      </div>
+    </div>`).join('');
+}
+
+async function eliminaAuto(id) {
+  if (!confirm('Eliminare questa auto?')) return;
+  await fetch(`${SUPABASE_URL}/rest/v1/foto?auto_id=eq.${id}`, {
+    method: 'DELETE',
+    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+  });
+  await fetch(`${SUPABASE_URL}/rest/v1/auto?id=eq.${id}`, {
+    method: 'DELETE',
+    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+  });
+  caricaAuto();
+}
+
+function toggleMenu() { document.getElementById('hamburger').classList.toggle('open'); document.getElementById('nav-menu').classList.toggle('open'); }
+function closeMenu() { document.getElementById('hamburger').classList.remove('open'); document.getElementById('nav-menu').classList.remove('open'); }
+</script>
+</body>
+</html>
