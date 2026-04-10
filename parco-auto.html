@@ -24,17 +24,18 @@ nav ul a:hover{ color:var(--text); }
 .hamburger.open span:nth-child(2){ opacity:0; }
 .hamburger.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
 
-.search-hero-section{ margin-top:80px; background:var(--navy); padding:2.5rem 0 3rem; }
+.search-hero-section{ margin-top:80px; background:var(--white); padding:2.5rem 0 2rem; border-bottom:1px solid var(--border); }
 .search-hero-inner{ max-width:1100px; margin:0 auto; padding:0 5vw; }
-.search-hero-section h1{ font-size:2rem; font-weight:800; color:#fff; letter-spacing:-1px; margin-bottom:.4rem; }
-.search-hero-section h1 span{ color:#f87171; }
-.search-hero-section p{ font-size:.9rem; color:rgba(255,255,255,0.65); margin-bottom:1.8rem; }
-.search-hero-bar{ display:flex; align-items:center; background:var(--white); border-radius:12px; overflow:hidden; box-shadow:0 8px 32px rgba(0,0,0,0.2); }
+.search-hero-section h1{ font-size:2rem; font-weight:800; color:var(--text); letter-spacing:-1px; margin-bottom:.4rem; }
+.search-hero-section h1 span{ color:var(--red); }
+.search-hero-section p{ font-size:.9rem; color:var(--muted); margin-bottom:1.8rem; }
+.search-hero-bar{ display:flex; align-items:center; background:var(--white); border:2px solid var(--border); border-radius:12px; overflow:hidden; box-shadow:0 2px 16px rgba(0,0,0,0.07); }
 .search-hero-field{ display:flex; align-items:center; gap:.6rem; padding:.9rem 1.2rem; flex:1; border-right:1px solid var(--border); min-width:0; }
 .search-hero-main{ flex:2; }
 .search-hero-icon{ font-size:1.1rem; flex-shrink:0; }
-.search-hero-field input, .search-hero-field select{ border:none; outline:none; font-family:'Inter',sans-serif; font-size:.95rem; color:var(--text); width:100%; background:transparent; }
+.search-hero-field input, .search-hero-field select{ border:none; outline:none; font-family:'Inter',sans-serif; font-size:.95rem; color:var(--text); width:100%; background:transparent; cursor:pointer; }
 .search-hero-field input::placeholder{ color:var(--muted); }
+.search-hero-field label{ font-size:.72rem; font-weight:700; text-transform:uppercase; letter-spacing:.5px; color:var(--muted); display:block; margin-bottom:.2rem; }
 .search-hero-btn{ background:var(--red); color:#fff; font-family:'Inter',sans-serif; font-size:.95rem; font-weight:700; padding:1rem 2rem; border:none; cursor:pointer; white-space:nowrap; transition:background .2s; flex-shrink:0; }
 .search-hero-btn:hover{ background:#c8001a; }
 
@@ -115,20 +116,29 @@ nav ul a:hover{ color:var(--text); }
     <div class="search-hero-bar">
       <div class="search-hero-field search-hero-main">
         <span class="search-hero-icon">🔍</span>
-        <input type="text" id="searchInput" placeholder="Cerca marca o modello..." oninput="filterCars()">
+        <div style="flex:1">
+          <label>Cosa cerchi?</label>
+          <input type="text" id="searchInput" placeholder="Marca, modello..." oninput="filterCars()">
+        </div>
       </div>
       <div class="search-hero-field">
         <span class="search-hero-icon">🚗</span>
-        <select id="filterMarca" onchange="filterCars()">
-          <option value="">Tutte le marche</option>
-        </select>
+        <div style="flex:1">
+          <label>Marca</label>
+          <select id="filterMarca" onchange="filterCars()">
+            <option value="">Tutte le marche</option>
+          </select>
+        </div>
       </div>
       <div class="search-hero-field">
         <span class="search-hero-icon">⛽</span>
-        <select id="filterCarburante" onchange="filterCars()">
-          <option value="">Tutti i carburanti</option>
-          <option>Benzina</option><option>Diesel</option><option>GPL</option><option>Ibrido</option>
-        </select>
+        <div style="flex:1">
+          <label>Carburante</label>
+          <select id="filterCarburante" onchange="filterCars()">
+            <option value="">Tutti</option>
+            <option>Benzina</option><option>Diesel</option><option>GPL</option><option>Ibrido</option>
+          </select>
+        </div>
       </div>
       <button class="search-hero-btn" onclick="filterCars()">Cerca</button>
     </div>
