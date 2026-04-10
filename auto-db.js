@@ -2,7 +2,7 @@ const SUPABASE_URL = 'https://wqxeyluxvepscqcvatik.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_YfGqts0tVEF4TQQZEvfoOA_QnVOHNMa';
 
 async function fetchAutoFromSupabase() {
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/auto?select=*&order=id.asc`, {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/auto?select=*`, {
     headers: {
       'apikey': SUPABASE_KEY,
       'Authorization': `Bearer ${SUPABASE_KEY}`
