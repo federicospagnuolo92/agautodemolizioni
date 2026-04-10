@@ -9,35 +9,26 @@
 :root { --red:#E8001D; --bg:#f5f6f8; --white:#ffffff; --border:#e5e7eb; --text:#111827; --muted:#6b7280; }
 * { margin:0; padding:0; box-sizing:border-box; }
 body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); }
-
-/* LOGIN */
 #loginPage { display:flex; align-items:center; justify-content:center; min-height:100vh; }
 .login-box { background:var(--white); border:1px solid var(--border); border-radius:16px; padding:2.5rem; width:100%; max-width:380px; }
 .login-box h1 { font-size:1.4rem; font-weight:800; margin-bottom:.3rem; }
 .login-box p { font-size:.85rem; color:var(--muted); margin-bottom:1.8rem; }
 .field { display:flex; flex-direction:column; gap:.4rem; margin-bottom:1rem; }
 .field label { font-size:.75rem; font-weight:600; text-transform:uppercase; letter-spacing:.5px; color:var(--muted); }
-.field input { font-family:'Inter',sans-serif; font-size:.9rem; border:1.5px solid var(--border); border-radius:8px; padding:.7rem 1rem; outline:none; }
-.field input:focus { border-color:var(--red); }
+.field input, .field select { font-family:'Inter',sans-serif; font-size:.9rem; border:1.5px solid var(--border); border-radius:8px; padding:.7rem 1rem; outline:none; color:var(--text); }
+.field input:focus, .field select:focus { border-color:var(--red); }
 .btn-red { background:var(--red); color:#fff; font-family:'Inter',sans-serif; font-size:.95rem; font-weight:700; padding:.85rem; border-radius:10px; border:none; cursor:pointer; width:100%; margin-top:.5rem; }
 .btn-red:hover { background:#c8001a; }
-
-/* ADMIN */
 #adminPage { display:none; max-width:800px; margin:0 auto; padding:2rem 1.5rem 5rem; }
 .admin-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:2rem; }
 .admin-header h1 { font-size:1.5rem; font-weight:800; }
 .btn-logout { font-family:'Inter',sans-serif; font-size:.8rem; font-weight:600; color:var(--muted); background:none; border:1.5px solid var(--border); border-radius:8px; padding:.4rem .9rem; cursor:pointer; }
-
-/* FORM */
 .form-box { background:var(--white); border:1px solid var(--border); border-radius:14px; padding:1.8rem; margin-bottom:2rem; }
 .form-box h2 { font-size:1rem; font-weight:700; margin-bottom:1.2rem; }
 .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
 .form-grid .full { grid-column:1/-1; }
-.foto-preview { width:100%; height:200px; object-fit:contain; border-radius:8px; border:1px solid var(--border); margin-top:.5rem; display:none; background:#f8f9fa; }
 .btn-green { background:#16a34a; color:#fff; font-family:'Inter',sans-serif; font-size:.95rem; font-weight:700; padding:.85rem; border-radius:10px; border:none; cursor:pointer; width:100%; margin-top:1rem; }
 .btn-green:hover { background:#15803d; }
-
-/* LISTA AUTO */
 .auto-item { background:var(--white); border:1px solid var(--border); border-radius:12px; padding:1.2rem 1.5rem; display:flex; align-items:center; gap:1rem; margin-bottom:.8rem; }
 .auto-item img { width:80px; height:60px; object-fit:contain; border-radius:8px; background:#f8f9fa; flex-shrink:0; }
 .auto-info { flex:1; }
@@ -48,11 +39,13 @@ body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); 
 .msg { font-size:.85rem; padding:.6rem 1rem; border-radius:8px; margin-top:.8rem; display:none; }
 .msg.ok { background:#f0fdf4; color:#16a34a; }
 .msg.err { background:#fee2e2; color:#dc2626; }
+.search-bar { display:flex; gap:.8rem; margin-bottom:1rem; }
+.search-bar input { font-family:'Inter',sans-serif; font-size:.85rem; border:1.5px solid var(--border); border-radius:8px; padding:.6rem 1rem; outline:none; flex:1; }
+.search-bar input:focus { border-color:var(--red); }
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
 <div id="loginPage">
   <div class="login-box">
     <h1>🔐 Admin AGS</h1>
@@ -66,14 +59,12 @@ body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); 
   </div>
 </div>
 
-<!-- ADMIN -->
 <div id="adminPage">
   <div class="admin-header">
     <h1>🚗 Gestione Parco Auto</h1>
     <button class="btn-logout" onclick="logout()">Esci</button>
   </div>
 
-  <!-- FORM AGGIUNGI -->
   <div class="form-box">
     <h2>➕ Aggiungi nuova auto</h2>
     <div class="form-grid">
@@ -82,13 +73,15 @@ body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); 
       <div class="field full"><label>Versione</label><input type="text" id="fVersione" placeholder="Es. 1.2 8v Easy 5p"></div>
       <div class="field"><label>Anno</label><input type="number" id="fAnno" placeholder="Es. 2009"></div>
       <div class="field"><label>Chilometri</label><input type="number" id="fKm" placeholder="Es. 140000"></div>
-      <div class="field"><label>Carburante</label>
-        <select id="fCarburante" style="font-family:'Inter',sans-serif;font-size:.9rem;border:1.5px solid var(--border);border-radius:8px;padding:.7rem 1rem;outline:none;">
+      <div class="field">
+        <label>Carburante</label>
+        <select id="fCarburante">
           <option>Benzina</option><option>Diesel</option><option>GPL</option><option>Ibrido</option>
         </select>
       </div>
       <div class="field"><label>CV</label><input type="number" id="fCv" placeholder="Es. 69"></div>
-      <div class="field full"><label>Foto</label>
+      <div class="field full">
+        <label>Foto (seleziona più foto tenendo Ctrl)</label>
         <input type="file" id="fFoto" accept="image/*" multiple onchange="previewFoto(this)">
         <div id="fotoPreviewContainer" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:.5rem;"></div>
       </div>
@@ -98,14 +91,17 @@ body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); 
     <div class="msg err" id="msgErr">Errore — riprova</div>
   </div>
 
-  <!-- LISTA -->
-  <h2 style="font-size:1rem;font-weight:700;margin-bottom:1rem;">Auto nel parco (</h2>
+  <h2 id="titoloLista" style="font-size:1rem;font-weight:700;margin-bottom:.8rem;">Auto nel parco (0)</h2>
+  <div class="search-bar">
+    <input type="text" id="searchAdmin" placeholder="🔍 Cerca per marca o modello..." oninput="filtraLista()">
+  </div>
   <div id="listaAuto"></div>
 </div>
 
 <script src="auto-db.js"></script>
 <script>
 const ADMIN_PWD = 'ags2024!';
+let tutteLeAuto = [];
 
 function login() {
   if (document.getElementById('pwdInput').value === ADMIN_PWD) {
@@ -148,7 +144,7 @@ function previewFoto(input) {
 
 async function uploadFoto(file) {
   const ext = file.name.split('.').pop();
-  const nome = `auto_${Date.now()}.${ext}`;
+  const nome = `auto_${Date.now()}_${Math.random().toString(36).substr(2,5)}.${ext}`;
   const res = await fetch(`${SUPABASE_URL}/storage/v1/object/foto-auto/${nome}`, {
     method: 'POST',
     headers: {
@@ -167,17 +163,13 @@ async function aggiungiAuto() {
   const modello = document.getElementById('fModello').value.trim();
   if (!marca || !modello) { alert('Inserisci almeno marca e modello'); return; }
 
-  let foto_url = null;
-  const file = document.getElementById('fFoto').files[0];
-  if (file) foto_url = await uploadFoto(file);
-
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/auto`, {
+  const resAuto = await fetch(`${SUPABASE_URL}/rest/v1/auto`, {
     method: 'POST',
     headers: {
       'apikey': SUPABASE_KEY,
       'Authorization': `Bearer ${SUPABASE_KEY}`,
       'Content-Type': 'application/json',
-      'Prefer': 'return=minimal'
+      'Prefer': 'return=representation'
     },
     body: JSON.stringify({
       marca,
@@ -186,28 +178,64 @@ async function aggiungiAuto() {
       anno: parseInt(document.getElementById('fAnno').value) || null,
       chilometri: parseInt(document.getElementById('fKm').value) || null,
       carburante: document.getElementById('fCarburante').value,
-      cv: parseInt(document.getElementById('fCv').value) || null,
-      foto_url
+      cv: parseInt(document.getElementById('fCv').value) || null
     })
   });
 
-  if (res.ok) {
-    document.getElementById('msgOk').style.display = 'block';
-    setTimeout(() => document.getElementById('msgOk').style.display = 'none', 3000);
-    document.querySelectorAll('.field input').forEach(i => i.value = '');
-    document.getElementById('fotoPreview').style.display = 'none';
-    caricaAuto();
-  } else {
+  if (!resAuto.ok) {
     document.getElementById('msgErr').style.display = 'block';
     setTimeout(() => document.getElementById('msgErr').style.display = 'none', 3000);
+    return;
   }
+
+  const autoSalvata = await resAuto.json();
+  const autoId = autoSalvata[0].id;
+
+  const files = document.getElementById('fFoto').files;
+  for (const file of Array.from(files)) {
+    const url = await uploadFoto(file);
+    if (url) {
+      await fetch(`${SUPABASE_URL}/rest/v1/foto`, {
+        method: 'POST',
+        headers: {
+          'apikey': SUPABASE_KEY,
+          'Authorization': `Bearer ${SUPABASE_KEY}`,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({ auto_id: autoId, url })
+      });
+    }
+  }
+
+  document.getElementById('msgOk').style.display = 'block';
+  setTimeout(() => document.getElementById('msgOk').style.display = 'none', 3000);
+  document.querySelectorAll('.field input[type=text], .field input[type=number]').forEach(i => i.value = '');
+  document.getElementById('fFoto').value = '';
+  document.getElementById('fotoPreviewContainer').innerHTML = '';
+  caricaAuto();
 }
 
 async function caricaAuto() {
-  const auto = await fetchAutoFromSupabase();
+  tutteLeAuto = await fetchAutoFromSupabase();
+  document.getElementById('titoloLista').textContent = `Auto nel parco (${tutteLeAuto.length})`;
+  renderLista(tutteLeAuto);
+}
+
+function filtraLista() {
+  const q = document.getElementById('searchAdmin').value.toLowerCase();
+  const filtrate = tutteLeAuto.filter(a =>
+    (a.marca + ' ' + a.modello + ' ' + a.versione).toLowerCase().includes(q)
+  );
+  renderLista(filtrate);
+}
+
+function renderLista(auto) {
   const lista = document.getElementById('listaAuto');
-  document.querySelector('#adminPage h2').textContent = `Auto nel parco (${auto.length})`;
-  if (auto.length === 0) { lista.innerHTML = '<p style="color:var(--muted);font-size:.85rem;">Nessuna auto inserita</p>'; return; }
+  if (auto.length === 0) {
+    lista.innerHTML = '<p style="color:var(--muted);font-size:.85rem;">Nessuna auto trovata</p>';
+    return;
+  }
   lista.innerHTML = auto.map(a => `
     <div class="auto-item">
       <img src="${a.foto[0]}" alt="" onerror="this.src='assets/logoAGS.png'">
@@ -221,12 +249,13 @@ async function caricaAuto() {
 
 async function eliminaAuto(id) {
   if (!confirm('Eliminare questa auto?')) return;
+  await fetch(`${SUPABASE_URL}/rest/v1/foto?auto_id=eq.${id}`, {
+    method: 'DELETE',
+    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+  });
   await fetch(`${SUPABASE_URL}/rest/v1/auto?id=eq.${id}`, {
     method: 'DELETE',
-    headers: {
-      'apikey': SUPABASE_KEY,
-      'Authorization': `Bearer ${SUPABASE_KEY}`
-    }
+    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
   });
   caricaAuto();
 }
