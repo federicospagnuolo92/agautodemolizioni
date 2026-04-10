@@ -9,6 +9,7 @@
   <link rel="icon" type="image/png" sizes="64x64" href="/favicon64.png">
   <link rel="apple-touch-icon" href="/favicon64.png">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 <style>
 :root { --red:#E8001D; --bg:#f5f6f8; --white:#ffffff; --border:#e5e7eb; --text:#111827; --muted:#6b7280; }
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -23,7 +24,7 @@ body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); 
 .field input:focus, .field select:focus { border-color:var(--red); }
 .btn-red { background:var(--red); color:#fff; font-family:'Inter',sans-serif; font-size:.95rem; font-weight:700; padding:.85rem; border-radius:10px; border:none; cursor:pointer; width:100%; margin-top:.5rem; }
 .btn-red:hover { background:#c8001a; }
-#adminPage { display:none; max-width:800px; margin:0 auto; padding:2rem 1.5rem 5rem; }
+#adminPage { display:none; max-width:800px; margin:0 auto; padding:2rem 1.5rem 5rem; margin-top:80px; }
 .admin-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:2rem; }
 .admin-header h1 { font-size:1.5rem; font-weight:800; }
 .btn-logout { font-family:'Inter',sans-serif; font-size:.8rem; font-weight:600; color:var(--muted); background:none; border:1.5px solid var(--border); border-radius:8px; padding:.4rem .9rem; cursor:pointer; }
@@ -49,6 +50,21 @@ body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); 
 </style>
 </head>
 <body>
+
+<nav>
+  <a href="https://agsrottama.it" class="logo-link">
+    <img src="assets/logoAGS.png" alt="A.G.S. Autodemolizioni">
+  </a>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+  <ul id="nav-menu">
+    <li><a href="https://agsrottama.it" onclick="closeMenu()">Home</a></li>
+    <li><a href="parco-auto.html" onclick="closeMenu()">Parco Auto</a></li>
+    <li><a href="https://agsrottama.it/contatti" onclick="closeMenu()">Contatti</a></li>
+    <li><a href="https://agsrottama.it/#richiesta" class="nav-cta" onclick="closeMenu()">Demolisci Gratis</a></li>
+  </ul>
+</nav>
 
 <div id="loginPage">
   <div class="login-box">
@@ -263,6 +279,9 @@ async function eliminaAuto(id) {
   });
   caricaAuto();
 }
+
+function toggleMenu() { document.getElementById('hamburger').classList.toggle('open'); document.getElementById('nav-menu').classList.toggle('open'); }
+function closeMenu() { document.getElementById('hamburger').classList.remove('open'); document.getElementById('nav-menu').classList.remove('open'); }
 </script>
 </body>
 </html>
