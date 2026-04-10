@@ -162,6 +162,13 @@ nav ul a:hover{ color:var(--text); }
 <div class="main">
   <div class="filters-sidebar">
     <h3>Filtri ricerca</h3>
+     <div class="filter-group">
+     <label>Cosa cerchi?</label>
+      <div class="filter-icon-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="searchInput2" placeholder="Marca, modello..." oninput="filterCars()" style="border:none;outline:none;font-family:'Inter',sans-serif;font-size:.85rem;color:var(--text);background:transparent;width:100%;">
+    </div>
+    </div>
     <div class="filter-group">
       <label>Marca</label>
       <div class="filter-icon-wrap">
@@ -258,7 +265,7 @@ function renderCars(cars) {
 }
 
 function filterCars() {
-  var search = document.getElementById('searchInput').value.toLowerCase();
+  var search = (document.getElementById('searchInput').value || document.getElementById('searchInput2').value).toLowerCase();
   var marca = document.getElementById('filterMarca').value || document.getElementById('filterMarca2').value;
   var carburante = document.getElementById('filterCarburante').value || document.getElementById('filterCarburante2').value;
   var filtered = AUTO_DB.filter(function(a) {
