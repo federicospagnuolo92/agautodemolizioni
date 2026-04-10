@@ -49,21 +49,21 @@ nav ul a:hover{ color:var(--text); }
 .car-card{ background:var(--white); border:1px solid var(--border); border-radius:12px; display:flex; align-items:stretch; overflow:hidden; transition:box-shadow .25s,transform .2s; position:relative; cursor:pointer; }
 .car-card:hover{ box-shadow:0 4px 20px rgba(0,0,0,0.09); transform:translateY(-1px); }
 .car-card-link{ position:absolute; inset:0; z-index:1; }
-.car-img-wrap{ flex:0 0 220px; position:relative; overflow:hidden; background:#f8f9fa; }
-.car-img-wrap img{ width:100%; height:100%; object-fit:cover; transition:transform .3s; }
+.car-img-wrap{ flex:0 0 260px; position:relative; overflow:hidden; background:#f0f0f0; }
+.car-img-wrap img{ width:100%; height:100%; object-fit:cover; transition:transform .3s; display:block; }
 .car-card:hover .car-img-wrap img{ transform:scale(1.03); }
 .car-badge{ position:absolute; top:10px; left:10px; background:var(--red); color:#fff; font-size:.65rem; font-weight:700; padding:.25rem .6rem; border-radius:5px; text-transform:uppercase; letter-spacing:.5px; z-index:2; }
+.car-specs-bar{ position:absolute; bottom:0; left:0; right:0; background:rgba(255,255,255,0.95); backdrop-filter:blur(4px); display:flex; align-items:center; gap:.8rem; padding:.5rem .8rem; flex-wrap:wrap; z-index:2; border-top:1px solid rgba(0,0,0,0.06); }
+.car-spec-item{ display:flex; align-items:center; gap:.3rem; font-size:.75rem; font-weight:500; color:#374151; white-space:nowrap; }
+.car-spec-item svg{ width:13px; height:13px; flex-shrink:0; color:#6b7280; }
 .car-body{ flex:1; padding:1.2rem 1.5rem; display:flex; flex-direction:column; justify-content:space-between; }
-.car-top{ display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:.8rem; }
-.car-title-wrap{}
-.car-title{ font-size:1.1rem; font-weight:800; color:var(--text); letter-spacing:-.3px; margin-bottom:.15rem; }
+.car-top{ display:flex; align-items:flex-start; justify-content:space-between; gap:.8rem; margin-bottom:1rem; }
+.car-title{ font-size:1.1rem; font-weight:800; color:var(--text); letter-spacing:-.3px; margin-bottom:.2rem; }
 .car-version{ font-size:.8rem; color:var(--muted); }
-.car-badge-green{ background:#f0fdf4; color:#16a34a; border:1px solid #86efac; font-size:.72rem; font-weight:700; padding:.3rem .8rem; border-radius:6px; white-space:nowrap; }
-.car-specs{ display:flex; gap:.5rem; flex-wrap:wrap; margin-bottom:1rem; }
-.car-spec{ background:#f5f6f8; border-radius:6px; padding:.35rem .7rem; font-size:.78rem; font-weight:600; color:var(--text); }
-.car-bottom{ display:flex; align-items:center; justify-content:space-between; }
+.car-badge-green{ background:#f0fdf4; color:#15803d; border:1px solid #86efac; font-size:.72rem; font-weight:700; padding:.3rem .8rem; border-radius:6px; white-space:nowrap; flex-shrink:0; }
+.car-bottom{ display:flex; align-items:center; justify-content:flex-start; }
 .car-arrow{ font-size:.78rem; font-weight:600; color:var(--red); }
-.car-cta{ flex:0 0 160px; padding:1.2rem 1.2rem; display:flex; flex-direction:column; align-items:stretch; justify-content:center; gap:.6rem; border-left:1px solid var(--border); background:#fafafa; position:relative; z-index:2; }
+.car-cta{ flex:0 0 160px; padding:1.2rem; display:flex; flex-direction:column; align-items:stretch; justify-content:center; gap:.6rem; border-left:1px solid var(--border); background:#fafafa; position:relative; z-index:2; }
 .btn-wa{ display:flex; align-items:center; justify-content:center; gap:.4rem; background:#25D366; color:#fff; font-family:'Inter',sans-serif; font-size:.8rem; font-weight:700; padding:.65rem 1rem; border-radius:8px; text-decoration:none; transition:background .2s; position:relative; z-index:3; }
 .btn-wa:hover{ background:#1aad52; }
 .btn-call{ display:flex; align-items:center; justify-content:center; gap:.4rem; background:var(--white); color:var(--text); font-family:'Inter',sans-serif; font-size:.8rem; font-weight:600; padding:.6rem 1rem; border-radius:8px; text-decoration:none; border:1.5px solid var(--border); transition:border-color .2s; position:relative; z-index:3; }
@@ -82,11 +82,11 @@ nav ul a:hover{ color:var(--text); }
   .nav-cta{ margin:.8rem 2rem!important; border-radius:8px!important; text-align:center; display:block; }
   .search-hero-bar{ flex-direction:column; }
   .search-hero-group{ width:100%; }
-  .search-hero-btn{ width:100%; border-radius:10px; height:44px; }
+  .search-hero-btn{ width:100%; border-radius:10px; }
 }
 @media (max-width:768px){
   .car-card{ flex-direction:column; }
-  .car-img-wrap{ flex:0 0 200px; height:200px; }
+  .car-img-wrap{ flex:0 0 220px; height:220px; }
   .car-cta{ flex:none; border-left:none; border-top:1px solid var(--border); flex-direction:row; padding:1rem; }
   .btn-wa,.btn-call{ flex:1; }
 }
@@ -134,7 +134,7 @@ nav ul a:hover{ color:var(--text); }
       <div class="search-hero-group">
         <label>Carburante</label>
         <div class="search-hero-field">
-          <svg class="search-hero-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 22h12M3 22V8l6-5 6 5v14M9 22v-6h6v6M18 5h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-1"/></svg>
+          <svg class="search-hero-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L6 12a6 6 0 0 0 12 0z"/></svg>
           <select id="filterCarburante" onchange="filterCars()">
             <option value="">Tutti</option>
             <option>Benzina</option><option>Diesel</option><option>GPL</option><option>Ibrido</option>
@@ -157,6 +157,11 @@ nav ul a:hover{ color:var(--text); }
 
 <script src="auto-db.js"></script>
 <script>
+const icoAnno = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/></svg>`;
+const icoKm = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12"/><path d="M22 12c0-5.52-4.48-10-10-10"/><path d="M12 12l4-4"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>`;
+const icoCarb = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L6 12a6 6 0 0 0 12 0z"/></svg>`;
+const icoCV = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`;
+
 let AUTO_DB = [];
 
 async function init() {
@@ -189,21 +194,21 @@ function renderCars(cars) {
       <div class="car-img-wrap">
         <img src="${foto}" alt="${auto.marca} ${auto.modello}" onerror="this.src='assets/logoAGS.png'">
         <span class="car-badge">Disponibile</span>
+        <div class="car-specs-bar">
+          ${auto.anno ? `<div class="car-spec-item">${icoAnno} ${auto.anno}</div>` : ''}
+          ${auto.km ? `<div class="car-spec-item">${icoKm} ${auto.km} km</div>` : ''}
+          ${auto.carburante ? `<div class="car-spec-item">${icoCarb} ${auto.carburante}</div>` : ''}
+          ${auto.cv ? `<div class="car-spec-item">${icoCV} ${auto.cv} CV</div>` : ''}
+        </div>
       </div>
       <div class="car-body">
         <div>
           <div class="car-top">
-            <div class="car-title-wrap">
+            <div>
               <div class="car-title">${auto.marca} ${auto.modello}</div>
               <div class="car-version">${auto.versione}</div>
             </div>
             <span class="car-badge-green">Ricambi disponibili</span>
-          </div>
-          <div class="car-specs">
-            <span class="car-spec">${auto.anno}</span>
-            <span class="car-spec">${auto.km} km</span>
-            <span class="car-spec">${auto.carburante}</span>
-            ${auto.cv ? `<span class="car-spec">${auto.cv} CV</span>` : ''}
           </div>
         </div>
         <div class="car-bottom">
