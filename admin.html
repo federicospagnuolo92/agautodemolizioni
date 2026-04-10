@@ -89,8 +89,8 @@ body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); 
       </div>
       <div class="field"><label>CV</label><input type="number" id="fCv" placeholder="Es. 69"></div>
       <div class="field full"><label>Foto</label>
-        <input type="file" id="fFoto" accept="image/*" onchange="previewFoto(this)">
-        <img id="fotoPreview" class="foto-preview" alt="Anteprima">
+        <input type="file" id="fFoto" accept="image/*" multiple onchange="previewFoto(this)">
+        <div id="fotoPreviewContainer" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:.5rem;"></div>
       </div>
     </div>
     <button class="btn-green" onclick="aggiungiAuto()">✅ Salva auto</button>
@@ -130,14 +130,19 @@ if (sessionStorage.getItem('ags_admin')) {
 }
 
 function previewFoto(input) {
-  if (input.files && input.files[0]) {
-    var reader = new FileReader();
-    reader.onload = e => {
-      var img = document.getElementById('fotoPreview');
-      img.src = e.target.result;
-      img.style.display = 'block';
-    };
-    reader.readAsDataURL(input.files[0]);
+  const container = document.getElementById('fotoPreviewContainer');
+  container.innerHTML = '';
+  if (input.files) {
+    Array.from(input.files).forEach(file => {
+      const reader = new FileReader();
+      reader.onload = e => {
+        const img = document.createElement('img');
+        img.src = e.target.result;
+        img.style = 'width:100px;height:75px;object-fit:cover;border-radius:8px;border:1px solid var(--border)';
+        container.appendChild(img);
+      };
+      reader.readAsDataURL(file);
+    });
   }
 }
 
