@@ -62,9 +62,9 @@ nav ul a:hover{ color:var(--text); }
 .gallery-thumb img{ width:100%; height:100%; object-fit:cover; }
 /* ── SCHEDA TECNICA NUOVA ── */
 .car-details{ margin-top:1.5rem; background:var(--white); border-radius:14px; border:1px solid var(--border); padding:1.4rem 1.6rem; }
-.details-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1rem 0; }
-.detail-item{ display:flex; align-items:flex-start; gap:.75rem; padding:.7rem 0; border-bottom:1px solid var(--border); }
-.detail-item:nth-last-child(-n+3){ border-bottom:none; }
+.details-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:0; }
+.detail-item{ display:flex; align-items:flex-start; gap:.75rem; padding:.9rem 0; border-bottom:1px solid var(--border); }
+.detail-item:nth-last-child(-n+2){ border-bottom:none; }
 .detail-icon{ flex-shrink:0; width:20px; height:20px; color:var(--muted); margin-top:2px; }
 .detail-icon svg{ width:20px; height:20px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
 .detail-label{ font-size:.75rem; color:var(--muted); margin-bottom:.18rem; }
@@ -180,12 +180,10 @@ async function init(){
   document.title=auto.marca+' '+auto.modello+' '+auto.anno+' — A.G.S. Autodemolizioni';
   document.getElementById('breadcrumbTitle').textContent=auto.marca+' '+auto.modello+' '+auto.anno;
   var thumbsHTML=auto.foto.map(function(f,i){return'<div class="gallery-thumb'+(i===0?' active':'')+'" onclick="goTo('+i+',this)"><img src="'+f+'" alt=""></div>';}).join('');
-  var svgKm='<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
-  var svgCambio='<svg viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>';
-  var svgAnno='<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>';
-  var svgFuel='<svg viewBox="0 0 24 24"><path d="M3 22V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v8h2a2 2 0 0 1 2 2v3a1 1 0 0 0 2 0V9l-3-3"/><line x1="3" y1="10" x2="15" y2="10"/></svg>';
-  var svgPotenza='<svg viewBox="0 0 24 24"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>';
-  var svgCambioM='<svg viewBox="0 0 24 24"><circle cx="5" cy="6" r="2"/><circle cx="12" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><line x1="5" y1="8" x2="5" y2="16"/><line x1="12" y1="8" x2="12" y2="18"/><line x1="19" y1="8" x2="19" y2="18"/><line x1="5" y1="6" x2="19" y2="6"/></svg>';
+  var svgAnno='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/></svg>';
+  var svgKm='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12"/><path d="M22 12c0-5.52-4.48-10-10-10"/><path d="M12 12l4-4"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>';
+  var svgFuel='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L6 12a6 6 0 0 0 12 0z"/></svg>';
+  var svgCV='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>';
 
   function di(icon,label,val){
     if(!val) return '';
@@ -193,11 +191,9 @@ async function init(){
   }
   var detailsHTML=
     di(svgKm,'Chilometraggio',auto.km?(auto.km+' km'):'')+
-    di(svgCambioM,'Tipo di cambio',auto.cambio||'')+
     di(svgAnno,'Anno',auto.anno||'')+
     di(svgFuel,'Carburante',auto.carburante||'')+
-    di(svgPotenza,'Potenza',auto.cv?(auto.cv+' CV'):'')+
-    di(svgCambio,'Versione',auto.versione||'');
+    di(svgCV,'Potenza',auto.cv?(auto.cv+' CV'):'');
 
   var waMsg=encodeURIComponent('Ciao, ho visto sul sito la '+auto.marca+' '+auto.modello+' '+auto.versione+' del '+auto.anno+'. Cerco: ');
   document.getElementById('pageContent').innerHTML=`
@@ -237,7 +233,7 @@ async function init(){
           <h3>Cerchi un ricambio?</h3>
           <p>Contattaci subito — rispondiamo in pochi minuti.</p>
           <a href="https://wa.me/393384672370?text=${waMsg}" target="_blank" class="btn-wa-big">💬 Scrivi su WhatsApp</a>
-          <a href="tel:0362306524" class="btn-call-big">📞 Chiama — 0362 306524</a>
+          <a href="tel:0362306524" class="btn-call-big"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 10.8c1.5 3 3.9 5.4 6.9 6.9l2.3-2.3c.3-.3.7-.4 1.1-.3 1.2.4 2.5.6 3.9.6.6 0 1 .4 1 1V21c0 .6-.4 1-1 1C10.3 22 2 13.7 2 3c0-.6.4-1 1-1h4.3c.6 0 1 .4 1 1 0 1.4.2 2.7.6 3.9.1.4 0 .8-.3 1.1l-2.3 2.3z"/></svg> Chiama — 0362 306524</a>
         </div>
       </div>
     </div>`;
