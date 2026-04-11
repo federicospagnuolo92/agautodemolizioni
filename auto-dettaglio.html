@@ -65,7 +65,17 @@ nav ul a:hover{ color:var(--text); }
 .gallery-thumb:hover{ opacity:.85; }
 .gallery-thumb img{ width:100%; height:100%; object-fit:cover; }
 
-/* ── SIDEBAR STILE SUBITO ── */
+/* ── DATI + DESCRIZIONE SOTTO GALLERIA ── */
+.info-below{ margin-top:1.5rem; background:var(--white); border-radius:12px; border:1px solid var(--border); padding:1.6rem 1.8rem; }
+.info-section{ padding:.2rem 0; }
+.info-title{ font-size:1rem; font-weight:700; color:var(--text); margin-bottom:1rem; }
+.dati-row{ display:flex; flex-wrap:wrap; gap:.5rem 2.5rem; }
+.dato-item{ display:flex; align-items:center; gap:.5rem; }
+.dato-icon{ width:18px; height:18px; flex-shrink:0; color:var(--muted); }
+.dato-icon svg{ width:18px; height:18px; }
+.dato-val{ font-size:.88rem; font-weight:700; color:var(--text); }
+.info-divider{ border:none; border-top:1px solid var(--border); margin:1.2rem 0; }
+.info-desc{ font-size:.9rem; color:var(--muted); line-height:1.7; }
 .sidebar{ display:flex; flex-direction:column; gap:0; }
 
 /* top bar: telefono + WA */
@@ -223,6 +233,35 @@ async function init(){
             </button>
           </div>
           <div class="gallery-thumbs">${thumbsHTML}</div>
+        </div>
+
+        <div class="info-below">
+          <div class="info-section">
+            <h3 class="info-title">Dati principali</h3>
+            <div class="dati-row">
+              <div class="dato-item">
+                <span class="dato-icon">${svgKm}</span>
+                <span class="dato-val">${auto.km ? auto.km+' Km' : '—'}</span>
+              </div>
+              <div class="dato-item">
+                <span class="dato-icon">${svgAnno}</span>
+                <span class="dato-val">${auto.anno || '—'}</span>
+              </div>
+              <div class="dato-item">
+                <span class="dato-icon">${svgFuel}</span>
+                <span class="dato-val">${auto.carburante || '—'}</span>
+              </div>
+              <div class="dato-item">
+                <span class="dato-icon">${svgCV}</span>
+                <span class="dato-val">${auto.cv ? auto.cv+' CV' : '—'}</span>
+              </div>
+            </div>
+          </div>
+          <hr class="info-divider">
+          <div class="info-section">
+            <h3 class="info-title">Descrizione</h3>
+            <p class="info-desc">Ricambi usati ${auto.marca} ${auto.modello} disponibili come in foto, chiamare o scrivere su WhatsApp per disponibilità.</p>
+          </div>
         </div>
 
         <div class="sidebar">
