@@ -30,13 +30,22 @@ nav ul a:hover{ color:var(--text); }
 .page-wrap{ max-width:1200px; margin:0 auto; padding:0 5vw 5rem; }
 .back-link{ display:inline-flex; align-items:center; gap:.4rem; font-size:.82rem; font-weight:600; color:var(--muted); text-decoration:none; padding:1.5rem 0 1rem; transition:color .2s; }
 .back-link:hover{ color:var(--red); }
-.main{ display:grid; grid-template-columns:1fr 380px; gap:2.5rem; align-items:start; }
+
+/* card bianca contenitore unica */
+.card-wrap{ background:var(--white); border:1px solid var(--border); border-radius:16px; overflow:hidden; margin-bottom:2rem; }
+.main{ display:grid; grid-template-columns:1fr 360px; align-items:start; }
+
+/* colonna sinistra: galleria + info below */
+.col-left{ border-right:1px solid var(--border); }
+
+/* colonna destra: sidebar */
+.sidebar{ display:flex; flex-direction:column; gap:0; padding:1.8rem; }
 
 /* ── GALLERIA ── */
-.gallery{ border-radius:12px; overflow:hidden; background:#000; }
+.gallery{ background:#000; }
 .gallery-main{
   position:relative; background:#111;
-  height:480px; overflow:hidden;
+  height:440px; overflow:hidden;
   display:flex; align-items:center; justify-content:center;
   cursor:pointer;
 }
@@ -57,7 +66,7 @@ nav ul a:hover{ color:var(--text); }
 .btn-expand{ position:absolute; bottom:10px; right:10px; width:32px; height:32px; background:rgba(0,0,0,0.55); border:none; border-radius:7px; cursor:pointer; z-index:3; display:flex; align-items:center; justify-content:center; transition:background .2s; }
 .btn-expand:hover{ background:rgba(0,0,0,0.85); }
 .btn-expand svg{ width:15px; height:15px; fill:none; stroke:#fff; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
-.gallery-thumbs{ display:flex; gap:5px; padding:8px; background:#1a1a1a; overflow-x:auto; }
+.gallery-thumbs{ display:flex; gap:5px; padding:8px 10px; background:#1a1a1a; overflow-x:auto; border-bottom:1px solid var(--border); }
 .gallery-thumbs::-webkit-scrollbar{ height:3px; }
 .gallery-thumbs::-webkit-scrollbar-thumb{ background:#444; border-radius:2px; }
 .gallery-thumb{ flex-shrink:0; width:80px; height:56px; border-radius:5px; overflow:hidden; cursor:pointer; border:2px solid transparent; transition:border-color .15s,opacity .15s; opacity:.5; }
@@ -66,17 +75,17 @@ nav ul a:hover{ color:var(--text); }
 .gallery-thumb img{ width:100%; height:100%; object-fit:cover; }
 
 /* ── DATI + DESCRIZIONE SOTTO GALLERIA ── */
-.info-below{ margin-top:1.5rem; background:var(--white); border-radius:12px; border:1px solid var(--border); padding:1.6rem 1.8rem; }
+.info-below{ padding:1.6rem 1.8rem; }
 .info-section{ padding:.2rem 0; }
 .info-title{ font-size:1rem; font-weight:700; color:var(--text); margin-bottom:1rem; }
-.dati-row{ display:flex; flex-wrap:wrap; gap:.5rem 2.5rem; }
+.dati-row{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:.8rem 0; }
 .dato-item{ display:flex; align-items:center; gap:.5rem; }
 .dato-icon{ width:18px; height:18px; flex-shrink:0; color:var(--muted); }
 .dato-icon svg{ width:18px; height:18px; }
-.dato-val{ font-size:.88rem; font-weight:700; color:var(--text); }
+.dato-label{ font-size:.72rem; color:var(--muted); display:block; }
+.dato-val{ font-size:.88rem; font-weight:700; color:var(--text); display:block; }
 .info-divider{ border:none; border-top:1px solid var(--border); margin:1.2rem 0; }
 .info-desc{ font-size:.9rem; color:var(--muted); line-height:1.7; }
-.sidebar{ display:flex; flex-direction:column; gap:0; }
 
 /* top bar: telefono + WA */
 .sb-topbar{ display:flex; align-items:center; justify-content:space-between; padding-bottom:1rem; border-bottom:1px solid var(--border); margin-bottom:1rem; }
@@ -136,8 +145,10 @@ nav ul a:hover{ color:var(--text); }
   nav ul a{ display:block; padding:1rem 2rem; font-size:1rem; border-bottom:1px solid var(--border); color:var(--text)!important; background:none!important; }
   .nav-cta{ margin:.8rem 2rem!important; border-radius:8px!important; text-align:center; display:block; }
   .main{ grid-template-columns:1fr; }
-  .sidebar{ order:-1; }
+  .col-left{ border-right:none; border-bottom:1px solid var(--border); }
+  .sidebar{ order:-1; border-bottom:1px solid var(--border); }
   .gallery-main{ height:260px; }
+  .dati-row{ grid-template-columns:1fr 1fr; }
   #lbPrev{ left:6px; }
   #lbNext{ right:6px; }
 }</style>
@@ -220,8 +231,10 @@ async function init(){
   document.getElementById('pageContent').innerHTML=`
     <div class="page-wrap">
       <a href="parco-auto.html" class="back-link">← Torna al parco auto</a>
-      <div class="main">
-        <div class="gallery">
+      <div class="card-wrap">
+        <div class="main">
+          <div class="col-left">
+            <div class="gallery">
           <div class="gallery-main" onclick="openLightbox(currentPhotos,currentIndex)" title="Clicca per ingrandire">
             <span class="gallery-badge">Disponibile</span>
             <img id="mainPhoto" src="${auto.foto[0]}" alt="${auto.marca} ${auto.modello}">
@@ -233,38 +246,39 @@ async function init(){
             </button>
           </div>
           <div class="gallery-thumbs">${thumbsHTML}</div>
-        </div>
+            </div>
 
-        <div class="info-below">
-          <div class="info-section">
-            <h3 class="info-title">Dati principali</h3>
-            <div class="dati-row">
-              <div class="dato-item">
-                <span class="dato-icon">${svgKm}</span>
-                <span class="dato-val">${auto.km ? auto.km+' Km' : '—'}</span>
+            <div class="info-below">
+              <div class="info-section">
+                <h3 class="info-title">Dati principali</h3>
+                <div class="dati-row">
+                  <div class="dato-item">
+                    <span class="dato-icon">${svgKm}</span>
+                    <div><span class="dato-label">Chilometraggio</span><span class="dato-val">${auto.km ? auto.km+' Km' : '—'}</span></div>
+                  </div>
+                  <div class="dato-item">
+                    <span class="dato-icon">${svgAnno}</span>
+                    <div><span class="dato-label">Anno</span><span class="dato-val">${auto.anno || '—'}</span></div>
+                  </div>
+                  <div class="dato-item">
+                    <span class="dato-icon">${svgFuel}</span>
+                    <div><span class="dato-label">Carburante</span><span class="dato-val">${auto.carburante || '—'}</span></div>
+                  </div>
+                  <div class="dato-item">
+                    <span class="dato-icon">${svgCV}</span>
+                    <div><span class="dato-label">Potenza</span><span class="dato-val">${auto.cv ? auto.cv+' CV' : '—'}</span></div>
+                  </div>
+                </div>
               </div>
-              <div class="dato-item">
-                <span class="dato-icon">${svgAnno}</span>
-                <span class="dato-val">${auto.anno || '—'}</span>
-              </div>
-              <div class="dato-item">
-                <span class="dato-icon">${svgFuel}</span>
-                <span class="dato-val">${auto.carburante || '—'}</span>
-              </div>
-              <div class="dato-item">
-                <span class="dato-icon">${svgCV}</span>
-                <span class="dato-val">${auto.cv ? auto.cv+' CV' : '—'}</span>
+              <hr class="info-divider">
+              <div class="info-section">
+                <h3 class="info-title">Descrizione</h3>
+                <p class="info-desc">Ricambi usati ${auto.marca} ${auto.modello} disponibili come in foto, chiamare o scrivere su WhatsApp per disponibilità.</p>
               </div>
             </div>
           </div>
-          <hr class="info-divider">
-          <div class="info-section">
-            <h3 class="info-title">Descrizione</h3>
-            <p class="info-desc">Ricambi usati ${auto.marca} ${auto.modello} disponibili come in foto, chiamare o scrivere su WhatsApp per disponibilità.</p>
-          </div>
-        </div>
 
-        <div class="sidebar">
+          <div class="sidebar">
           <div class="sb-topbar">
             <a href="tel:0362306524" class="sb-phone">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 10.8c1.5 3 3.9 5.4 6.9 6.9l2.3-2.3c.3-.3.7-.4 1.1-.3 1.2.4 2.5.6 3.9.6.6 0 1 .4 1 1V21c0 .6-.4 1-1 1C10.3 22 2 13.7 2 3c0-.6.4-1 1-1h4.3c.6 0 1 .4 1 1 0 1.4.2 2.7.6 3.9.1.4 0 .8-.3 1.1l-2.3 2.3z"/></svg>
@@ -295,6 +309,7 @@ async function init(){
           <div class="cta-label">Rispondiamo in pochi minuti</div>
         </div>
       </div>
+    </div>
     </div>`;
 
   var current=0;
