@@ -26,70 +26,79 @@ nav ul a:hover{ color:var(--text); }
 .breadcrumb a{ color:var(--muted); text-decoration:none; }
 .breadcrumb a:hover{ color:var(--red); }
 .breadcrumb span{ margin:0 .4rem; }
-.main{ max-width:1200px; margin:0 auto; padding:2rem 5vw 5rem; display:grid; grid-template-columns:1fr 400px; gap:2.5rem; align-items:start; }
-.back-link{ display:inline-flex; align-items:center; gap:.4rem; font-size:.82rem; font-weight:600; color:var(--muted); text-decoration:none; margin-bottom:1rem; transition:color .2s; }
+/* ── LAYOUT ── */
+.page-wrap{ max-width:1200px; margin:0 auto; padding:0 5vw 5rem; }
+.back-link{ display:inline-flex; align-items:center; gap:.4rem; font-size:.82rem; font-weight:600; color:var(--muted); text-decoration:none; padding:1.5rem 0 1rem; transition:color .2s; }
 .back-link:hover{ color:var(--red); }
-.gallery{ background:var(--white); border-radius:14px; overflow:hidden; border:1px solid var(--border); }
+.main{ display:grid; grid-template-columns:1fr 380px; gap:2.5rem; align-items:start; }
+
+/* ── GALLERIA ── */
+.gallery{ border-radius:12px; overflow:hidden; background:#000; }
 .gallery-main{
   position:relative; background:#111;
-  height:520px; overflow:hidden;
+  height:480px; overflow:hidden;
   display:flex; align-items:center; justify-content:center;
   cursor:pointer;
 }
 .gallery-main img{ width:100%; height:100%; object-fit:cover; transition:opacity .25s; user-select:none; pointer-events:none; }
-.gallery-badge{ position:absolute; top:16px; left:16px; background:var(--red); color:#fff; font-size:.72rem; font-weight:700; padding:.3rem .8rem; border-radius:6px; text-transform:uppercase; letter-spacing:.5px; z-index:2; }
+.gallery-badge{ position:absolute; top:14px; left:14px; background:var(--red); color:#fff; font-size:.7rem; font-weight:700; padding:.28rem .75rem; border-radius:6px; text-transform:uppercase; letter-spacing:.5px; z-index:2; }
 .gallery-btn{
   position:absolute; top:50%; transform:translateY(-50%);
-  width:44px; height:44px;
+  width:40px; height:40px;
   background:rgba(255,255,255,0.18); border:1.5px solid rgba(255,255,255,0.35);
-  border-radius:50%; color:#fff; font-size:1.3rem; cursor:pointer; z-index:3;
+  border-radius:50%; color:#fff; font-size:1.2rem; cursor:pointer; z-index:3;
   display:flex; align-items:center; justify-content:center;
   transition:background .2s; backdrop-filter:blur(4px);
 }
 .gallery-btn:hover{ background:rgba(255,255,255,0.35); }
-.gallery-btn.prev{ left:14px; }
-.gallery-btn.next{ right:14px; }
-.gallery-counter{ position:absolute; bottom:14px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,0.55); color:#fff; font-size:.72rem; font-weight:600; padding:.25rem .75rem; border-radius:100px; z-index:2; }
-.btn-expand{ position:absolute; bottom:12px; right:12px; width:34px; height:34px; background:rgba(0,0,0,0.55); border:none; border-radius:8px; cursor:pointer; z-index:3; display:flex; align-items:center; justify-content:center; transition:background .2s; }
+.gallery-btn.prev{ left:12px; }
+.gallery-btn.next{ right:12px; }
+.gallery-counter{ position:absolute; top:14px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,0.55); color:#fff; font-size:.72rem; font-weight:600; padding:.22rem .7rem; border-radius:100px; z-index:2; }
+.btn-expand{ position:absolute; bottom:10px; right:10px; width:32px; height:32px; background:rgba(0,0,0,0.55); border:none; border-radius:7px; cursor:pointer; z-index:3; display:flex; align-items:center; justify-content:center; transition:background .2s; }
 .btn-expand:hover{ background:rgba(0,0,0,0.85); }
-.btn-expand svg{ width:16px; height:16px; fill:none; stroke:#fff; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
-.gallery-thumbs{ display:flex; gap:6px; padding:10px; background:#f0f2f5; border-top:1px solid var(--border); overflow-x:auto; }
-.gallery-thumbs::-webkit-scrollbar{ height:4px; }
-.gallery-thumbs::-webkit-scrollbar-thumb{ background:#ccc; border-radius:2px; }
-.gallery-thumb{ flex-shrink:0; width:90px; height:62px; border-radius:7px; overflow:hidden; cursor:pointer; border:2.5px solid transparent; transition:border-color .18s,opacity .18s; opacity:.6; }
-.gallery-thumb.active{ border-color:var(--red); opacity:1; }
-.gallery-thumb:hover{ opacity:1; }
+.btn-expand svg{ width:15px; height:15px; fill:none; stroke:#fff; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
+.gallery-thumbs{ display:flex; gap:5px; padding:8px; background:#1a1a1a; overflow-x:auto; }
+.gallery-thumbs::-webkit-scrollbar{ height:3px; }
+.gallery-thumbs::-webkit-scrollbar-thumb{ background:#444; border-radius:2px; }
+.gallery-thumb{ flex-shrink:0; width:80px; height:56px; border-radius:5px; overflow:hidden; cursor:pointer; border:2px solid transparent; transition:border-color .15s,opacity .15s; opacity:.5; }
+.gallery-thumb.active{ border-color:#fff; opacity:1; }
+.gallery-thumb:hover{ opacity:.85; }
 .gallery-thumb img{ width:100%; height:100%; object-fit:cover; }
-/* ── SCHEDA TECNICA NUOVA ── */
-.car-details{ margin-top:1.5rem; background:var(--white); border-radius:14px; border:1px solid var(--border); padding:1.4rem 1.6rem; }
-.details-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:0; }
-.detail-item{ display:flex; align-items:flex-start; gap:.75rem; padding:.9rem 0; border-bottom:1px solid var(--border); }
-.detail-item:nth-last-child(-n+2){ border-bottom:none; }
-.detail-icon{ flex-shrink:0; width:20px; height:20px; color:var(--muted); margin-top:2px; }
-.detail-icon svg{ width:20px; height:20px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
-.detail-label{ font-size:.75rem; color:var(--muted); margin-bottom:.18rem; }
-.detail-value{ font-size:.92rem; font-weight:700; color:var(--text); }
-.sidebar{ display:flex; flex-direction:column; gap:1.2rem; padding-top:2.4rem; }
-.car-title-box{ background:var(--white); border:1px solid var(--border); border-radius:14px; padding:1.8rem; }
-.car-badge-row{ display:flex; align-items:center; gap:.6rem; margin-bottom:.8rem; }
-.badge-disponibile{ background:#f0fdf4; color:#16a34a; border:1px solid #86efac; font-size:.72rem; font-weight:700; padding:.25rem .8rem; border-radius:100px; text-transform:uppercase; letter-spacing:.5px; }
-.car-name{ font-size:1.8rem; font-weight:800; letter-spacing:-1px; color:var(--text); line-height:1.1; margin-bottom:.3rem; }
-.car-version{ font-size:.9rem; color:var(--muted); margin-bottom:1.2rem; }
-.specs-row{ display:grid; grid-template-columns:1fr 1fr; gap:.6rem; }
-.spec-box{ background:var(--bg); border-radius:8px; padding:.7rem .8rem; display:flex; align-items:center; gap:.5rem; }
-.spec-box-icon{ width:20px; height:20px; flex-shrink:0; color:var(--muted); }
-.spec-box-icon svg{ width:20px; height:20px; }
-.spec-box-label{ font-size:.68rem; color:var(--muted); display:block; }
-.spec-box-value{ font-size:.82rem; font-weight:700; color:var(--text); }
-.cta-box{ background:var(--white); border:1px solid var(--border); border-radius:14px; padding:1.8rem; }
-.cta-box h3{ font-size:1rem; font-weight:800; color:var(--text); margin-bottom:.4rem; }
-.cta-box p{ font-size:.82rem; color:var(--muted); line-height:1.6; margin-bottom:1.4rem; }
-.btn-wa-big{ display:flex; align-items:center; justify-content:center; gap:.6rem; background:#25D366; color:#fff; font-family:'Inter',sans-serif; font-size:.95rem; font-weight:700; padding:.9rem 1.5rem; border-radius:10px; text-decoration:none; width:100%; margin-bottom:.8rem; transition:background .2s,transform .15s; box-shadow:0 4px 14px rgba(37,211,102,0.3); }
-.btn-wa-big:hover{ background:#1aad52; transform:translateY(-1px); }
-.btn-call-big{ display:flex; align-items:center; justify-content:center; gap:.6rem; background:var(--white); color:var(--text); font-family:'Inter',sans-serif; font-size:.95rem; font-weight:600; padding:.85rem 1.5rem; border-radius:10px; text-decoration:none; width:100%; border:1.5px solid var(--border); transition:border-color .2s; }
+
+/* ── SIDEBAR STILE SUBITO ── */
+.sidebar{ display:flex; flex-direction:column; gap:0; }
+
+/* top bar: telefono + WA */
+.sb-topbar{ display:flex; align-items:center; justify-content:space-between; padding-bottom:1rem; border-bottom:1px solid var(--border); margin-bottom:1rem; }
+.sb-phone{ display:flex; align-items:center; gap:.5rem; font-size:.9rem; font-weight:600; color:var(--muted); text-decoration:none; }
+.sb-phone:hover{ color:var(--text); }
+.sb-wa-btn{ width:40px; height:40px; background:#25D366; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; transition:background .2s; flex-shrink:0; }
+.sb-wa-btn:hover{ background:#1aad52; }
+.sb-wa-btn svg{ width:22px; height:22px; fill:#fff; }
+
+/* badge + titolo */
+.badge-disponibile{ display:inline-flex; align-items:center; gap:.35rem; background:#f0fdf4; color:#16a34a; border:1px solid #86efac; font-size:.72rem; font-weight:700; padding:.25rem .8rem; border-radius:100px; text-transform:uppercase; letter-spacing:.5px; margin-bottom:.7rem; }
+.car-name{ font-size:1.7rem; font-weight:800; letter-spacing:-.5px; color:var(--text); line-height:1.15; margin-bottom:.2rem; }
+.car-version{ font-size:.88rem; color:var(--muted); margin-bottom:1.4rem; }
+
+/* specs 2x2 senza sfondo */
+.specs-grid{ display:grid; grid-template-columns:1fr 1fr; gap:.5rem; margin-bottom:1.6rem; }
+.spec-cell{ background:var(--white); border:1px solid var(--border); border-radius:10px; padding:.75rem 1rem; display:flex; align-items:center; gap:.6rem; }
+.spec-cell-icon{ width:18px; height:18px; flex-shrink:0; color:var(--muted); }
+.spec-cell-icon svg{ width:18px; height:18px; }
+.spec-cell-label{ font-size:.68rem; color:var(--muted); display:block; line-height:1.2; }
+.spec-cell-value{ font-size:.85rem; font-weight:700; color:var(--text); display:block; }
+
+/* CTA buttons */
+.btn-wa-big{ display:flex; align-items:center; justify-content:center; gap:.6rem; background:#25D366; color:#fff; font-family:'Inter',sans-serif; font-size:.95rem; font-weight:700; padding:.9rem 1.5rem; border-radius:10px; text-decoration:none; width:100%; margin-bottom:.6rem; transition:background .2s; box-shadow:0 4px 14px rgba(37,211,102,0.25); }
+.btn-wa-big:hover{ background:#1aad52; }
+.btn-call-big{ display:flex; align-items:center; justify-content:center; gap:.6rem; background:var(--white); color:var(--text); font-family:'Inter',sans-serif; font-size:.9rem; font-weight:600; padding:.85rem 1.5rem; border-radius:10px; text-decoration:none; width:100%; border:1.5px solid var(--border); transition:border-color .2s; }
 .btn-call-big:hover{ border-color:#9ca3af; }
+
+.cta-label{ font-size:.78rem; color:var(--muted); text-align:center; margin-top:.5rem; }
 .not-found{ text-align:center; padding:6rem 2rem; color:var(--muted); }
 .not-found h2{ font-size:1.5rem; font-weight:800; color:var(--text); margin-bottom:.5rem; }
+.page-wrap{ margin-top:80px; }
 
 /* LIGHTBOX */
 #lightbox{ display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.95); align-items:center; justify-content:center; flex-direction:column; animation:lbFadeIn .18s ease; }
@@ -121,8 +130,7 @@ nav ul a:hover{ color:var(--text); }
   .gallery-main{ height:260px; }
   #lbPrev{ left:6px; }
   #lbNext{ right:6px; }
-}
-</style>
+}</style>
 </head>
 <body>
 
@@ -197,10 +205,12 @@ async function init(){
     di(svgCV,'Potenza',auto.cv?(auto.cv+' CV'):'');
 
   var waMsg=encodeURIComponent('Ciao, ho visto sul sito la '+auto.marca+' '+auto.modello+' '+auto.versione+' del '+auto.anno+'. Cerco: ');
+  var svgWA='<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.978-1.41A9.944 9.944 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" fill-rule="evenodd" clip-rule="evenodd"/></svg>';
+
   document.getElementById('pageContent').innerHTML=`
-    <div class="main">
-      <div>
-        <a href="parco-auto.html" class="back-link">← Torna al parco auto</a>
+    <div class="page-wrap">
+      <a href="parco-auto.html" class="back-link">← Torna al parco auto</a>
+      <div class="main">
         <div class="gallery">
           <div class="gallery-main" onclick="openLightbox(currentPhotos,currentIndex)" title="Clicca per ingrandire">
             <span class="gallery-badge">Disponibile</span>
@@ -214,27 +224,36 @@ async function init(){
           </div>
           <div class="gallery-thumbs">${thumbsHTML}</div>
         </div>
-        <div class="car-details">
-          <div class="details-grid">${detailsHTML}</div>
-        </div>
-      </div>
-      <div class="sidebar">
-        <div class="car-title-box">
-          <div class="car-badge-row"><span class="badge-disponibile">✓ Disponibile</span></div>
+
+        <div class="sidebar">
+          <div class="sb-topbar">
+            <a href="tel:0362306524" class="sb-phone">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 10.8c1.5 3 3.9 5.4 6.9 6.9l2.3-2.3c.3-.3.7-.4 1.1-.3 1.2.4 2.5.6 3.9.6.6 0 1 .4 1 1V21c0 .6-.4 1-1 1C10.3 22 2 13.7 2 3c0-.6.4-1 1-1h4.3c.6 0 1 .4 1 1 0 1.4.2 2.7.6 3.9.1.4 0 .8-.3 1.1l-2.3 2.3z"/></svg>
+              0362 306524
+            </a>
+            <a href="https://wa.me/393384672370?text=${waMsg}" target="_blank" class="sb-wa-btn" title="Scrivi su WhatsApp">${svgWA}</a>
+          </div>
+
+          <div class="badge-disponibile">✓ Disponibile</div>
           <div class="car-name">${auto.marca} ${auto.modello}</div>
           <div class="car-version">${auto.versione}</div>
-          <div class="specs-row">
-            <div class="spec-box"><span class="spec-box-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/></svg></span><div><span class="spec-box-label">Anno</span><span class="spec-box-value">${auto.anno}</span></div></div>
-            <div class="spec-box"><span class="spec-box-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12"/><path d="M22 12c0-5.52-4.48-10-10-10"/><path d="M12 12l4-4"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg></span><div><span class="spec-box-label">Km</span><span class="spec-box-value">${auto.km}</span></div></div>
-            <div class="spec-box"><span class="spec-box-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L6 12a6 6 0 0 0 12 0z"/></svg></span><div><span class="spec-box-label">Carburante</span><span class="spec-box-value">${auto.carburante}</span></div></div>
-            <div class="spec-box"><span class="spec-box-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span><div><span class="spec-box-label">Potenza</span><span class="spec-box-value">${auto.cv} CV</span></div></div>
+
+          <div class="specs-grid">
+            <div class="spec-cell"><span class="spec-cell-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/></svg></span><div><span class="spec-cell-label">Anno</span><span class="spec-cell-value">${auto.anno}</span></div></div>
+            <div class="spec-cell"><span class="spec-cell-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12"/><path d="M22 12c0-5.52-4.48-10-10-10"/><path d="M12 12l4-4"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg></span><div><span class="spec-cell-label">Km</span><span class="spec-cell-value">${auto.km}</span></div></div>
+            <div class="spec-cell"><span class="spec-cell-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L6 12a6 6 0 0 0 12 0z"/></svg></span><div><span class="spec-cell-label">Carburante</span><span class="spec-cell-value">${auto.carburante}</span></div></div>
+            <div class="spec-cell"><span class="spec-cell-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span><div><span class="spec-cell-label">Potenza</span><span class="spec-cell-value">${auto.cv} CV</span></div></div>
           </div>
-        </div>
-        <div class="cta-box">
-          <h3>Cerchi un ricambio?</h3>
-          <p>Contattaci subito — rispondiamo in pochi minuti.</p>
-          <a href="https://wa.me/393384672370?text=${waMsg}" target="_blank" class="btn-wa-big">💬 Scrivi su WhatsApp</a>
-          <a href="tel:0362306524" class="btn-call-big"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 10.8c1.5 3 3.9 5.4 6.9 6.9l2.3-2.3c.3-.3.7-.4 1.1-.3 1.2.4 2.5.6 3.9.6.6 0 1 .4 1 1V21c0 .6-.4 1-1 1C10.3 22 2 13.7 2 3c0-.6.4-1 1-1h4.3c.6 0 1 .4 1 1 0 1.4.2 2.7.6 3.9.1.4 0 .8-.3 1.1l-2.3 2.3z"/></svg> Chiama — 0362 306524</a>
+
+          <a href="https://wa.me/393384672370?text=${waMsg}" target="_blank" class="btn-wa-big">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.978-1.41A9.944 9.944 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" fill-rule="evenodd" clip-rule="evenodd"/></svg>
+            Scrivi su WhatsApp
+          </a>
+          <a href="tel:0362306524" class="btn-call-big">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 10.8c1.5 3 3.9 5.4 6.9 6.9l2.3-2.3c.3-.3.7-.4 1.1-.3 1.2.4 2.5.6 3.9.6.6 0 1 .4 1 1V21c0 .6-.4 1-1 1C10.3 22 2 13.7 2 3c0-.6.4-1 1-1h4.3c.6 0 1 .4 1 1 0 1.4.2 2.7.6 3.9.1.4 0 .8-.3 1.1l-2.3 2.3z"/></svg>
+            Chiama — 0362 306524
+          </a>
+          <div class="cta-label">Rispondiamo in pochi minuti</div>
         </div>
       </div>
     </div>`;
