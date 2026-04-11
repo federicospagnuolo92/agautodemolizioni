@@ -4,157 +4,231 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dettaglio Auto — A.G.S. Autodemolizioni</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root { --red:#E8001D; --navy:#1e2d4f; --bg:#f5f6f8; --white:#ffffff; --border:#e5e7eb; --text:#111827; --muted:#6b7280; }
+/* ── RESET & BASE ── */
+:root{
+  --red:#E8001D;
+  --bg:#f0f1f3;
+  --white:#ffffff;
+  --border:#e2e4e8;
+  --text:#1a1a1a;
+  --muted:#6b7280;
+  --muted2:#9ca3af;
+  --blue:#1a73e8;
+  --radius:4px;
+}
 *{ margin:0; padding:0; box-sizing:border-box; }
 html{ scroll-behavior:smooth; }
-body{ font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased; }
-nav{ height:80px; display:flex; align-items:center; justify-content:space-between; padding:0 5vw; position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(255,255,255,0.97); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); }
+body{ font-family:'Inter',system-ui,-apple-system,sans-serif; background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased; font-size:15px; }
+
+/* ── NAV ── */
+nav{
+  height:72px; display:flex; align-items:center; justify-content:space-between;
+  padding:0 5vw; position:fixed; top:0; left:0; right:0; z-index:100;
+  background:#1a1a2e; border-bottom:1px solid rgba(255,255,255,0.08);
+}
 .logo-link{ display:flex; align-items:center; text-decoration:none; }
-.logo-link img{ height:55px; width:auto; margin-left:3rem; margin-top:12px; }
-nav ul{ display:flex; align-items:center; gap:2rem; list-style:none; }
-nav ul a{ font-size:.875rem; font-weight:500; color:var(--muted); text-decoration:none; transition:color .2s; }
-nav ul a:hover{ color:var(--text); }
-.nav-cta{ background:var(--red)!important; color:#fff!important; padding:.55rem 1.3rem; border-radius:6px; font-weight:600!important; font-size:.825rem!important; }
-.hamburger{ display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px; z-index:200; }
-.hamburger span{ display:block; width:24px; height:2px; background:var(--text); border-radius:2px; transition:all .3s; }
+.logo-link img{ height:48px; width:auto; }
+nav ul{ display:flex; align-items:center; gap:1.8rem; list-style:none; }
+nav ul a{ font-size:.85rem; font-weight:500; color:rgba(255,255,255,0.75); text-decoration:none; transition:color .15s; }
+nav ul a:hover{ color:#fff; }
+.nav-cta{
+  background:var(--red)!important; color:#fff!important;
+  padding:.5rem 1.2rem; border-radius:var(--radius);
+  font-weight:600!important; font-size:.82rem!important;
+}
+.hamburger{ display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px; }
+.hamburger span{ display:block; width:22px; height:2px; background:#fff; border-radius:1px; transition:all .3s; }
 .hamburger.open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
 .hamburger.open span:nth-child(2){ opacity:0; }
 .hamburger.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
-.breadcrumb{ margin-top:80px; padding:1rem 5vw; background:var(--white); border-bottom:1px solid var(--border); font-size:.82rem; color:var(--muted); }
+
+/* ── BREADCRUMB ── */
+.breadcrumb{
+  margin-top:72px; padding:.75rem 5vw;
+  background:var(--white); border-bottom:1px solid var(--border);
+  font-size:.8rem; color:var(--muted);
+  display:flex; align-items:center; gap:.35rem;
+}
 .breadcrumb a{ color:var(--muted); text-decoration:none; }
-.breadcrumb a:hover{ color:var(--red); }
-.breadcrumb span{ margin:0 .4rem; }
-/* ── LAYOUT ── */
-.page-wrap{ max-width:1200px; margin:0 auto; padding:0 5vw 5rem; }
-.back-link{ display:inline-flex; align-items:center; gap:.4rem; font-size:.82rem; font-weight:600; color:var(--muted); text-decoration:none; padding:1.5rem 0 1rem; transition:color .2s; }
-.back-link:hover{ color:var(--red); }
+.breadcrumb a:hover{ color:var(--red); text-decoration:underline; }
 
-/* card bianca contenitore unica */
-.card-wrap{ background:var(--white); border:1px solid var(--border); border-radius:16px; overflow:hidden; margin-bottom:2rem; }
-.main{ display:grid; grid-template-columns:1fr 360px; align-items:start; }
+/* ── BACK BAR (stile AutoScout) ── */
+.topbar{
+  background:var(--white); border-bottom:1px solid var(--border);
+  padding:.65rem 5vw; font-size:.82rem;
+}
+.back-link{
+  display:inline-flex; align-items:center; gap:.4rem;
+  color:var(--blue); text-decoration:none; font-weight:500;
+}
+.back-link:hover{ text-decoration:underline; }
+.back-link svg{ width:16px; height:16px; }
 
-/* colonna sinistra: galleria + info below */
-.col-left{ border-right:1px solid var(--border); }
-
-/* colonna destra: sidebar */
-.sidebar{ display:flex; flex-direction:column; gap:0; padding:1.8rem; }
+/* ── PAGE LAYOUT ── */
+.page{ max-width:1160px; margin:0 auto; padding:1.5rem 5vw 4rem; display:grid; grid-template-columns:1fr 360px; gap:1.5rem; align-items:start; }
 
 /* ── GALLERIA ── */
-.gallery{ background:#000; }
+.gallery-wrap{ display:flex; flex-direction:column; gap:0; }
 .gallery-main{
-  position:relative; background:#111;
-  height:440px; overflow:hidden;
+  position:relative; background:#000;
+  aspect-ratio:16/10; overflow:hidden;
   display:flex; align-items:center; justify-content:center;
-  cursor:pointer;
+  cursor:pointer; border-radius:var(--radius) var(--radius) 0 0;
 }
-.gallery-main img{ width:100%; height:100%; object-fit:cover; transition:opacity .25s; user-select:none; pointer-events:none; }
-.gallery-badge{ position:absolute; top:14px; left:14px; background:var(--red); color:#fff; font-size:.7rem; font-weight:700; padding:.28rem .75rem; border-radius:6px; text-transform:uppercase; letter-spacing:.5px; z-index:2; }
-.gallery-btn{
+.gallery-main img{ width:100%; height:100%; object-fit:cover; transition:opacity .2s; user-select:none; pointer-events:none; }
+.gal-counter{
+  position:absolute; top:14px; right:14px;
+  background:rgba(0,0,0,0.65); color:#fff;
+  font-size:.72rem; font-weight:600; padding:.2rem .65rem;
+  border-radius:3px; z-index:2; letter-spacing:.3px;
+}
+.gal-btn{
   position:absolute; top:50%; transform:translateY(-50%);
-  width:40px; height:40px;
-  background:rgba(255,255,255,0.18); border:1.5px solid rgba(255,255,255,0.35);
-  border-radius:50%; color:#fff; font-size:1.2rem; cursor:pointer; z-index:3;
+  width:38px; height:38px;
+  background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3);
+  border-radius:50%; color:#fff; font-size:1.1rem; cursor:pointer; z-index:3;
   display:flex; align-items:center; justify-content:center;
-  transition:background .2s; backdrop-filter:blur(4px);
+  transition:background .15s;
 }
-.gallery-btn:hover{ background:rgba(255,255,255,0.35); }
-.gallery-btn.prev{ left:12px; }
-.gallery-btn.next{ right:12px; }
-.gallery-counter{ position:absolute; top:14px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,0.55); color:#fff; font-size:.72rem; font-weight:600; padding:.22rem .7rem; border-radius:100px; z-index:2; }
-.btn-expand{ position:absolute; bottom:10px; right:10px; width:32px; height:32px; background:rgba(0,0,0,0.55); border:none; border-radius:7px; cursor:pointer; z-index:3; display:flex; align-items:center; justify-content:center; transition:background .2s; }
-.btn-expand:hover{ background:rgba(0,0,0,0.85); }
-.btn-expand svg{ width:15px; height:15px; fill:none; stroke:#fff; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
-.gallery-thumbs{ display:flex; gap:5px; padding:8px 10px; background:#1a1a1a; overflow-x:auto; border-bottom:1px solid var(--border); }
+.gal-btn:hover{ background:rgba(255,255,255,0.3); }
+.gal-btn.prev{ left:12px; }
+.gal-btn.next{ right:12px; }
+.gal-expand{
+  position:absolute; bottom:10px; right:10px; z-index:3;
+  width:30px; height:30px; background:rgba(0,0,0,0.5);
+  border:none; border-radius:3px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+}
+.gal-expand svg{ width:14px; height:14px; stroke:#fff; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+
+/* miniature stile AutoScout — bordo giallo → noi rosso */
+.gallery-thumbs{
+  display:flex; gap:4px; background:#111;
+  padding:6px; overflow-x:auto;
+  border-radius:0 0 var(--radius) var(--radius);
+}
 .gallery-thumbs::-webkit-scrollbar{ height:3px; }
-.gallery-thumbs::-webkit-scrollbar-thumb{ background:#444; border-radius:2px; }
-.gallery-thumb{ flex-shrink:0; width:80px; height:56px; border-radius:5px; overflow:hidden; cursor:pointer; border:2px solid transparent; transition:border-color .15s,opacity .15s; opacity:.5; }
-.gallery-thumb.active{ border-color:#fff; opacity:1; }
-.gallery-thumb:hover{ opacity:.85; }
-.gallery-thumb img{ width:100%; height:100%; object-fit:cover; }
+.gallery-thumbs::-webkit-scrollbar-thumb{ background:#555; }
+.gal-thumb{
+  flex-shrink:0; width:100px; height:68px;
+  border-radius:2px; overflow:hidden; cursor:pointer;
+  border:2.5px solid transparent; opacity:.55;
+  transition:opacity .15s, border-color .15s;
+}
+.gal-thumb.active{ border-color:var(--red); opacity:1; }
+.gal-thumb:hover{ opacity:.85; }
+.gal-thumb img{ width:100%; height:100%; object-fit:cover; }
 
-/* ── DATI + DESCRIZIONE SOTTO GALLERIA ── */
-.info-below{ padding:1.6rem 1.8rem; }
-.info-section{ padding:.2rem 0; }
-.info-title{ font-size:1rem; font-weight:700; color:var(--text); margin-bottom:1rem; }
-.dati-row{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:.8rem 0; }
-.dato-item{ display:flex; align-items:center; gap:.5rem; }
-.dato-icon{ width:18px; height:18px; flex-shrink:0; color:var(--muted); }
-.dato-icon svg{ width:18px; height:18px; }
-.dato-label{ font-size:.72rem; color:var(--muted); display:block; }
-.dato-val{ font-size:.88rem; font-weight:700; color:var(--text); display:block; }
-.info-divider{ border:none; border-top:1px solid var(--border); margin:1.2rem 0; }
-.info-desc{ font-size:.9rem; color:var(--muted); line-height:1.7; }
+/* ── DATI PRINCIPALI (sotto galleria, stile AutoScout) ── */
+.dati-box{
+  margin-top:1rem;
+  background:var(--white); border:1px solid var(--border);
+  border-radius:var(--radius); padding:1.2rem 1.4rem;
+}
+.dati-grid{ display:grid; grid-template-columns:repeat(3,1fr); row-gap:.1rem; }
+.dati-cell{ display:flex; align-items:flex-start; gap:.55rem; padding:.65rem 0; border-bottom:1px solid var(--border); }
+.dati-cell:nth-last-child(-n+3){ border-bottom:none; }
+.dati-icon{ width:18px; height:18px; flex-shrink:0; color:var(--muted); margin-top:1px; }
+.dati-icon svg{ width:18px; height:18px; }
+.dati-lbl{ font-size:.72rem; color:var(--muted); margin-bottom:.12rem; }
+.dati-val{ font-size:.88rem; font-weight:700; color:var(--text); }
 
-/* top bar: telefono + WA */
-.sb-topbar{ display:flex; align-items:center; justify-content:space-between; padding-bottom:1rem; border-bottom:1px solid var(--border); margin-bottom:1rem; }
-.sb-phone{ display:flex; align-items:center; gap:.5rem; font-size:.9rem; font-weight:600; color:var(--muted); text-decoration:none; }
-.sb-phone:hover{ color:var(--text); }
-.sb-wa-btn{ width:40px; height:40px; background:#25D366; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; transition:background .2s; flex-shrink:0; }
-.sb-wa-btn:hover{ background:#1aad52; }
-.sb-wa-btn svg{ width:22px; height:22px; fill:#fff; }
+/* ── DESCRIZIONE ── */
+.desc-box{
+  margin-top:1rem;
+  background:var(--white); border:1px solid var(--border);
+  border-radius:var(--radius); padding:1.4rem;
+}
+.desc-box h3{ font-size:.95rem; font-weight:700; color:var(--text); margin-bottom:.75rem; }
+.desc-box p{ font-size:.88rem; color:var(--muted); line-height:1.75; }
 
-/* badge + titolo */
-.badge-disponibile{ display:inline-flex; align-items:center; gap:.35rem; background:#f0fdf4; color:#16a34a; border:1px solid #86efac; font-size:.72rem; font-weight:700; padding:.25rem .8rem; border-radius:100px; text-transform:uppercase; letter-spacing:.5px; margin-bottom:.7rem; }
-.car-name{ font-size:1.7rem; font-weight:800; letter-spacing:-.5px; color:var(--text); line-height:1.15; margin-bottom:.2rem; }
-.car-version{ font-size:.88rem; color:var(--muted); margin-bottom:1.4rem; }
+/* ── SIDEBAR ── */
+.sidebar{ display:flex; flex-direction:column; gap:.9rem; }
 
-/* specs 2x2 senza sfondo */
-.specs-grid{ display:grid; grid-template-columns:1fr 1fr; gap:.5rem; margin-bottom:1.6rem; }
-.spec-cell{ background:var(--white); border:1px solid var(--border); border-radius:10px; padding:.75rem 1rem; display:flex; align-items:center; gap:.6rem; }
-.spec-cell-icon{ width:18px; height:18px; flex-shrink:0; color:var(--muted); }
-.spec-cell-icon svg{ width:18px; height:18px; }
-.spec-cell-label{ font-size:.68rem; color:var(--muted); display:block; line-height:1.2; }
-.spec-cell-value{ font-size:.85rem; font-weight:700; color:var(--text); display:block; }
+/* titolo auto (stile AutoScout: niente card, testo diretto) */
+.sb-head{ background:var(--white); border:1px solid var(--border); border-radius:var(--radius); padding:1.4rem 1.4rem 1.2rem; }
+.sb-title{ font-size:1.5rem; font-weight:800; color:var(--text); line-height:1.15; margin-bottom:.25rem; letter-spacing:-.3px; }
+.sb-subtitle{ font-size:.88rem; color:var(--muted); line-height:1.5; margin-bottom:.9rem; }
+.sb-sep{ border:none; border-top:1px solid var(--border); margin:.9rem 0; }
 
-/* CTA buttons */
-.btn-wa-big{ display:flex; align-items:center; justify-content:center; gap:.6rem; background:#25D366; color:#fff; font-family:'Inter',sans-serif; font-size:.95rem; font-weight:700; padding:.9rem 1.5rem; border-radius:10px; text-decoration:none; width:100%; margin-bottom:.6rem; transition:background .2s; box-shadow:0 4px 14px rgba(37,211,102,0.25); }
-.btn-wa-big:hover{ background:#1aad52; }
-.btn-call-big{ display:flex; align-items:center; justify-content:center; gap:.6rem; background:var(--white); color:var(--text); font-family:'Inter',sans-serif; font-size:.9rem; font-weight:600; padding:.85rem 1.5rem; border-radius:10px; text-decoration:none; width:100%; border:1.5px solid var(--border); transition:border-color .2s; }
-.btn-call-big:hover{ border-color:#9ca3af; }
+/* specs 2x2 */
+.sb-specs{ display:grid; grid-template-columns:1fr 1fr; gap:.5rem; }
+.sb-spec{
+  background:var(--bg); border:1px solid var(--border);
+  border-radius:var(--radius); padding:.65rem .8rem;
+  display:flex; align-items:center; gap:.5rem;
+}
+.sb-spec-icon{ width:17px; height:17px; flex-shrink:0; color:var(--muted); }
+.sb-spec-icon svg{ width:17px; height:17px; }
+.sb-spec-lbl{ font-size:.67rem; color:var(--muted); display:block; line-height:1.3; }
+.sb-spec-val{ font-size:.83rem; font-weight:700; color:var(--text); display:block; }
 
-.cta-label{ font-size:.78rem; color:var(--muted); text-align:center; margin-top:.5rem; }
-.not-found{ text-align:center; padding:6rem 2rem; color:var(--muted); }
-.not-found h2{ font-size:1.5rem; font-weight:800; color:var(--text); margin-bottom:.5rem; }
-.page-wrap{ margin-top:80px; }
+/* CTA box */
+.sb-cta{ background:var(--white); border:1px solid var(--border); border-radius:var(--radius); padding:1.2rem 1.4rem; display:flex; flex-direction:column; gap:.6rem; }
+.sb-cta-title{ font-size:.8rem; color:var(--muted); margin-bottom:.2rem; }
+.btn-wa{
+  display:flex; align-items:center; justify-content:center; gap:.55rem;
+  background:#25D366; color:#fff;
+  font-family:'Inter',sans-serif; font-size:.9rem; font-weight:700;
+  padding:.85rem; border-radius:var(--radius); text-decoration:none;
+  transition:background .15s; box-shadow:0 2px 8px rgba(37,211,102,0.3);
+}
+.btn-wa:hover{ background:#1aad52; }
+.btn-call{
+  display:flex; align-items:center; justify-content:center; gap:.55rem;
+  background:var(--white); color:var(--text);
+  font-family:'Inter',sans-serif; font-size:.9rem; font-weight:600;
+  padding:.82rem; border-radius:var(--radius); text-decoration:none;
+  border:1.5px solid var(--border); transition:border-color .15s, background .15s;
+}
+.btn-call:hover{ border-color:#9ca3af; background:#fafafa; }
+.sb-cta-note{ font-size:.73rem; color:var(--muted2); text-align:center; }
 
-/* LIGHTBOX */
-#lightbox{ display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.95); align-items:center; justify-content:center; flex-direction:column; animation:lbFadeIn .18s ease; }
+/* ── LIGHTBOX ── */
+#lightbox{ display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.95); align-items:center; justify-content:center; flex-direction:column; }
 #lightbox.open{ display:flex; }
-@keyframes lbFadeIn{ from{opacity:0}to{opacity:1} }
-#lbImg{ max-width:90vw; max-height:80vh; object-fit:contain; border-radius:6px; user-select:none; transition:opacity .2s; }
-#lbClose{ position:fixed; top:18px; right:22px; width:42px; height:42px; background:rgba(255,255,255,0.12); border:none; border-radius:50%; color:#fff; font-size:1.3rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .2s; }
-#lbClose:hover{ background:rgba(255,255,255,0.28); }
-#lbPrev,#lbNext{ position:fixed; top:50%; transform:translateY(-50%); width:50px; height:50px; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); border-radius:50%; color:#fff; font-size:1.5rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .2s; }
-#lbPrev:hover,#lbNext:hover{ background:rgba(255,255,255,0.25); }
-#lbPrev{ left:16px; }
-#lbNext{ right:16px; }
-#lbCounter{ margin-top:12px; font-size:.78rem; color:rgba(255,255,255,0.5); font-family:'Inter',sans-serif; }
-#lbThumbs{ display:flex; gap:8px; margin-top:12px; overflow-x:auto; max-width:90vw; padding-bottom:4px; }
-#lbThumbs img{ height:54px; width:76px; object-fit:cover; border-radius:6px; cursor:pointer; opacity:.45; border:2px solid transparent; transition:opacity .2s,border-color .2s; flex-shrink:0; }
+#lbImg{ max-width:92vw; max-height:82vh; object-fit:contain; border-radius:2px; user-select:none; transition:opacity .18s; }
+#lbClose{ position:fixed; top:16px; right:20px; width:40px; height:40px; background:rgba(255,255,255,0.1); border:none; border-radius:50%; color:#fff; font-size:1.2rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .15s; }
+#lbClose:hover{ background:rgba(255,255,255,0.22); }
+#lbPrev,#lbNext{ position:fixed; top:50%; transform:translateY(-50%); width:46px; height:46px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.18); border-radius:50%; color:#fff; font-size:1.4rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .15s; }
+#lbPrev:hover,#lbNext:hover{ background:rgba(255,255,255,0.2); }
+#lbPrev{ left:14px; }
+#lbNext{ right:14px; }
+#lbCounter{ margin-top:10px; font-size:.75rem; color:rgba(255,255,255,0.45); }
+#lbThumbs{ display:flex; gap:6px; margin-top:10px; overflow-x:auto; max-width:92vw; }
+#lbThumbs img{ height:50px; width:70px; object-fit:cover; border-radius:2px; cursor:pointer; opacity:.4; border:2px solid transparent; transition:opacity .15s,border-color .15s; flex-shrink:0; }
 #lbThumbs img.active{ opacity:1; border-color:#fff; }
 
-@media(max-width:900px){
-  nav{ justify-content:center; position:relative; }
-  .logo-link{ margin:0 auto; }
-  .logo-link img{ margin-left:0; margin-top:0; height:65px; }
-  .hamburger{ display:flex; position:absolute; right:1.5rem; top:50%; transform:translateY(-50%); }
-  nav ul{ display:none; position:fixed; top:80px; left:0; right:0; background:#fff; flex-direction:column; gap:0; border-bottom:1px solid var(--border); box-shadow:0 4px 20px rgba(0,0,0,0.1); z-index:99; padding:.5rem 0; }
+/* ── NOT FOUND ── */
+.not-found{ text-align:center; padding:5rem 2rem; color:var(--muted); }
+.not-found h2{ font-size:1.4rem; font-weight:700; color:var(--text); margin-bottom:.5rem; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:920px){
+  nav{ justify-content:space-between; }
+  .logo-link img{ height:40px; }
+  .hamburger{ display:flex; }
+  nav ul{ display:none; position:fixed; top:72px; left:0; right:0; background:#1a1a2e; flex-direction:column; gap:0; z-index:99; padding:.5rem 0; border-bottom:1px solid rgba(255,255,255,0.1); }
   nav ul.open{ display:flex; }
-  nav ul a{ display:block; padding:1rem 2rem; font-size:1rem; border-bottom:1px solid var(--border); color:var(--text)!important; background:none!important; }
-  .nav-cta{ margin:.8rem 2rem!important; border-radius:8px!important; text-align:center; display:block; }
-  .main{ grid-template-columns:1fr; }
-  .col-left{ border-right:none; border-bottom:1px solid var(--border); }
-  .sidebar{ order:-1; border-bottom:1px solid var(--border); }
-  .gallery-main{ height:260px; }
-  .dati-row{ grid-template-columns:1fr 1fr; }
+  nav ul a{ display:block; padding:.9rem 2rem; font-size:.95rem; border-bottom:1px solid rgba(255,255,255,0.07); }
+  .nav-cta{ margin:.7rem 2rem!important; border-radius:4px!important; text-align:center; display:block; }
+  .page{ grid-template-columns:1fr; padding-top:1rem; }
+  .sidebar{ order:-1; }
+  .gallery-main{ aspect-ratio:16/9; }
+  .gal-thumb{ width:72px; height:50px; }
+  .dati-grid{ grid-template-columns:1fr 1fr; }
+  .dati-cell:nth-last-child(-n+3){ border-bottom:1px solid var(--border); }
+  .dati-cell:nth-last-child(-n+2){ border-bottom:none; }
   #lbPrev{ left:6px; }
   #lbNext{ right:6px; }
-}</style>
+}
+</style>
 </head>
 <body>
 
+<!-- LIGHTBOX -->
 <div id="lightbox">
   <button id="lbClose" onclick="closeLightbox()">✕</button>
   <button id="lbPrev" onclick="lbPrev()">‹</button>
@@ -164,6 +238,7 @@ nav ul a:hover{ color:var(--text); }
   <div id="lbThumbs"></div>
 </div>
 
+<!-- NAV -->
 <nav>
   <a href="https://agsrottama.it" class="logo-link">
     <img src="assets/logoAGS.png" alt="A.G.S. Autodemolizioni">
@@ -179,16 +254,26 @@ nav ul a:hover{ color:var(--text); }
   </ul>
 </nav>
 
+<!-- BREADCRUMB -->
 <div class="breadcrumb">
-  <a href="https://agsrottama.it">Home</a><span>›</span>
-  <a href="parco-auto.html">Parco Auto</a><span>›</span>
-  <span id="breadcrumbTitle">Dettaglio auto</span>
+  <a href="https://agsrottama.it">Home</a> ›
+  <a href="parco-auto.html">Parco Auto</a> ›
+  <span id="breadcrumbTitle">Dettaglio</span>
+</div>
+
+<!-- BACK BAR -->
+<div class="topbar">
+  <a href="parco-auto.html" class="back-link">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Torna al parco auto
+  </a>
 </div>
 
 <div id="pageContent"></div>
 
 <script src="auto-db.js"></script>
 <script>
+/* ── LIGHTBOX ── */
 var lbPhotos=[],lbCurrent=0;
 function openLightbox(p,i){lbPhotos=p;lbCurrent=i;document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';renderLb();buildLbThumbs();}
 function closeLightbox(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
@@ -202,130 +287,120 @@ var lbTX=null;
 document.getElementById('lbImg').addEventListener('touchstart',function(e){lbTX=e.touches[0].clientX;},{passive:true});
 document.getElementById('lbImg').addEventListener('touchend',function(e){if(lbTX===null)return;var dx=e.changedTouches[0].clientX-lbTX;if(Math.abs(dx)>40){dx<0?lbNext():lbPrev();}lbTX=null;});
 
+/* ── SVG ICONS ── */
+var icoAnno='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/></svg>';
+var icoKm='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12"/><path d="M22 12c0-5.52-4.48-10-10-10"/><path d="M12 12l4-4"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>';
+var icoCarb='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L6 12a6 6 0 0 0 12 0z"/></svg>';
+var icoCV='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>';
+var icoPhone='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 10.8c1.5 3 3.9 5.4 6.9 6.9l2.3-2.3c.3-.3.7-.4 1.1-.3 1.2.4 2.5.6 3.9.6.6 0 1 .4 1 1V21c0 .6-.4 1-1 1C10.3 22 2 13.7 2 3c0-.6.4-1 1-1h4.3c.6 0 1 .4 1 1 0 1.4.2 2.7.6 3.9.1.4 0 .8-.3 1.1l-2.3 2.3z"/></svg>';
+var icoWA='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.978-1.41A9.944 9.944 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" fill-rule="evenodd" clip-rule="evenodd"/></svg>';
+
+/* ── INIT ── */
 async function init(){
   const AUTO_DB=await fetchAutoFromSupabase();
   var id=new URLSearchParams(window.location.search).get('id');
   var auto=AUTO_DB.find(function(a){return String(a.id)===String(id);});
-  if(!auto){document.getElementById('pageContent').innerHTML='<div class="not-found"><h2>Auto non trovata</h2><p>Torna al <a href="parco-auto.html" style="color:var(--red)">parco auto</a></p></div>';return;}
-  document.title=auto.marca+' '+auto.modello+' '+auto.anno+' — A.G.S. Autodemolizioni';
-  document.getElementById('breadcrumbTitle').textContent=auto.marca+' '+auto.modello+' '+auto.anno;
-  var thumbsHTML=auto.foto.map(function(f,i){return'<div class="gallery-thumb'+(i===0?' active':'')+'" onclick="goTo('+i+',this)"><img src="'+f+'" alt=""></div>';}).join('');
-  var svgAnno='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/></svg>';
-  var svgKm='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12"/><path d="M22 12c0-5.52-4.48-10-10-10"/><path d="M12 12l4-4"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>';
-  var svgFuel='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L6 12a6 6 0 0 0 12 0z"/></svg>';
-  var svgCV='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>';
 
-  function di(icon,label,val){
-    if(!val) return '';
-    return '<div class="detail-item"><div class="detail-icon">'+icon+'</div><div><div class="detail-label">'+label+'</div><div class="detail-value">'+val+'</div></div></div>';
+  if(!auto){
+    document.getElementById('pageContent').innerHTML='<div class="not-found"><h2>Auto non trovata</h2><p>Torna al <a href="parco-auto.html" style="color:var(--red)">parco auto</a></p></div>';
+    return;
   }
-  var detailsHTML=
-    di(svgKm,'Chilometraggio',auto.km?(auto.km+' km'):'')+
-    di(svgAnno,'Anno',auto.anno||'')+
-    di(svgFuel,'Carburante',auto.carburante||'')+
-    di(svgCV,'Potenza',auto.cv?(auto.cv+' CV'):'');
+
+  document.title=auto.marca+' '+auto.modello+' '+auto.anno+' — A.G.S. Autodemolizioni';
+  document.getElementById('breadcrumbTitle').textContent=auto.marca+' '+auto.modello;
+
+  var thumbsHTML=auto.foto.map(function(f,i){
+    return'<div class="gal-thumb'+(i===0?' active':'')+'" onclick="goTo('+i+',this)"><img src="'+f+'" alt=""></div>';
+  }).join('');
 
   var waMsg=encodeURIComponent('Ciao, ho visto sul sito la '+auto.marca+' '+auto.modello+' '+auto.versione+' del '+auto.anno+'. Cerco: ');
-  var svgWA='<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.978-1.41A9.944 9.944 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" fill-rule="evenodd" clip-rule="evenodd"/></svg>';
 
   document.getElementById('pageContent').innerHTML=`
-    <div class="page-wrap">
-      <a href="parco-auto.html" class="back-link">← Torna al parco auto</a>
-      <div class="card-wrap">
-        <div class="main">
-          <div class="col-left">
-            <div class="gallery">
-          <div class="gallery-main" onclick="openLightbox(currentPhotos,currentIndex)" title="Clicca per ingrandire">
-            <span class="gallery-badge">Disponibile</span>
-            <img id="mainPhoto" src="${auto.foto[0]}" alt="${auto.marca} ${auto.modello}">
-            <button class="gallery-btn prev" onclick="event.stopPropagation();prevPhoto()">‹</button>
-            <button class="gallery-btn next" onclick="event.stopPropagation();nextPhoto()">›</button>
-            <div class="gallery-counter" id="photoCounter">1 / ${auto.foto.length}</div>
-            <button class="btn-expand" onclick="event.stopPropagation();openLightbox(currentPhotos,currentIndex)" title="Schermo intero">
-              <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
-            </button>
-          </div>
-          <div class="gallery-thumbs">${thumbsHTML}</div>
-            </div>
+  <div class="page">
 
-            <div class="info-below">
-              <div class="info-section">
-                <h3 class="info-title">Dati principali</h3>
-                <div class="dati-row">
-                  <div class="dato-item">
-                    <span class="dato-icon">${svgKm}</span>
-                    <div><span class="dato-label">Chilometraggio</span><span class="dato-val">${auto.km ? auto.km+' Km' : '—'}</span></div>
-                  </div>
-                  <div class="dato-item">
-                    <span class="dato-icon">${svgAnno}</span>
-                    <div><span class="dato-label">Anno</span><span class="dato-val">${auto.anno || '—'}</span></div>
-                  </div>
-                  <div class="dato-item">
-                    <span class="dato-icon">${svgFuel}</span>
-                    <div><span class="dato-label">Carburante</span><span class="dato-val">${auto.carburante || '—'}</span></div>
-                  </div>
-                  <div class="dato-item">
-                    <span class="dato-icon">${svgCV}</span>
-                    <div><span class="dato-label">Potenza</span><span class="dato-val">${auto.cv ? auto.cv+' CV' : '—'}</span></div>
-                  </div>
-                </div>
-              </div>
-              <hr class="info-divider">
-              <div class="info-section">
-                <h3 class="info-title">Descrizione</h3>
-                <p class="info-desc">Ricambi usati ${auto.marca} ${auto.modello} disponibili come in foto, chiamare o scrivere su WhatsApp per disponibilità.</p>
-              </div>
-            </div>
-          </div>
+    <!-- COLONNA SINISTRA -->
+    <div>
+      <!-- GALLERIA -->
+      <div class="gallery-wrap">
+        <div class="gallery-main" onclick="openLightbox(currentPhotos,currentIndex)" title="Clicca per ingrandire">
+          <img id="mainPhoto" src="${auto.foto[0]}" alt="${auto.marca} ${auto.modello}">
+          <div class="gal-counter" id="photoCounter">1 / ${auto.foto.length}</div>
+          <button class="gal-btn prev" onclick="event.stopPropagation();prevPhoto()">‹</button>
+          <button class="gal-btn next" onclick="event.stopPropagation();nextPhoto()">›</button>
+          <button class="gal-expand" onclick="event.stopPropagation();openLightbox(currentPhotos,currentIndex)">
+            <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+          </button>
+        </div>
+        <div class="gallery-thumbs">${thumbsHTML}</div>
+      </div>
 
-          <div class="sidebar">
-          <div class="sb-topbar">
-            <a href="tel:0362306524" class="sb-phone">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 10.8c1.5 3 3.9 5.4 6.9 6.9l2.3-2.3c.3-.3.7-.4 1.1-.3 1.2.4 2.5.6 3.9.6.6 0 1 .4 1 1V21c0 .6-.4 1-1 1C10.3 22 2 13.7 2 3c0-.6.4-1 1-1h4.3c.6 0 1 .4 1 1 0 1.4.2 2.7.6 3.9.1.4 0 .8-.3 1.1l-2.3 2.3z"/></svg>
-              0362 306524
-            </a>
-            <a href="https://wa.me/393384672370?text=${waMsg}" target="_blank" class="sb-wa-btn" title="Scrivi su WhatsApp">${svgWA}</a>
-          </div>
-
-          <div class="badge-disponibile">✓ Disponibile</div>
-          <div class="car-name">${auto.marca} ${auto.modello}</div>
-          <div class="car-version">${auto.versione}</div>
-
-          <div class="specs-grid">
-            <div class="spec-cell"><span class="spec-cell-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/></svg></span><div><span class="spec-cell-label">Anno</span><span class="spec-cell-value">${auto.anno}</span></div></div>
-            <div class="spec-cell"><span class="spec-cell-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12"/><path d="M22 12c0-5.52-4.48-10-10-10"/><path d="M12 12l4-4"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg></span><div><span class="spec-cell-label">Km</span><span class="spec-cell-value">${auto.km}</span></div></div>
-            <div class="spec-cell"><span class="spec-cell-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L6 12a6 6 0 0 0 12 0z"/></svg></span><div><span class="spec-cell-label">Carburante</span><span class="spec-cell-value">${auto.carburante}</span></div></div>
-            <div class="spec-cell"><span class="spec-cell-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span><div><span class="spec-cell-label">Potenza</span><span class="spec-cell-value">${auto.cv} CV</span></div></div>
-          </div>
-
-          <a href="https://wa.me/393384672370?text=${waMsg}" target="_blank" class="btn-wa-big">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.978-1.41A9.944 9.944 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" fill-rule="evenodd" clip-rule="evenodd"/></svg>
-            Scrivi su WhatsApp
-          </a>
-          <a href="tel:0362306524" class="btn-call-big">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 10.8c1.5 3 3.9 5.4 6.9 6.9l2.3-2.3c.3-.3.7-.4 1.1-.3 1.2.4 2.5.6 3.9.6.6 0 1 .4 1 1V21c0 .6-.4 1-1 1C10.3 22 2 13.7 2 3c0-.6.4-1 1-1h4.3c.6 0 1 .4 1 1 0 1.4.2 2.7.6 3.9.1.4 0 .8-.3 1.1l-2.3 2.3z"/></svg>
-            Chiama — 0362 306524
-          </a>
-          <div class="cta-label">Rispondiamo in pochi minuti</div>
+      <!-- DATI PRINCIPALI -->
+      <div class="dati-box">
+        <div class="dati-grid">
+          <div class="dati-cell"><span class="dati-icon">${icoKm}</span><div><div class="dati-lbl">Chilometraggio</div><div class="dati-val">${auto.km ? auto.km+' km' : '—'}</div></div></div>
+          <div class="dati-cell"><span class="dati-icon">${icoAnno}</span><div><div class="dati-lbl">Anno</div><div class="dati-val">${auto.anno || '—'}</div></div></div>
+          <div class="dati-cell"><span class="dati-icon">${icoCarb}</span><div><div class="dati-lbl">Carburante</div><div class="dati-val">${auto.carburante || '—'}</div></div></div>
+          <div class="dati-cell"><span class="dati-icon">${icoCV}</span><div><div class="dati-lbl">Potenza</div><div class="dati-val">${auto.cv ? auto.cv+' CV' : '—'}</div></div></div>
         </div>
       </div>
+
+      <!-- DESCRIZIONE -->
+      <div class="desc-box">
+        <h3>Descrizione</h3>
+        <p>Ricambi usati ${auto.marca} ${auto.modello} disponibili come in foto, chiamare o scrivere su WhatsApp per disponibilità.</p>
+      </div>
     </div>
-    </div>`;
+
+    <!-- SIDEBAR DESTRA -->
+    <div class="sidebar">
+
+      <!-- TITOLO -->
+      <div class="sb-head">
+        <div class="sb-title">${auto.marca} ${auto.modello}</div>
+        <div class="sb-subtitle">${auto.versione || ''}</div>
+        <hr class="sb-sep">
+        <div class="sb-specs">
+          <div class="sb-spec"><span class="sb-spec-icon">${icoAnno}</span><div><span class="sb-spec-lbl">Anno</span><span class="sb-spec-val">${auto.anno || '—'}</span></div></div>
+          <div class="sb-spec"><span class="sb-spec-icon">${icoKm}</span><div><span class="sb-spec-lbl">Km</span><span class="sb-spec-val">${auto.km || '—'}</span></div></div>
+          <div class="sb-spec"><span class="sb-spec-icon">${icoCarb}</span><div><span class="sb-spec-lbl">Carburante</span><span class="sb-spec-val">${auto.carburante || '—'}</span></div></div>
+          <div class="sb-spec"><span class="sb-spec-icon">${icoCV}</span><div><span class="sb-spec-lbl">Potenza</span><span class="sb-spec-val">${auto.cv ? auto.cv+' CV' : '—'}</span></div></div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="sb-cta">
+        <div class="sb-cta-title">Cerchi un ricambio?</div>
+        <a href="https://wa.me/393384672370?text=${waMsg}" target="_blank" class="btn-wa">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.978-1.41A9.944 9.944 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" fill-rule="evenodd" clip-rule="evenodd"/></svg>
+          Scrivi su WhatsApp
+        </a>
+        <a href="tel:0362306524" class="btn-call">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 10.8c1.5 3 3.9 5.4 6.9 6.9l2.3-2.3c.3-.3.7-.4 1.1-.3 1.2.4 2.5.6 3.9.6.6 0 1 .4 1 1V21c0 .6-.4 1-1 1C10.3 22 2 13.7 2 3c0-.6.4-1 1-1h4.3c.6 0 1 .4 1 1 0 1.4.2 2.7.6 3.9.1.4 0 .8-.3 1.1l-2.3 2.3z"/></svg>
+          Chiama — 0362 306524
+        </a>
+        <div class="sb-cta-note">Rispondiamo in pochi minuti</div>
+      </div>
+
+    </div>
+  </div>`;
 
   var current=0;
   window.currentPhotos=auto.foto;
   window.currentIndex=0;
+
   window.goTo=function(idx,el){
-    current=idx;window.currentIndex=idx;
+    current=idx; window.currentIndex=idx;
     var img=document.getElementById('mainPhoto');
     img.style.opacity='0';
     setTimeout(function(){img.src=auto.foto[idx];img.style.opacity='1';},80);
     document.getElementById('photoCounter').textContent=(idx+1)+' / '+auto.foto.length;
-    document.querySelectorAll('.gallery-thumb').forEach(function(t){t.classList.remove('active');});
+    document.querySelectorAll('.gal-thumb').forEach(function(t){t.classList.remove('active');});
     el.classList.add('active');
   };
-  window.nextPhoto=function(){var n=(current+1)%auto.foto.length;goTo(n,document.querySelectorAll('.gallery-thumb')[n]);};
-  window.prevPhoto=function(){var p=(current-1+auto.foto.length)%auto.foto.length;goTo(p,document.querySelectorAll('.gallery-thumb')[p]);};
+  window.nextPhoto=function(){var n=(current+1)%auto.foto.length;goTo(n,document.querySelectorAll('.gal-thumb')[n]);};
+  window.prevPhoto=function(){var p=(current-1+auto.foto.length)%auto.foto.length;goTo(p,document.querySelectorAll('.gal-thumb')[p]);};
+
+  /* swipe mobile */
   var tx=null,gm=document.querySelector('.gallery-main');
   gm.addEventListener('touchstart',function(e){tx=e.touches[0].clientX;},{passive:true});
   gm.addEventListener('touchend',function(e){if(tx===null)return;var dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>40){dx<0?nextPhoto():prevPhoto();}tx=null;});
