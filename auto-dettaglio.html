@@ -27,6 +27,7 @@ nav ul a:hover{ color:var(--text); }
 .breadcrumb a:hover{ color:var(--red); }
 .breadcrumb span{ margin:0 .4rem; }
 .main{ max-width:1200px; margin:0 auto; padding:2rem 5vw 5rem; display:grid; grid-template-columns:1fr 400px; gap:2.5rem; align-items:start; }
+.back-link{ display:inline-flex; align-items:center; gap:.4rem; font-size:.82rem; font-weight:600; color:var(--muted); text-decoration:none; margin-bottom:1rem; transition:color .2s; }
 .back-link:hover{ color:var(--red); }
 .gallery{ background:var(--white); border-radius:14px; overflow:hidden; border:1px solid var(--border); }
 .gallery-main{
@@ -68,7 +69,7 @@ nav ul a:hover{ color:var(--text); }
 .detail-icon svg{ width:20px; height:20px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
 .detail-label{ font-size:.75rem; color:var(--muted); margin-bottom:.18rem; }
 .detail-value{ font-size:.92rem; font-weight:700; color:var(--text); }
-.sidebar{ display:flex; flex-direction:column; gap:1.2rem; }
+.sidebar{ display:flex; flex-direction:column; gap:1.2rem; padding-top:2.4rem; }
 .car-title-box{ background:var(--white); border:1px solid var(--border); border-radius:14px; padding:1.8rem; }
 .car-badge-row{ display:flex; align-items:center; gap:.6rem; margin-bottom:.8rem; }
 .badge-disponibile{ background:#f0fdf4; color:#16a34a; border:1px solid #86efac; font-size:.72rem; font-weight:700; padding:.25rem .8rem; border-radius:100px; text-transform:uppercase; letter-spacing:.5px; }
@@ -197,9 +198,9 @@ async function init(){
 
   var waMsg=encodeURIComponent('Ciao, ho visto sul sito la '+auto.marca+' '+auto.modello+' '+auto.versione+' del '+auto.anno+'. Cerco: ');
   document.getElementById('pageContent').innerHTML=`
-    <a href="parco-auto.html" class="back-link" style="display:inline-flex;align-items:center;gap:.4rem;font-size:.82rem;font-weight:600;color:var(--muted);text-decoration:none;padding:1rem 5vw 0;transition:color .2s;">← Torna al parco auto</a>
-    <div class="main" style="padding-top:1rem;">
+    <div class="main">
       <div>
+        <a href="parco-auto.html" class="back-link">← Torna al parco auto</a>
         <div class="gallery">
           <div class="gallery-main" onclick="openLightbox(currentPhotos,currentIndex)" title="Clicca per ingrandire">
             <span class="gallery-badge">Disponibile</span>
