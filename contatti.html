@@ -4,13 +4,226 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/klaro@0.7.21/dist/klaro.min.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="A.G.S. Autodemolizioni — Demolizione auto gratuita nelle province di Milano e Monza-Brianza. Ritiro a domicilio, pratiche PRA incluse, zero burocrazia.">
-  <title>A.G.S. Autodemolizioni — Demolizione Gratuita Milano e Monza</title>
-  <link rel="icon" href="/favicon.ico">
-  <link rel="icon" type="image/png" sizes="48x48" href="/favicon48.png">
-  <link rel="icon" type="image/png" sizes="64x64" href="/favicon64.png">
-  <link rel="apple-touch-icon" href="/favicon64.png">
+  <meta name="description" content="Come funziona la demolizione gratuita di A.G.S. Autodemolizioni — 4 semplici passi per demolire la tua auto gratis nelle province di Milano e Monza-Brianza.">
+  <title>Come Funziona — A.G.S. Autodemolizioni</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="assets/logoAGS.png">
+  <style>
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      padding: calc(68px + 4rem) 5vw 4rem;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+    .page-hero .tag { display: block; margin-bottom: .8rem; }
+    .page-hero h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+    .page-hero p {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ── STEPS SECTION ── */
+    .steps-section {
+      padding: 6rem 5vw;
+      background: var(--bg);
+    }
+    .steps-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .step-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 3rem;
+      margin-bottom: 4rem;
+      position: relative;
+    }
+
+    /* Linea verticale connettore */
+    .step-row:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 27px;
+      top: 56px;
+      bottom: -4rem;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--red), var(--red-mid));
+      opacity: 0.3;
+    }
+
+    .step-left {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .step-circle {
+      width: 56px;
+      height: 56px;
+      background: var(--red);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 800;
+      flex-shrink: 0;
+      box-shadow: 0 4px 16px rgba(232,0,29,0.25);
+    }
+
+    .step-content {
+      flex: 1;
+      padding-top: 8px;
+    }
+
+    .step-content h2 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: .6rem;
+      letter-spacing: -0.5px;
+    }
+
+    .step-content p {
+      font-size: .95rem;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 1rem;
+    }
+
+    .step-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+    }
+
+    .step-detail-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      color: var(--text-mid);
+      font-size: .78rem;
+      font-weight: 600;
+      padding: .3rem .8rem;
+      border-radius: 100px;
+    }
+
+    /* ── FAQ ── */
+    .faq-section {
+      padding: 5rem 5vw;
+      background: var(--bg-alt);
+      border-top: 1px solid var(--border);
+    }
+
+    .faq-inner {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 1.2rem 0;
+    }
+
+    .faq-item:first-of-type { border-top: 1px solid var(--border); }
+
+    .faq-question {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      user-select: none;
+    }
+
+    .faq-icon {
+      width: 24px;
+      height: 24px;
+      background: var(--red-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .9rem;
+      color: var(--red);
+      flex-shrink: 0;
+      transition: transform .3s;
+      font-weight: 700;
+    }
+
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+    .faq-answer {
+      font-size: .9rem;
+      color: var(--muted);
+      line-height: 1.75;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .35s ease, padding .35s;
+      padding-top: 0;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 300px;
+      padding-top: .8rem;
+    }
+
+    /* ── CTA FINALE ── */
+    .final-cta {
+      padding: 5rem 5vw;
+      background: var(--bg);
+      text-align: center;
+    }
+
+    .final-cta h2 {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: var(--text);
+      margin-bottom: .8rem;
+    }
+
+    .final-cta p {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    .final-cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .step-row { gap: 1.5rem; }
+      .step-row:not(:last-child)::after { left: 27px; }
+      .step-content h2 { font-size: 1.2rem; }
+    }
+
+  </style>
 </head>
 <body>
 <nav>
